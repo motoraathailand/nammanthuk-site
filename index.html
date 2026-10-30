@@ -1,19 +1,222 @@
 <!doctype html>
 <html lang="th">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light dark">
-<title>น้ำมันถูก — Nammanthuk</title>
-<link rel="stylesheet" href="site.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>น้ำมันถูก — หาปั๊มราคาถูกใกล้คุณ เช็กได้ว่ามีน้ำมันไหม</title>
+<meta name="description" content="แอป Android ดูราคาน้ำมันวันนี้แยกตามยี่ห้อ ปั๊มใกล้คุณบนแผนที่ และสถานะน้ำมัน มี/ใกล้หมด/หมด จากผู้ใช้ด้วยกัน ใช้ฟรี ตัวใหญ่ อ่านง่าย">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#ffffff">
+<meta name="color-scheme" content="light">
+<link rel="canonical" href="https://motoraathailand.github.io/nammanthuk-site/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="น้ำมันถูก"><meta property="og:locale" content="th_TH">
+<meta property="og:title" content="น้ำมันถูก — หาปั๊มราคาถูกใกล้คุณ เช็กได้ว่ามีน้ำมันไหม"><meta property="og:description" content="แอป Android ดูราคาน้ำมันวันนี้แยกตามยี่ห้อ ปั๊มใกล้คุณบนแผนที่ และสถานะน้ำมัน มี/ใกล้หมด/หมด จากผู้ใช้ด้วยกัน ใช้ฟรี ตัวใหญ่ อ่านง่าย">
+<meta property="og:url" content="https://motoraathailand.github.io/nammanthuk-site/">
+<link rel="icon" href="img/icon.svg" type="image/svg+xml">
+<script>/* decide the language first (no flash): ?lang= > saved choice > always Thai (not the device language) */
+(function(){var L=['th','en','ko','zh','hi'],l='th';try{var m=/[?&]lang=(\w\w)/.exec(location.search),s=localStorage.getItem('nmt.site.lang');l=m&&L.indexOf(m[1])>-1?m[1]:L.indexOf(s)>-1?s:'th'}catch(e){}window.__L=l;document.documentElement.lang=l;document.documentElement.className='js'})();</script>
+<link rel="preload" href="fonts/ibm-plex-sans-thai-thai-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="landing.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"น้ำมันถูก (Namman Thuk)","applicationCategory":"UtilitiesApplication","operatingSystem":"Android","inLanguage":["th","en","ko","zh","hi"],"offers":{"@type":"Offer","price":"0","priceCurrency":"THB"},"author":{"@type":"Person","name":"Pornnarai Tananchai"}}</script>
 </head>
 <body>
-<main id="main" style="max-width:40rem;margin:2rem auto;padding:0 1rem">
-<h1>น้ำมันถูก <small>Nammanthuk</small></h1>
-<p>แอปหาปั๊มน้ำมันใกล้คุณ ดูราคาและสถานะน้ำมัน (มี/ใกล้หมด/หมด) ในประเทศไทย<br>Find nearby fuel stations in Thailand, with prices and fuel availability.</p>
-<ul>
-<li><a href="privacy.html">นโยบายความเป็นส่วนตัว · Privacy Policy</a></li>
-<li><a href="delete-account.html">ขอลบบัญชีและข้อมูล · Delete account and data</a></li>
-</ul>
-<p>ติดต่อ / Contact: <a href="mailto:motoraathailand@gmail.com">motoraathailand@gmail.com</a></p>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+  <linearGradient id="dg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0c635c"/><stop offset="1" stop-color="#14b8a6"/></linearGradient>
+  <symbol id="drop" viewBox="0 0 32 32"><path d="M16 3.5C12.5 8.4 7.5 13.2 7.5 19a8.5 8.5 0 0 0 17 0c0-5.8-5-10.6-8.5-15.5z" fill="none" stroke="url(#dg)" stroke-width="3" stroke-linejoin="round"/><path d="M12.3 19.8a4 4 0 0 0 3.7 3.2" fill="none" stroke="url(#dg)" stroke-width="2.4" stroke-linecap="round"/></symbol>
+  <symbol id="gplay" viewBox="0 0 24 24"><path d="M4 2.5v19l10-9.5z" fill="#34d399"/><path d="M4 2.5l12 7-2 2.5z" fill="#60a5fa"/><path d="M4 21.5l12-7-2-2.5z" fill="#f87171"/><path d="M16 9.5l4 2.5-4 2.5-2-2.5z" fill="#fbbf24"/></symbol>
+</defs></svg>
+<a class="skip" href="#main" data-t="skip">ข้ามไปยังเนื้อหา</a>
+<header class="hd" id="hd">
+  <div class="hd-in">
+    <a class="logo" href="./" aria-label="น้ำมันถูก"><svg class="logo-drop" aria-hidden="true"><use href="#drop"/></svg><span>น้ำมันถูก</span></a>
+    <div class="hd-r">
+      <label class="lang"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M3 12h18M12 3c2.6 2.6 3.8 5.6 3.8 9s-1.2 6.4-3.8 9c-2.6-2.6-3.8-5.6-3.8-9S9.4 5.6 12 3z" fill="none" stroke="currentColor" stroke-width="1.8"/></svg><span class="sr" data-t="lang">ภาษา</span>
+        <select id="lang" aria-label="ภาษา" data-alt-label="lang"><option value="th">ไทย</option><option value="en">English</option><option value="ko">한국어</option><option value="zh">简体中文</option><option value="hi">हिन्दी</option></select></label>
+      <span class="gp sm soon" role="img" aria-label="Google Play — เร็ว ๆ นี้" data-gp><svg aria-hidden="true"><use href="#gplay"/></svg><span><small data-t="gpSmall">เร็ว ๆ นี้บน</small><b>Google Play</b></span></span>
+    </div>
+  </div>
+  <div class="progress" id="progress" aria-hidden="true"></div>
+</header>
+
+<main id="main">
+<section class="hero">
+  <div class="blob b1" aria-hidden="true"></div><div class="blob b2" aria-hidden="true"></div>
+  <div class="drops" aria-hidden="true"><i style="--x:8%;--s:.9;--t:11s;--dl:0s"></i><i style="--x:22%;--s:.6;--t:14s;--dl:3s"></i><i style="--x:40%;--s:.8;--t:12s;--dl:6s"></i><i style="--x:62%;--s:.55;--t:15s;--dl:1.5s"></i><i style="--x:78%;--s:1;--t:13s;--dl:4.5s"></i><i style="--x:92%;--s:.7;--t:10s;--dl:7.5s"></i></div>
+  <div class="wrap hero-in">
+    <div class="hero-text">
+      <span class="tagpill in-h" style="--h:0"><i></i><span data-t="tag">ใช้ฟรี · ตัวใหญ่ อ่านง่าย</span></span>
+      <h1 class="in-h" style="--h:1"><span class="grad">น้ำมันถูก</span> <small>Namman Thuk</small></h1>
+      <p class="sub in-h" style="--h:2"><span class="hl" data-t="chip">ฟรี</span><span data-t="sub">หาปั๊มราคาถูกใกล้คุณ เช็กได้ว่ามีน้ำมันไหม</span></p>
+      <p class="lead in-h" style="--h:3" data-t="lead">ดูราคาน้ำมันวันนี้ ปั๊มใกล้คุณบนแผนที่ และสถานะน้ำมันที่ผู้ใช้ช่วยกันแจ้ง ครบในแอปเดียว ตัวหนังสือใหญ่ ปุ่มใหญ่ ใช้ง่ายสำหรับทุกวัย</p>
+      <div class="cta in-h" style="--h:4">
+        <span class="gp soon" role="img" aria-label="Google Play — เร็ว ๆ นี้" data-gp><svg aria-hidden="true"><use href="#gplay"/></svg><span><small data-t="gpSmall">เร็ว ๆ นี้บน</small><b>Google Play</b></span><em data-t="gpSoon">เร็ว ๆ นี้</em></span>
+        <a class="btn ghost lg" href="#s1" data-t="cta2">ดูว่าทำอะไรได้บ้าง</a>
+      </div>
+      <p class="note in-h" style="--h:5" data-t="note">ใช้ได้เฉพาะแอป Android · ใช้ฟรี · เข้าสู่ระบบด้วย Google</p>
+    </div>
+    <div class="hero-vis in-h" style="--h:2">
+      <div class="phone-wrap" id="tiltBox">
+        <div class="float-a"><div class="tilt" id="tilt">
+          <div class="phone"><div class="phone-screen stack" id="heroStack">
+            <img data-shot="home" src="img/th-home.webp" data-alt="altHome" alt="หน้าแรกของแอป น้ำมันถูก แสดงปั๊มที่ราคาถูกที่สุด" width="450" height="800" fetchpriority="high" decoding="async" class="on">
+            <img data-shot="list" src="img/th-list.webp" data-alt="altList" alt="รายการปั๊มใกล้คุณ" width="450" height="800" decoding="async" loading="lazy">
+            <img data-shot="map" src="img/th-map.webp" data-alt="altMap" alt="แผนที่ปั๊มใกล้คุณ" width="450" height="800" decoding="async" loading="lazy">
+            <img data-shot="board" src="img/th-board.webp" data-alt="altBoard" alt="ราคาน้ำมันวันนี้แยกตามยี่ห้อ" width="450" height="800" decoding="async" loading="lazy">
+            <img data-shot="report" src="img/th-report.webp" data-alt="altReport" alt="หน้าปั๊มและปุ่มแจ้งสถานะน้ำมัน" width="450" height="800" decoding="async" loading="lazy">
+          </div></div>
+        </div></div>
+        <div class="fl f1"><b class="fi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5c-3 4.2-7 8-7 12.5a7 7 0 0 0 14 0c0-4.500-4-8.300-7-12.500z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg></b><div><strong data-t="fl1t">ถูกสุดวันนี้</strong><span class="big"><span class="cnt" data-to="41.54" data-dec="2">41.54</span></span> <small data-t="fl1s">บาท/ลิตร (ตัวอย่าง)</small></div></div>
+        <div class="fl f2"><b class="fi ok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.500l4.500 4.500L19 7.500" fill="none" stroke="currentColor" stroke-width="2.800" stroke-linecap="round" stroke-linejoin="round"/></svg></b><div><strong data-t="fl2t">มีน้ำมัน</strong><small data-t="fl2s">ผู้ใช้แจ้งล่าสุด</small></div></div>
+        <div class="fl f3"><b class="fi pin"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.200 7-11.500a7 7 0 0 0-14 0C5 14.800 12 21 12 21z" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linejoin="round"/><circle cx="12" cy="9.500" r="2.500" fill="currentColor"/></svg></b><div><strong data-t="fl3t">ปั๊มใกล้สุด</strong><span class="big"><span class="cnt" data-to="780" data-dec="0">780</span></span> <small data-t="fl3s">เมตร (ตัวอย่าง)</small></div></div>
+      </div>
+      <div class="dots" id="heroDots" role="tablist"><button type="button" class="on" data-i="0" aria-label="1"></button><button type="button" data-i="1" aria-label="2"></button><button type="button" data-i="2" aria-label="3"></button><button type="button" data-i="3" aria-label="4"></button><button type="button" data-i="4" aria-label="5"></button></div>
+    </div>
+  </div>
+</section>
+
+<section class="stats" aria-label="stats">
+  <div class="wrap stats-in stg">
+    <div class="stat rv"><b><span class="cnt" data-to="10000" data-sep="1">10,000</span>+</b><span data-t="st1">ปั๊มในฐานข้อมูล</span></div>
+    <div class="stat rv"><b><span class="cnt" data-to="7">7</span></b><span data-t="st2">ชนิดน้ำมัน</span></div>
+    <div class="stat rv"><b><span class="cnt" data-to="5">5</span></b><span data-t="st3">ภาษา</span></div>
+    <div class="stat rv"><b>฿<span class="cnt" data-to="0" data-from="99">0</span></b><span data-t="st4">ค่าใช้จ่าย</span></div>
+  </div>
+</section>
+
+<section class="mq" aria-labelledby="mqH">
+  <p class="mq-h rv" id="mqH" data-t="mqH">ราคาแยกตามยี่ห้อ และน้ำมันทุกชนิดที่คุณเติม</p>
+  <div class="mq-row" aria-hidden="true"><div class="mq-track" id="mq1"><span class="mq-chip">ปตท.</span><span class="mq-chip">บางจาก</span><span class="mq-chip">เชลล์</span><span class="mq-chip">คาลเท็กซ์</span><span class="mq-chip">พีที</span><span class="mq-chip">ซัสโก้</span><span class="mq-chip">เอสโซ่</span><span class="mq-chip">เพียว</span><span class="mq-chip">ปตท.</span><span class="mq-chip">บางจาก</span><span class="mq-chip">เชลล์</span><span class="mq-chip">คาลเท็กซ์</span><span class="mq-chip">พีที</span><span class="mq-chip">ซัสโก้</span><span class="mq-chip">เอสโซ่</span><span class="mq-chip">เพียว</span></div></div>
+  <div class="mq-row rev" aria-hidden="true"><div class="mq-track" id="mq2"><span class="mq-chip">ไออาร์พีซี</span><span class="mq-chip">แก๊สโซฮอล์ 95</span><span class="mq-chip">แก๊สโซฮอล์ 91</span><span class="mq-chip">แก๊สโซฮอล์ E20</span><span class="mq-chip">ดีเซล B7</span><span class="mq-chip">E85</span><span class="mq-chip">ดีเซล B20</span><span class="mq-chip">น้ำมันพรีเมียม</span><span class="mq-chip">ไออาร์พีซี</span><span class="mq-chip">แก๊สโซฮอล์ 95</span><span class="mq-chip">แก๊สโซฮอล์ 91</span><span class="mq-chip">แก๊สโซฮอล์ E20</span><span class="mq-chip">ดีเซล B7</span><span class="mq-chip">E85</span><span class="mq-chip">ดีเซล B20</span><span class="mq-chip">น้ำมันพรีเมียม</span></div></div>
+  <ul class="sr" id="mqList"><li>ปตท.</li><li>บางจาก</li><li>เชลล์</li><li>คาลเท็กซ์</li><li>พีที</li><li>ซัสโก้</li><li>เอสโซ่</li><li>เพียว</li><li>ไออาร์พีซี</li><li>แก๊สโซฮอล์ 95</li><li>แก๊สโซฮอล์ 91</li><li>แก๊สโซฮอล์ E20</li><li>ดีเซล B7</li><li>E85</li><li>ดีเซล B20</li><li>น้ำมันพรีเมียม</li></ul>
+</section>
+
+<section class="feat" id="s1">
+  <div class="wrap feat-in">
+    <div class="feat-text">
+      <p class="sec-l rv"><span class="n">01</span><i></i><span data-t="s1l">ราคาวันนี้</span></p>
+      <h2 class="rv" style="--d:.05s" data-t="s1h">ราคาน้ำมันวันนี้ แยกตามยี่ห้อ</h2>
+      <p class="desc rv" style="--d:.1s" data-t="s1p">เห็นราคาของทุกยี่ห้อในหน้าเดียว พร้อมบอกว่าขึ้นหรือลงจากเมื่อวาน ไม่ต้องไล่ดูทีละเว็บ</p>
+      <ul class="check rv" style="--d:.15s"><li data-t="s1b1">ราคาทุกยี่ห้อในหน้าเดียว</li><li data-t="s1b2">เทียบกับเมื่อวาน: เพิ่มขึ้น ลดลง หรือเท่าเดิม</li><li data-t="s1b3">ป้าย “ถูกสุด” เห็นชัด</li><li data-t="s1b4">ราคาอ้างอิงขายปลีกในกรุงเทพฯ ราคาหน้าปั๊มอาจต่างเล็กน้อย</li></ul>
+    </div>
+    <div class="feat-vis rv z" style="--d:.1s"><div class="phone-wrap sm"><div class="float-a slow"><div class="phone"><div class="phone-screen"><img data-shot="board" src="img/th-board.webp" data-alt="altBoard" alt="ราคาน้ำมันวันนี้แยกตามยี่ห้อ" width="450" height="800" loading="lazy" decoding="async"></div></div></div></div></div>
+  </div>
+</section>
+
+<section class="feat alt" id="s2">
+  <div class="wrap feat-in rev">
+    <div class="feat-text">
+      <p class="sec-l rv"><span class="n">02</span><i></i><span data-t="s2l">แผนที่</span></p>
+      <h2 class="rv" style="--d:.05s" data-t="s2h">ปั๊มใกล้คุณบนแผนที่</h2>
+      <p class="desc rv" style="--d:.1s" data-t="s2p">แตะ “ตำแหน่งฉัน” แผนที่จะไปที่คุณ เห็นปั๊มรอบตัวพร้อมราคาและสถานะ แล้วกดนำทางต่อได้เลย</p>
+      <ul class="check rv" style="--d:.15s"><li data-t="s2b1">ปุ่ม “ตำแหน่งฉัน” ปุ่มเดียวจบ</li><li data-t="s2b2">หมุดสีตามยี่ห้อ แตะเพื่อดูราคา</li><li data-t="s2b3">เรียงตามใกล้สุดหรือถูกสุด กรองตามยี่ห้อได้</li><li data-t="s2b4">นำทางด้วย Google Maps หรือ Waze</li></ul>
+    </div>
+    <div class="feat-vis rv z" style="--d:.1s"><div class="phone-wrap sm"><div class="float-a slow"><div class="phone"><div class="phone-screen"><img data-shot="map" src="img/th-map.webp" data-alt="altMap" alt="แผนที่ปั๊มใกล้คุณ" width="450" height="800" loading="lazy" decoding="async"></div></div></div></div></div>
+  </div>
+</section>
+
+<section class="feat" id="s3">
+  <div class="wrap feat-in">
+    <div class="feat-text">
+      <p class="sec-l rv"><span class="n">03</span><i></i><span data-t="s3l">สถานะน้ำมัน</span></p>
+      <h2 class="rv" style="--d:.05s" data-t="s3h">รู้ก่อนไปว่ามีน้ำมันไหม</h2>
+      <p class="desc rv" style="--d:.1s" data-t="s3p">ผู้ใช้ด้วยกันแจ้งสถานะที่ปั๊ม ไปถึงแล้วแตะครั้งเดียว ช่วยให้คนถัดไปไม่เสียเที่ยว</p>
+      <ul class="check rv" style="--d:.15s"><li data-t="s3b1">สถานะ มี / ใกล้หมด / หมด ทั้งสี ไอคอน และคำ</li><li data-t="s3b2">แตะครั้งเดียวก็แจ้งได้</li><li data-t="s3b3">ไม่มีสัญญาณก็แจ้งได้ แอปเก็บไว้ส่งให้เอง</li><li data-t="s3b4">เป็นรายงานจากผู้ใช้ อาจไม่ตรงกับหน้าปั๊มเสมอไป</li></ul>
+    </div>
+    <div class="feat-vis rv z" style="--d:.1s">
+      <div class="gauge-card">
+        <p class="g-t" data-t="gT">สถานะน้ำมันที่ปั๊ม</p>
+        <svg class="gauge" viewBox="0 0 220 128" aria-hidden="true">
+          <path class="arc a1" d="M20 112 A90 90 0 0 1 65 34" /><path class="arc a2" d="M65 34 A90 90 0 0 1 155 34" /><path class="arc a3" d="M155 34 A90 90 0 0 1 200 112" />
+          <g class="needle" id="needle"><line x1="110" y1="112" x2="110" y2="40" /><circle cx="110" cy="112" r="9" /></g>
+        </svg>
+        <div class="g-chips" id="gChips" role="group"><button type="button" class="gc ok on" data-i="0"><i></i><span data-t="g1">มี</span></button><button type="button" class="gc low" data-i="1"><i></i><span data-t="g2">ใกล้หมด</span></button><button type="button" class="gc out" data-i="2"><i></i><span data-t="g3">หมด</span></button></div>
+      </div>
+      <div class="phone-wrap sm sm2"><div class="float-a slow"><div class="phone"><div class="phone-screen"><img data-shot="report" src="img/th-report.webp" data-alt="altReport" alt="หน้าปั๊มและปุ่มแจ้งสถานะน้ำมัน" width="450" height="800" loading="lazy" decoding="async"></div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="more">
+  <div class="wrap">
+    <div class="steps-h"><h2 class="rv" data-t="moreH">ครบในแอปเดียว</h2><p class="rv" style="--d:.05s" data-t="moreP">เข้าสู่ระบบด้วย Google แล้วข้อมูลของคุณตามไปทุกเครื่อง</p></div>
+    <div class="mgrid stg">
+      <article class="mcard rv"><span class="ti"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="pop" d="M12 20.500s-7.500-4.600-7.500-10.200A4.300 4.300 0 0 1 12 7.600a4.300 4.300 0 0 1 7.500 2.700c0 5.600-7.500 10.200-7.500 10.200z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span><h3 data-t="m1t">ปั๊มโปรด</h3><p data-t="m1p">เก็บปั๊มที่ใช้ประจำไว้ ซิงก์กับบัญชี Google ไม่หายแม้เปลี่ยนมือถือ</p></article>
+      <article class="mcard rv"><span class="ti"><svg viewBox="0 0 24 24" aria-hidden="true"><g class="ring"><path d="M6 16.500V11a6 6 0 0 1 12 0v5.500l1.500 2h-15z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M10 21h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></g></svg></span><h3 data-t="m2t">แจ้งเตือน</h3><p data-t="m2p">บอกเมื่อปั๊มโปรดลดราคา หรือน้ำมันกลับมามี (ในแอป)</p></article>
+      <article class="mcard rv"><span class="ti"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3.500" width="14" height="17" rx="2.500" fill="none" stroke="currentColor" stroke-width="2"/><path class="wr" d="M8.500 9h7M8.500 13h7M8.500 17h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span><h3 data-t="m3t">บันทึกการเติมน้ำมัน</h3><p data-t="m3p">จดวันที่ ลิตร และจำนวนเงิน ดูยอดรวมรายเดือนและราคาเฉลี่ยต่อลิตร</p></article>
+      <article class="mcard rv"><span class="ti"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9.500a10 10 0 0 1 14 0M8 13a6 6 0 0 1 8 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="17" r="1.600" fill="currentColor"/><path d="M4 4l16 16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span><h3 data-t="m4t">ใช้ออฟไลน์ได้</h3><p data-t="m4p">ไม่มีอินเทอร์เน็ตก็ยังเห็นข้อมูลที่บันทึกไว้ล่าสุด</p></article>
+      <article class="mcard rv"><span class="ti"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 12h18M12 3c2.600 2.600 3.800 5.600 3.800 9s-1.200 6.400-3.800 9c-2.600-2.600-3.800-5.600-3.800-9S9.400 5.600 12 3z" fill="none" stroke="currentColor" stroke-width="2"/></svg></span><h3 data-t="m5t">5 ภาษา</h3><p data-t="m5p">ไทยเป็นค่าเริ่มต้น เปลี่ยนเป็นอังกฤษ เกาหลี จีน หรือฮินดีได้</p></article>
+      <article class="mcard rv"><span class="ti"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19l5-14 5 14M6 14h6" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 9h4M16 13h4M16 17h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span><h3 data-t="m6t">ตัวใหญ่ ปุ่มใหญ่</h3><p data-t="m6p">ออกแบบให้อ่านง่ายและแตะง่าย มีโหมดมืดตามเครื่อง</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="steps" id="how">
+  <div class="wrap">
+    <div class="steps-h"><h2 class="rv" data-t="stepsH">ใช้งานง่าย 3 ขั้นตอน</h2><p class="rv" style="--d:.05s" data-t="stepsP">ไม่ต้องตั้งค่าอะไรมาก</p></div>
+    <div class="tabs rv" id="tabs" role="tablist" style="--d:.1s">
+      <button type="button" class="tab on" id="tab0" role="tab" data-i="0"><span class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.500c-3 4.200-7 8-7 12.500a7 7 0 0 0 14 0c0-4.500-4-8.300-7-12.500z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span><span data-t="t1">เลือกน้ำมัน</span><span class="bar"><b></b></span></button>
+      <button type="button" class="tab" id="tab1" role="tab" data-i="1"><span class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.200 7-11.500a7 7 0 0 0-14 0C5 14.800 12 21 12 21z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="12" cy="9.500" r="2.500" fill="currentColor"/></svg></span><span data-t="t2">ดูปั๊ม</span><span class="bar"><b></b></span></button>
+      <button type="button" class="tab" id="tab2" role="tab" data-i="2"><span class="tile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.500l4.500 4.500L19 7.500" fill="none" stroke="currentColor" stroke-width="2.600" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span data-t="t3">แจ้งสถานะ</span><span class="bar"><b></b></span></button>
+    </div>
+    <div class="panel rv" id="panel" role="tabpanel" aria-labelledby="tab0" style="--d:.15s">
+      <div class="panel-text"><span class="stepno" id="stepNo">1</span><h3 id="stepH" data-t="st1h">เข้าสู่ระบบ แล้วเลือกน้ำมันของคุณ</h3><p id="stepP" data-t="st1p">แตะปุ่ม Google ปุ่มเดียว แล้วเลือกชนิดน้ำมันที่คุณเติม ครั้งแรกครั้งเดียวเท่านั้น</p></div>
+      <div class="panel-vis"><div class="phone-wrap"><div class="phone"><div class="phone-screen stack" id="stepStack">
+        <img data-shot="home" src="img/th-home.webp" data-alt="altHome" alt="หน้าแรกของแอป น้ำมันถูก แสดงปั๊มที่ราคาถูกที่สุด" width="450" height="800" loading="lazy" decoding="async" class="on"><img data-shot="list" src="img/th-list.webp" data-alt="altList" alt="รายการปั๊มใกล้คุณ" width="450" height="800" loading="lazy" decoding="async"><img data-shot="report" src="img/th-report.webp" data-alt="altReport" alt="หน้าปั๊มและปุ่มแจ้งสถานะน้ำมัน" width="450" height="800" loading="lazy" decoding="async">
+      </div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="trust">
+  <div class="wrap">
+    <h2 class="rv center" data-t="trustH">ใช้อย่างสบายใจ</h2>
+    <div class="cards stg">
+      <article class="tcard rv"><span class="ti"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.200 7-11.500a7 7 0 0 0-14 0C5 14.800 12 21 12 21z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="12" cy="9.500" r="2.500" fill="currentColor"/></svg></span><h3 data-t="c1t">ตำแหน่งอยู่บนเครื่องคุณ</h3><p data-t="c1p">ใช้ตำแหน่งเพื่อหาปั๊มที่ใกล้ที่สุดเท่านั้น ไม่ส่งตำแหน่งไปที่ไหน</p></article>
+      <article class="tcard rv"><span class="ti"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7.500 3v5.500c0 4.500-3.200 8-7.500 9.500-4.300-1.500-7.500-5-7.500-9.500V6z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M8.500 12l2.500 2.500 4.500-5" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"/></svg></span><h3 data-t="c2t">กันรายงานมั่ว</h3><p data-t="c2p">ต้องเข้าสู่ระบบด้วย Google ก่อนแจ้งสถานะ เพื่อให้ข้อมูลน่าเชื่อถือสำหรับทุกคน</p></article>
+      <article class="tcard rv"><span class="ti"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h14M9.500 7V4.500h5V7M7 7l1 13h8l1-13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><h3 data-t="c3t">ลบบัญชีได้ทุกเมื่อ</h3><p data-t="c3p">ลบบัญชีและข้อมูลได้ในแอป หรือดูวิธีที่หน้า “ขอลบบัญชี”</p></article>
+      <article class="tcard rv"><span class="ti"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.500" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7.500v5l3 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span><h3 data-t="c4t">ข้อมูลเปิด</h3><p data-t="c4p">ราคาจากข้อมูลสาธารณะของผู้ค้าน้ำมัน ปั๊มและแผนที่จาก OpenStreetMap</p></article>
+    </div>
+    <p class="disc rv" data-t="disc">น้ำมันถูกเป็นแอปอิสระ ไม่เกี่ยวข้องกับยี่ห้อน้ำมันใด ๆ</p>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <div class="wrap narrow">
+    <h2 class="rv" data-t="faqH">คำถามที่พบบ่อย</h2>
+    <div class="qa rv" style="--d:.05s">
+      <details><summary data-t="q1">ใช้ฟรีไหม?</summary><p data-t="a1">ใช้ฟรี ไม่มีค่าใช้จ่ายในการใช้แอป</p></details>
+      <details><summary data-t="q2">ทำไมต้องเข้าสู่ระบบด้วย Google?</summary><p data-t="a2">กันการแจ้งสต็อกมั่ว ให้ข้อมูลน่าเชื่อถือสำหรับทุกคน และเก็บปั๊มโปรด น้ำมันของคุณ กับบันทึกการเติมน้ำมันไว้ ไม่หายแม้เปลี่ยนมือถือ แตะปุ่มเดียวก็เสร็จ</p></details>
+      <details><summary data-t="q3">ตำแหน่งของฉันถูกส่งไปที่ไหนไหม?</summary><p data-t="a3">ไม่ แอปใช้ตำแหน่งบนเครื่องของคุณเพื่อหาปั๊มที่ใกล้ที่สุดเท่านั้น ไม่ส่งตำแหน่งไปที่ไหน</p></details>
+      <details><summary data-t="q4">ราคาและสถานะน้ำมันเชื่อถือได้แค่ไหน?</summary><p data-t="a4">ราคาเป็นราคาอ้างอิงขายปลีกในกรุงเทพฯ ราคาหน้าปั๊มอาจต่างเล็กน้อย ส่วนสถานะ มี/ใกล้หมด/หมด เป็นรายงานจากผู้ใช้ด้วยกัน อาจไม่ตรงกับหน้าปั๊มเสมอไป</p></details>
+      <details><summary data-t="q5">ลบบัญชีและข้อมูลได้อย่างไร?</summary><p data-t="a5">ในแอปไปที่ เมนู → บัญชีของฉัน → ลบบัญชี หรือดูวิธีที่หน้า “ขอลบบัญชีและข้อมูล” ด้านล่างของหน้านี้</p></details>
+      <details><summary data-t="q6">ใช้บน iPhone ได้ไหม?</summary><p data-t="a6">ตอนนี้มีเฉพาะ Android และกำลังจะเปิดให้ดาวน์โหลดบน Google Play</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap narrow">
+    <span class="final-drop rv" aria-hidden="true"><svg><use href="#drop"/></svg></span>
+    <h2 class="rv" data-t="finalH">เร็ว ๆ นี้บน Google Play</h2>
+    <p class="rv" style="--d:.05s" data-t="finalP">อยากให้ช่วยทดลองใช้ หรือมีข้อเสนอแนะ? ส่งอีเมลหาเราได้เลย</p>
+    <div class="dl rv" style="--d:.1s"><span class="gp soon" role="img" aria-label="Google Play — เร็ว ๆ นี้" data-gp><svg aria-hidden="true"><use href="#gplay"/></svg><span><small data-t="gpSmall">เร็ว ๆ นี้บน</small><b>Google Play</b></span><em data-t="gpSoon">เร็ว ๆ นี้</em></span></div>
+    <p class="rv" style="--d:.15s"><a class="btn lg" href="mailto:motoraathailand@gmail.com"><span data-t="mailBtn">ส่งความคิดเห็น</span></a></p>
+  </div>
+</section>
 </main>
+
+<footer class="ft">
+  <div class="wrap ft-in">
+    <nav><a href="privacy.html" data-t="ftPriv">นโยบายความเป็นส่วนตัว</a><a href="delete-account.html" data-t="ftDel">ขอลบบัญชีและข้อมูล</a><a href="mailto:motoraathailand@gmail.com" data-t="ftMail">ส่งความคิดเห็น</a></nav>
+    <p><a href="mailto:motoraathailand@gmail.com">motoraathailand@gmail.com</a></p>
+    <p><span data-t="ftOp">ผู้ให้บริการ</span>: Pornnarai Tananchai</p>
+    <p data-t="ftOsm">แผนที่และตำแหน่งปั๊ม © ผู้ร่วมจัดทำ OpenStreetMap (ODbL)</p>
+  </div>
+</footer>
+
+<div class="stick" id="stick"><svg class="logo-drop" aria-hidden="true"><use href="#drop"/></svg><div class="st-t"><b>น้ำมันถูก</b><small data-t="stickS">เร็ว ๆ นี้บน Google Play</small></div><span class="btn off" aria-hidden="true"><svg><use href="#gplay"/></svg><span data-t="stickB">เร็ว ๆ นี้</span></span></div>
+<button type="button" class="totop" id="totop" hidden aria-label="กลับไปด้านบน" data-alt-label="totop"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 14l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2.400" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+<script src="strings.js"></script>
+<script src="landing.js"></script>
 </body>
 </html>

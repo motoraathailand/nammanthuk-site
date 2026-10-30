@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" fill="#ffffff"/>
+<!-- น้ำมันถูก icon in the AAAi family style: outline drop (teal→mint) + three dots (teal/mint/coral) on white -->
+<defs><linearGradient id="g" x1="150" y1="90" x2="370" y2="360" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#0a5651"/><stop offset=".55" stop-color="#0f766e"/><stop offset="1" stop-color="#2dd4bf"/></linearGradient></defs>
+<g fill="none" stroke="url(#g)" stroke-linecap="round" stroke-linejoin="round"><path d="M256 82c-56 80-112 134-112 200a112 112 0 0 0 224 0c0-66-56-120-112-200z" stroke-width="30"/><path d="M200 292a58 58 0 0 0 54 48" stroke-width="24"/></g>
+<circle cx="216" cy="424" r="14" fill="#0f766e"/><circle cx="256" cy="424" r="14" fill="#2dd4bf"/><circle cx="296" cy="424" r="14" fill="#f2786b"/>
+</svg>
