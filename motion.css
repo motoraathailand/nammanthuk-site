@@ -1,0 +1,99 @@
+/* ======================================================================================================
+   AA 앱 공통 모션 표준 — motion.css  (v1, 2026-10-30, 가이드: /workspace/shared/motion-guide.md)
+   프레임워크 없음 · 앱 전용 코드 없음 · 앱마다 이 파일을 "복사"해서 쓴다(링크 금지, 양도 대비).
+   규칙: transform / opacity 만 움직인다 · 220~450ms(시트·화면 최대 520ms) · 탭을 절대 막지 않는다(fill-mode backwards)
+         prefers-reduced-motion 이면 전부 꺼진다(파일 맨 아래).  색 전환(background/border/color)만 예외로 허용(레이아웃 영향 없음).
+   ====================================================================================================== */
+
+:root {
+  /* ---- 곡선 ---- */
+  --m-ease-out: cubic-bezier(.22, 1, .36, 1);     /* 등장·이동의 기본: 빠르게 시작해 아주 부드럽게 멈춤 */
+  --m-ease:     cubic-bezier(.4, 0, .2, 1);       /* 표준 이동·색 전환 */
+  --m-ease-in:  cubic-bezier(.4, 0, 1, 1);        /* 퇴장(사라질 때) */
+  --m-spring:   cubic-bezier(.22, 1, .36, 1);     /* 스프링(오버슈트 없음, 임계감쇠). 아래 @supports 에서 linear() 근사로 교체 */
+  /* ---- 길이 ---- */
+  --m-fast: 220ms;      /* 눌림 복귀, 칩·알약, 작은 요소 */
+  --m-base: 320ms;      /* 카드·목록 한 줄 등장, 언어 전환, 토스트 퇴장 */
+  --m-slow: 450ms;      /* 숫자 롤업, 리플, 토스트 등장, 핀 드롭, 즐겨찾기 팝 */
+  --m-screen: 400ms;    /* 화면 전환(공유 축 페이드 + 작은 이동) */
+  --m-drawer: 440ms;
+  --m-sheet: 520ms;     /* 하단 시트·모달: 가장 긴 값 */
+  --m-exit: 240ms;      /* 퇴장은 등장보다 짧게 */
+  /* ---- 목록 ---- */
+  --m-stagger: 36ms;    /* 줄 사이 간격(30~45ms). 최대 10단계 → 마지막 줄도 ≤ 0.36s 만 기다림 */
+  --m-shift: 14px;      /* 카드가 올라오는 거리 */
+  --m-shift-x: 24px;    /* 화면이 옆에서 들어오는 거리(공유 축) */
+}
+@supports (animation-timing-function: linear(0, 1)) {
+  :root { --m-spring: linear(0, 0.075, 0.228, 0.391, 0.537, 0.657, 0.751, 0.822, 0.874, 0.912, 0.939, 0.958, 0.971, 0.98, 0.987, 0.991, 0.994, 0.996, 0.997, 0.998, 1); }  /* x = 1-(1+9t)e^(-9t) */
+}
+
+/* ---------- keyframes (전부 transform / opacity 만) ---------- */
+@keyframes m-rise      { from { opacity: 0; transform: translate3d(0, var(--m-shift), 0); } to { opacity: 1; transform: none; } }
+@keyframes m-in-x      { from { opacity: 0; transform: translate3d(var(--m-shift-x), 0, 0); } to { opacity: 1; transform: none; } }
+@keyframes m-in-x-back { from { opacity: 0; transform: translate3d(calc(var(--m-shift-x) * -.75), 0, 0); } to { opacity: 1; transform: none; } }
+@keyframes m-sheet-up  { from { opacity: 0; transform: translate3d(0, 40px, 0); } to { opacity: 1; transform: none; } }
+@keyframes m-fade-in   { from { opacity: 0; } to { opacity: 1; } }
+@keyframes m-fade-out  { from { opacity: 1; } to { opacity: 0; } }
+@keyframes m-drawer-in  { from { transform: translate3d(-100%, 0, 0); } to { transform: none; } }
+@keyframes m-drawer-out { from { transform: none; } to { transform: translate3d(-100%, 0, 0); } }
+@keyframes m-scale-in  { from { opacity: .35; transform: scale(.9); } to { opacity: 1; transform: none; } }
+@keyframes m-pop       { 0% { transform: scale(.7); } 55% { transform: scale(1.08); } 100% { transform: scale(1); } }   /* 즐겨찾기 별: 유일하게 오버슈트(8%)를 쓰는 곳 */
+@keyframes m-ring      { from { opacity: .45; transform: scale(.94); } to { opacity: 0; transform: scale(var(--m-ring-scale, 1.12)); } }   /* 누른 컨트롤 주위로 퍼지는 링 (::after). 넓은 버튼은 --m-ring-scale 을 1.04~1.08 로 줄여 화면 밖으로 새지 않게 */
+@keyframes m-ripple    { from { opacity: .16; transform: scale(.15); } 60% { opacity: .08; } to { opacity: 0; transform: scale(1); } }
+@keyframes m-drop      { 0% { opacity: 0; transform: translate3d(0, -1.25rem, 0) scale(.9); } 100% { opacity: 1; transform: none; } }
+@keyframes m-toast-in  { from { opacity: 0; transform: translate3d(0, 22px, 0) scale(.98); } to { opacity: 1; transform: none; } }
+@keyframes m-toast-out { from { opacity: 1; transform: none; } to { opacity: 0; transform: translate3d(0, 18px, 0) scale(.98); } }
+@keyframes m-lang      { from { opacity: .25; } to { opacity: 1; } }
+@keyframes m-shimmer   { from { transform: translate3d(-100%, 0, 0); } to { transform: translate3d(100%, 0, 0); } }     /* 반짝임은 ::after 를 옮김(배경 위치 애니메이션 금지) */
+@keyframes m-breathe   { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+
+/* ---------- 한 번 재생하는 등장 클래스 (JS 가 붙였다 뗀다; 둘 다 backwards: 끝나면 아무것도 숨겨지거나 밀려 있지 않음) ---------- */
+.m-rise, .m-stagger { animation: m-rise var(--m-base) var(--m-ease-out) backwards; will-change: transform, opacity; }
+.m-stagger { animation-delay: calc(var(--i, 0) * var(--m-stagger)); animation-duration: var(--m-slow); }
+.m-screen-fwd  { animation: m-in-x var(--m-screen) var(--m-ease-out) backwards; will-change: transform, opacity; }       /* 공유 축: 앞으로 */
+.m-screen-back { animation: m-in-x-back var(--m-screen) var(--m-ease-out) backwards; will-change: transform, opacity; }  /* 공유 축: 뒤로 */
+.m-sheet       { animation: m-sheet-up var(--m-sheet) var(--m-ease-out) backwards; will-change: transform, opacity; }
+.m-fade        { animation: m-fade-in var(--m-base) var(--m-ease) backwards; }
+.m-scale-in    { animation: m-scale-in var(--m-base) var(--m-ease-out) backwards; will-change: transform, opacity; }
+.m-pop         { animation: m-pop var(--m-slow) var(--m-ease-out); transform-origin: 50% 50%; transform-box: fill-box; will-change: transform; }
+.m-ring        { position: relative; }
+.m-ring::after { content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; border: 2px solid currentColor; animation: m-ring var(--m-slow) var(--m-ease-out) forwards; }
+.m-drop        { animation: m-drop var(--m-slow) var(--m-ease-out) backwards; animation-delay: var(--d, 0ms); transform-origin: 50% 100%; }
+.m-toast       { animation: m-toast-in var(--m-slow) var(--m-ease-out) backwards; }
+.m-toast.m-out { animation: m-toast-out var(--m-exit) var(--m-ease-in) forwards; }
+.m-lang        { animation: m-lang var(--m-base) var(--m-ease) both; }
+.m-scrim-in    { animation: m-fade-in var(--m-drawer) var(--m-ease) backwards; }
+.m-drawer-in   { animation: m-drawer-in var(--m-drawer) var(--m-ease-out) backwards; will-change: transform; }
+.m-drawer-out  { animation: m-drawer-out var(--m-exit) var(--m-ease-in) forwards; }
+.m-scrim-out   { animation: m-fade-out var(--m-exit) var(--m-ease-in) forwards; }
+.m-breathe     { animation: m-breathe 2.4s var(--m-ease) infinite; }   /* 아바타 등 "살아 있음" 표시용 */
+
+/* ---------- 누름 피드백: 눌리면 .97 로 살짝, 떼면 스프링(오버슈트 없음)으로 복귀. data-press 또는 앱이 자기 선택자에 같은 규칙을 쓴다 ---------- */
+[data-press] { transition: transform var(--m-fast) var(--m-spring); }
+[data-press]:active { transform: scale(.97); transition-duration: 120ms; }
+
+/* ---------- 리플 (motion.js 가 .m-rip-w 래퍼를 넣는다; 래퍼는 누른 컨트롤 안에서 잘림) ---------- */
+.m-rip-w { position: absolute; inset: 0; border-radius: inherit; overflow: hidden; pointer-events: none; }
+.m-rip-w i { position: absolute; border-radius: 50%; background: currentColor; opacity: 0; transform: scale(.15); animation: m-ripple var(--m-slow) var(--m-ease-out) forwards; will-change: transform, opacity; }
+
+/* ---------- 숫자 롤업: 진짜 글자는 처음부터 최종값, 장식용 복사본(::after)이 올라간다 ---------- */
+.m-rolling { position: relative; -webkit-text-fill-color: transparent; }
+.m-rolling::after { content: attr(data-roll); position: absolute; left: 0; top: 0; white-space: nowrap; -webkit-text-fill-color: currentColor; }
+
+/* ---------- 스켈레톤: 배경 위치가 아니라 ::after 를 translate 로 움직인다 ---------- */
+.m-skeleton { position: relative; overflow: hidden; background: color-mix(in srgb, currentColor 8%, transparent); }
+.m-skeleton::after { content: ''; position: absolute; inset: 0; background: linear-gradient(100deg, transparent 20%, color-mix(in srgb, currentColor 10%, transparent) 50%, transparent 80%); animation: m-shimmer 1.6s var(--m-ease) infinite; will-change: transform; }
+
+/* ---------- 스크롤 등장: [data-reveal] (motion.js 의 IntersectionObserver 가 .m-in 을 붙임) ---------- */
+[data-reveal] { opacity: 0; transform: translate3d(0, var(--m-shift), 0); transition: opacity var(--m-slow) var(--m-ease-out), transform var(--m-slow) var(--m-ease-out); transition-delay: calc(var(--i, 0) * var(--m-stagger)); }
+[data-reveal].m-in { opacity: 1; transform: none; }
+html:not(.m-js) [data-reveal] { opacity: 1; transform: none; }   /* JS 가 없으면 숨기지 않는다 */
+
+/* ---------- 동작 줄이기: 전부 끈다. 아무것도 숨겨지거나 밀려 있지 않다 ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  [data-reveal] { opacity: 1 !important; transform: none !important; }
+  [data-press]:active { transform: none !important; }
+  .m-rip-w { display: none; }
+}
