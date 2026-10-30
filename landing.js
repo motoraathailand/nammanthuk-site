@@ -6,7 +6,7 @@
   var rmq = window.matchMedia ? matchMedia('(prefers-reduced-motion: reduce)') : { matches: false }, reduce = rmq.matches;
   if (rmq.addEventListener) rmq.addEventListener('change', function (e) { reduce = e.matches; });
   var $ = function (s, r) { return (r || doc).querySelector(s); }, $$ = function (s, r) { return Array.prototype.slice.call((r || doc).querySelectorAll(s)); };
-  var lang = window.__L || 'th', ready = false;
+  var lang = window.__L || 'en', ready = false;
   var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
   var shotLang = function (l) { return l === 'th' ? 'th' : 'en'; };   // Thai screenshots for Thai, English screenshots for the others
   function start() { root.classList.add('ready'); ready = true; $$('.hero .cnt').forEach(function (c) { runCount(c, 300); }); }
@@ -109,6 +109,7 @@
   }, { passive: true });
 
   if (lang !== 'th') paintLang(lang); else { $('#lang').value = 'th'; setShots('th'); }
+  root.classList.remove('pl');   // text is final: show the page (the CSS also un-hides it after 1.5 s if this script ever fails)
   setStep(0, true);
   window.__landing = { setLang: function (l) { applyLang(l, true); }, reduce: function () { return reduce; } };
 })();

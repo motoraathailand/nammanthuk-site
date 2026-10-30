@@ -118,3 +118,6 @@ details > p { padding:0 14px 14px; color:var(--mut); font-size:15.5px; }
 .ft a { color:var(--mut); }
 @media (min-width:680px) { h1 { font-size:34px; } .two { grid-template-columns:1fr 1fr; } }
 @media (prefers-reduced-motion:reduce) { .tap .ring { animation:none; opacity:.6; } .pend.nudge, .all:not([hidden]), details[open] > p { animation:none; } .bar i, .num svg, summary::after { transition:none; } }
+
+/* first paint in a non-Thai language: hidden until the script has swapped the baked Thai text (fails open after 1.5 s) */
+html.pl body { opacity:0; animation:plshow .01s linear 1.5s forwards; } @keyframes plshow { to { opacity:1; } }

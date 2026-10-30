@@ -2,7 +2,7 @@
 (function () {
   'use strict';
   var I = window.JOIN_I18N || {}, LANGS = ['th', 'en', 'ko', 'zh', 'hi'], KEY = 'nmt.join.steps', LKEY = 'nmt.site.lang';
-  var M = window.Motion, lang = window.__L || 'th';
+  var M = window.Motion, lang = window.__L || 'en';
   var $ = function (s, r) { return (r || document).querySelector(s); }, $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
   var done = { 1: false, 2: false, 3: false };
   try { var s = JSON.parse(localStorage.getItem(KEY) || '{}'); [1, 2, 3].forEach(function (n) { done[n] = !!s[n]; }); } catch (e) {}
@@ -57,4 +57,5 @@
     else say('copyFail');
   });
   paintText();
+  document.documentElement.classList.remove('pl');   // text is final: show the page (the CSS also un-hides it after 1.5 s if this script ever fails)
 })();

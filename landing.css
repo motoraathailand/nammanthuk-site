@@ -261,3 +261,6 @@ html[lang=th] h2 { line-height:1.45; } html[lang=hi] h2 { line-height:1.5; } htm
   .tab .bar b { transform:scaleX(0); } .tab.on .bar b, .tab.done .bar b { transform:scaleX(1); }
   .drops { display:none; } .tilt { transform:none !important; } .stick { transform:none; }
 }
+
+/* first paint in a non-Thai language: hidden until the script has swapped the baked Thai text (fails open after 1.5 s) */
+html.pl body { opacity:0; animation:plshow .01s linear 1.5s forwards; } @keyframes plshow { to { opacity:1; } }
