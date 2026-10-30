@@ -20,7 +20,7 @@
     if (c.__done) return; c.__done = true;
     var to = +c.getAttribute('data-to'), from = c.hasAttribute('data-from') ? +c.getAttribute('data-from') : 0;
     if (reduce) { c.textContent = fmt(c, to); return; }
-    var dur = 1400, t0 = null; c.textContent = fmt(c, from);
+    var dur = 1200, t0 = null; c.textContent = fmt(c, from);
     function step(t) { if (t0 === null) t0 = t + (delay || 0); var p = Math.min(1, Math.max(0, (t - t0) / dur)), e = 1 - Math.pow(1 - p, 4); c.textContent = fmt(c, from + (to - from) * e); if (p < 1) requestAnimationFrame(step); else c.textContent = fmt(c, to); }
     requestAnimationFrame(step);
   }
@@ -43,12 +43,12 @@
   function applyLang(l, quick) {
     try { localStorage.setItem('nmt.site.lang', l); } catch (e) {}
     if (reduce || quick) return paintLang(l);
-    root.classList.add('lsw'); setTimeout(function () { paintLang(l); requestAnimationFrame(function () { root.classList.remove('lsw'); }); }, 170);   // fade out, swap text, fade in (~340 ms in total)
+    root.classList.add('lsw'); setTimeout(function () { paintLang(l); requestAnimationFrame(function () { root.classList.remove('lsw'); }); }, 230);   // fade out, swap text, fade in (~450 ms in total)
   }
   $('#lang').addEventListener('change', function () { applyLang(this.value); });
 
   /* ---- scroll reveal ---- */
-  $$('.stg').forEach(function (g) { $$(':scope > .rv', g).forEach(function (el, i) { el.style.setProperty('--d', (i * 0.09).toFixed(2) + 's'); }); });
+  $$('.stg').forEach(function (g) { $$(':scope > .rv', g).forEach(function (el, i) { el.style.setProperty('--d', (Math.min(i, 9) * 0.045).toFixed(3) + 's'); }); });
   var rv = $$('.rv, .feat-vis');
   if ('IntersectionObserver' in window && !reduce) {
     var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (!e.isIntersecting) return; e.target.classList.add('in'); $$('.cnt', e.target).forEach(function (c) { runCount(c, 150); }); io.unobserve(e.target); }); }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
