@@ -1,0 +1,148 @@
+{
+ "_note": "Seed stations (Pattaya, 13). Names as given by the owner; refine Thai names/brand branches from OSM (scripts/fetch-osm-stations.mjs) later.",
+ "stations": [
+  {
+   "id": "ptt-11015",
+   "brand": "ptt",
+   "name": "PTT Pattaya Lotus (#11015)",
+   "tambon": "หนองปรือ",
+   "amphoe": "บางละมุง",
+   "province": "ชลบุรี",
+   "lat": 12.906677,
+   "lng": 100.896915,
+   "source": "seed"
+  },
+  {
+   "id": "ptt-11004",
+   "brand": "ptt",
+   "name": "PTT Pattaya Klang (#11004)",
+   "tambon": "นาเกลือ",
+   "amphoe": "บางละมุง",
+   "province": "ชลบุรี",
+   "lat": 12.945738,
+   "lng": 100.904044,
+   "source": "seed"
+  },
+  {
+   "id": "ptt-11003",
+   "brand": "ptt",
+   "name": "PTT Mini Siam (#11003)",
+   "tambon": "นาเกลือ",
+   "amphoe": "บางละมุง",
+   "province": "ชลบุรี",
+   "lat": 12.958296,
+   "lng": 100.909024,
+   "source": "seed"
+  },
+  {
+   "id": "ptt-jomtien-junction",
+   "brand": "ptt",
+   "name": "PTT Jomtien junction",
+   "tambon": "หนองปรือ",
+   "amphoe": "บางละมุง",
+   "province": "ชลบุรี",
+   "lat": 12.882608,
+   "lng": 100.898517,
+   "source": "seed"
+  },
+  {
+   "id": "ptt-thepprasit",
+   "brand": "ptt",
+   "name": "PTT Thepprasit",
+   "tambon": "หนองปรือ",
+   "amphoe": "บางละมุง",
+   "province": "ชลบุรี",
+   "lat": 12.909043,
+   "lng": 100.888569,
+   "source": "seed"
+  },
+  {
+   "id": "bangchak-pattaya-klang",
+   "brand": "bangchak",
+   "name": "Bangchak Pattaya Klang",
+   "tambon": "หนองปรือ",
+   "amphoe": "บางละมุง",
+   "province": "ชลบุรี",
+   "lat": 12.933444,
+   "lng": 100.900725,
+   "source": "seed"
+  },
+  {
+   "id": "bangchak-pattaya-tai",
+   "brand": "bangchak",
+   "name": "Bangchak Pattaya Tai",
+   "tambon": "หนองปรือ",
+   "amphoe": "บางละมุง",
+   "province": "ชลบุรี",
+   "lat": 12.887797,
+   "lng": 100.897279,
+   "source": "seed"
+  },
+  {
+   "id": "bangchak-na-kluea-km142",
+   "brand": "bangchak",
+   "name": "Bangchak Na Kluea Sukhumvit km142",
+   "tambon": "นาเกลือ",
+   "amphoe": "บางละมุง",
+   "province": "ชลบุรี",
+   "lat": 12.964252,
+   "lng": 100.910184,
+   "source": "seed"
+  },
+  {
+   "id": "caltex-jaruwan",
+   "brand": "caltex",
+   "name": "Caltex จารุวรรณบริการ",
+   "tambon": "หนองปรือ",
+   "amphoe": "บางละมุง",
+   "province": "ชลบุรี",
+   "lat": 12.928323,
+   "lng": 100.900105,
+   "source": "seed"
+  },
+  {
+   "id": "shell-sky-and-proud",
+   "brand": "shell",
+   "name": "Shell สกายแอนด์พราวด์",
+   "tambon": "นาเกลือ",
+   "amphoe": "บางละมุง",
+   "province": "ชลบุรี",
+   "lat": 12.951405,
+   "lng": 100.90598,
+   "source": "seed"
+  },
+  {
+   "id": "shell-pornratcha",
+   "brand": "shell",
+   "name": "Shell พรรัชชา",
+   "tambon": "หนองปรือ",
+   "amphoe": "บางละมุง",
+   "province": "ชลบุรี",
+   "lat": 12.87373,
+   "lng": 100.902333,
+   "source": "seed"
+  },
+  {
+   "id": "pt-banglamung-2",
+   "brand": "pt",
+   "name": "PT บางละมุง 2",
+   "tambon": "หนองปรือ",
+   "amphoe": "บางละมุง",
+   "province": "ชลบุรี",
+   "lat": 12.926605,
+   "lng": 100.900098,
+   "source": "seed"
+  },
+  {
+   "id": "susco-na-kluea",
+   "brand": "susco",
+   "name": "Susco นาเกลือ",
+   "tambon": "นาเกลือ",
+   "amphoe": "บางละมุง",
+   "province": "ชลบุรี",
+   "lat": 12.956395,
+   "lng": 100.891613,
+   "source": "seed"
+  }
+ ]
+}

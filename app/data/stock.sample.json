@@ -1,0 +1,61 @@
+{
+ "_sample": true,
+ "_note": "SAMPLE stock reports for UI development only (minutesAgo is converted to a timestamp at load time). Real reports come from the backend /api/stock.",
+ "source": "sample",
+ "reports": [
+  {
+   "stationId": "ptt-11015",
+   "fuel": "gsh95",
+   "status": "ok",
+   "minutesAgo": 12
+  },
+  {
+   "stationId": "ptt-11015",
+   "fuel": "b7",
+   "status": "low",
+   "minutesAgo": 40
+  },
+  {
+   "stationId": "ptt-11015",
+   "fuel": "e20",
+   "status": "out",
+   "minutesAgo": 95
+  },
+  {
+   "stationId": "bangchak-pattaya-klang",
+   "fuel": "gsh95",
+   "status": "ok",
+   "minutesAgo": 25
+  },
+  {
+   "stationId": "bangchak-pattaya-klang",
+   "fuel": "e85",
+   "status": "ok",
+   "minutesAgo": 25
+  },
+  {
+   "stationId": "caltex-jaruwan",
+   "fuel": "gsh95",
+   "status": "low",
+   "minutesAgo": 18
+  },
+  {
+   "stationId": "shell-sky-and-proud",
+   "fuel": "premium_gas",
+   "status": "ok",
+   "minutesAgo": 60
+  },
+  {
+   "stationId": "pt-banglamung-2",
+   "fuel": "b7",
+   "status": "out",
+   "minutesAgo": 30
+  },
+  {
+   "stationId": "susco-na-kluea",
+   "fuel": "gsh95",
+   "status": "ok",
+   "minutesAgo": 900
+  }
+ ]
+}

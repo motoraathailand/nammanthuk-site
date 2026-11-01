@@ -1,0 +1,128 @@
+{
+ "_note": "Brand display data. color/ink = UI accent + readable text colour on it (AA contrast). Not official logos. priceSource: 'official' = the server has a free official price feed for the brand; 'alias' = rebranded (aliasOf: its stations are shown as that brand); 'crowd' = no official price exists (stations are listed, 'no official price' is shown; crowd prices may come later).",
+ "brands": [
+  {
+   "id": "ptt",
+   "name": {
+    "th": "ปตท.",
+    "en": "PTT",
+    "ko": "PTT"
+   },
+   "color": "#1f66b3",
+   "short": "ปตท",
+   "ink": "#ffffff",
+   "priceSource": "official"
+  },
+  {
+   "id": "bangchak",
+   "name": {
+    "th": "บางจาก",
+    "en": "Bangchak",
+    "ko": "방착"
+   },
+   "color": "#4d7a00",
+   "short": "บจ",
+   "ink": "#ffffff",
+   "priceSource": "official"
+  },
+  {
+   "id": "shell",
+   "name": {
+    "th": "เชลล์",
+    "en": "Shell",
+    "ko": "쉘"
+   },
+   "color": "#ffcb05",
+   "short": "เชลล์",
+   "ink": "#1a1a1a",
+   "priceSource": "official"
+  },
+  {
+   "id": "caltex",
+   "name": {
+    "th": "คาลเท็กซ์",
+    "en": "Caltex",
+    "ko": "칼텍스"
+   },
+   "color": "#c01f1f",
+   "short": "คท",
+   "ink": "#ffffff",
+   "priceSource": "official"
+  },
+  {
+   "id": "pt",
+   "name": {
+    "th": "พีที",
+    "en": "PT",
+    "ko": "PT"
+   },
+   "color": "#c2410c",
+   "short": "PT",
+   "ink": "#ffffff",
+   "priceSource": "official"
+  },
+  {
+   "id": "susco",
+   "name": {
+    "th": "ซัสโก้",
+    "en": "Susco",
+    "ko": "수스코"
+   },
+   "color": "#7b3fa0",
+   "short": "ซส",
+   "ink": "#ffffff",
+   "priceSource": "official"
+  },
+  {
+   "id": "esso",
+   "name": {
+    "th": "เอสโซ่",
+    "en": "Esso",
+    "ko": "에쏘"
+   },
+   "color": "#c8102e",
+   "short": "เอสโซ่",
+   "ink": "#ffffff",
+   "noBoard": true,
+   "priceSource": "alias",
+   "aliasOf": "bangchak"
+  },
+  {
+   "id": "pure",
+   "name": {
+    "th": "เพียว",
+    "en": "Pure",
+    "ko": "퓨어"
+   },
+   "color": "#00703c",
+   "short": "เพียว",
+   "ink": "#ffffff",
+   "priceSource": "official"
+  },
+  {
+   "id": "irpc",
+   "name": {
+    "th": "ไออาร์พีซี",
+    "en": "IRPC",
+    "ko": "IRPC"
+   },
+   "color": "#1d4e89",
+   "short": "IRPC",
+   "ink": "#ffffff",
+   "priceSource": "official"
+  },
+  {
+   "id": "other",
+   "name": {
+    "th": "ปั๊มน้ำมันอื่น ๆ",
+    "en": "Other station",
+    "ko": "기타 주유소"
+   },
+   "color": "#53606a",
+   "short": "ปั๊ม",
+   "ink": "#ffffff",
+   "noBoard": true,
+   "priceSource": "crowd"
+  }
+ ]
+}

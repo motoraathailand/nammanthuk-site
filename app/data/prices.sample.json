@@ -1,0 +1,390 @@
+{
+ "_sample": true,
+ "_note": "SAMPLE DATA for development/offline fallback — not live. Today (2026-10-29, THB/L, Bangkok retail) from the owner's verified list; PTT/Bangchak premium petrol (Super Power GSH95 / Hi Premium 98 Plus) and premium diesel (PTT Premium Diesel = Super Power Diesel / Bangchak Hi Premium Diesel S Plus; premium split into premium_gas + premium_diesel on 2026-11-01) read from the PTT OR + Bangchak APIs on 2026-10-29. 'prev' (yesterday): PTT/Bangchak = Bangchak API PriceYesterday of 2026-10-29; Caltex/PT/Susco = ASSUMED equal to PTT's yesterday (retail prices move in lockstep, not verified); Shell and PTT premium = null (unknown). Caltex premium (Gold 95 Techron 50.61, Power Diesel Techron D 49.05) read from the official Caltex page on 2026-11-01 (page date 29 Oct 2026). Shell V-Power (51.84), IRPC, PT, Susco and Pure are the official Ministry of Energy table values read on 2026-11-01 (new2.energy.go.th, price date 2026-10-29).",
+ "source": "sample",
+ "region": "bkk",
+ "date": "2026-10-29",
+ "fetchedAt": "2026-10-29T15:00:00.000Z",
+ "brands": {
+  "ptt": {
+   "gsh95": {
+    "price": 41.54,
+    "prev": 42.04
+   },
+   "gsh91": {
+    "price": 41.17,
+    "prev": 41.67
+   },
+   "e20": {
+    "price": 33.5,
+    "prev": 33.5
+   },
+   "e85": {
+    "price": 31.63,
+    "prev": 31.63
+   },
+   "b7": {
+    "price": 42.54,
+    "prev": 43.54
+   },
+   "b20": {
+    "price": 33.5,
+    "prev": 33.5
+   },
+   "premium_gas": {
+    "price": 47.05,
+    "prev": null,
+    "product": "Super Power GSH95"
+   },
+   "premium_diesel": {
+    "price": 49.05,
+    "prev": null,
+    "product": "Super Power Diesel"
+   }
+  },
+  "bangchak": {
+   "gsh95": {
+    "price": 41.54,
+    "prev": 42.04
+   },
+   "gsh91": {
+    "price": 41.17,
+    "prev": 41.67
+   },
+   "e20": {
+    "price": 33.5,
+    "prev": 33.5
+   },
+   "e85": {
+    "price": 31.63,
+    "prev": 31.63
+   },
+   "b7": {
+    "price": 42.54,
+    "prev": 43.54
+   },
+   "b20": {
+    "price": 33.5,
+    "prev": 33.5
+   },
+   "premium_gas": {
+    "price": 48.55,
+    "prev": 49.29,
+    "product": "Hi Premium 98 Plus"
+   },
+   "premium_diesel": {
+    "price": 49.05,
+    "prev": 50.05,
+    "product": "Hi Premium Diesel Plus"
+   }
+  },
+  "shell": {
+   "gsh95": {
+    "price": 42.04,
+    "prev": null
+   },
+   "e20": {
+    "price": 33.7,
+    "prev": null
+   },
+   "gsh91": {
+    "price": 41.67,
+    "prev": null
+   },
+   "premium_gas": {
+    "price": 51.84,
+    "prev": null,
+    "product": "V-Power Gasohol 95"
+   },
+   "b7": {
+    "price": 42.54,
+    "prev": 43.54
+   },
+   "b20": {
+    "price": 33.5,
+    "prev": 33.5
+   },
+   "premium_diesel": {
+    "price": 51.84,
+    "prev": null,
+    "product": "V-Power Diesel"
+   }
+  },
+  "caltex": {
+   "gsh95": {
+    "price": 41.54,
+    "prev": 42.04
+   },
+   "gsh91": {
+    "price": 41.17,
+    "prev": 41.67
+   },
+   "e20": {
+    "price": 33.5,
+    "prev": 33.5
+   },
+   "b7": {
+    "price": 42.54,
+    "prev": 43.54
+   },
+   "b20": {
+    "price": 33.5,
+    "prev": 33.5
+   },
+   "premium_gas": {
+    "price": 50.61,
+    "prev": null,
+    "product": "Gold 95 Techron"
+   },
+   "premium_diesel": {
+    "price": 49.05,
+    "prev": 50.05,
+    "product": "Power Diesel Techron D"
+   }
+  },
+  "pt": {
+   "gsh95": {
+    "price": 41.54,
+    "prev": 42.04
+   },
+   "e20": {
+    "price": 33.5,
+    "prev": 33.5
+   },
+   "gsh91": {
+    "price": 41.17,
+    "prev": 41.67
+   },
+   "b7": {
+    "price": 42.54,
+    "prev": 43.54
+   },
+   "b20": {
+    "price": 33.5,
+    "prev": 33.5
+   }
+  },
+  "susco": {
+   "gsh95": {
+    "price": 41.54,
+    "prev": 42.04
+   },
+   "e20": {
+    "price": 33.5,
+    "prev": 33.5
+   },
+   "gsh91": {
+    "price": 41.17,
+    "prev": 41.67
+   },
+   "b7": {
+    "price": 42.54,
+    "prev": 43.54
+   },
+   "b20": {
+    "price": 33.5,
+    "prev": 33.5
+   }
+  },
+  "irpc": {
+   "gsh95": {
+    "price": 41.54,
+    "prev": 42.04
+   },
+   "gsh91": {
+    "price": 41.17,
+    "prev": 41.67
+   },
+   "b7": {
+    "price": 42.54,
+    "prev": 43.54
+   }
+  },
+  "pure": {
+   "gsh95": {
+    "price": 41.54,
+    "prev": 42.04
+   },
+   "e20": {
+    "price": 33.5,
+    "prev": 33.5
+   },
+   "gsh91": {
+    "price": 41.17,
+    "prev": 41.67
+   },
+   "b7": {
+    "price": 42.54,
+    "prev": 43.54
+   },
+   "b20": {
+    "price": 33.5,
+    "prev": 33.5
+   }
+  }
+ },
+ "products": [
+  {
+   "id": "ptt-super-powerx-99",
+   "brand": "ptt",
+   "fuel": "premium_gas",
+   "group": "gas99",
+   "octane": 99,
+   "octaneText": "99+",
+   "display": {
+    "en": "Super PowerX 99",
+    "th": "Super PowerX 99"
+   },
+   "raw": {
+    "th": "Super Power X99",
+    "en": "Super Power X99"
+   },
+   "price": 49.05,
+   "prev": null
+  },
+  {
+   "id": "bangchak-hi-premium-98-plus",
+   "brand": "bangchak",
+   "fuel": "premium_gas",
+   "group": "gas98",
+   "octane": 98,
+   "octaneText": "98",
+   "display": {
+    "en": "Hi Premium 98 Plus",
+    "th": "ไฮ พรีเมียม 98 พลัส"
+   },
+   "raw": {
+    "th": "ไฮ พรีเมียม 98 พลัส",
+    "en": "Hi Premium 98 Plus"
+   },
+   "price": 48.55,
+   "prev": 49.29
+  },
+  {
+   "id": "ptt-super-power-gsh95",
+   "brand": "ptt",
+   "fuel": "premium_gas",
+   "group": "gas95",
+   "octane": 95,
+   "octaneText": "95",
+   "display": {
+    "en": "Super Power GSH95",
+    "th": "Super Power GSH95"
+   },
+   "raw": {
+    "th": "Super Power GSH95",
+    "en": "Super Power GSH95"
+   },
+   "price": 47.05,
+   "prev": null
+  },
+  {
+   "id": "caltex-gold-95-techron",
+   "brand": "caltex",
+   "fuel": "premium_gas",
+   "group": "gas95",
+   "octane": 95,
+   "octaneText": "95",
+   "display": {
+    "en": "Gold 95 Techron",
+    "th": "โกลด์ 95 เทครอน®"
+   },
+   "raw": {
+    "th": "โกลด์ 95 เทครอน®",
+    "en": null
+   },
+   "price": 50.61,
+   "prev": null
+  },
+  {
+   "id": "shell-v-power-gasohol-95",
+   "brand": "shell",
+   "fuel": "premium_gas",
+   "group": "gas95",
+   "octane": 95,
+   "octaneText": "95",
+   "display": {
+    "en": "V-Power Gasohol 95",
+    "th": "วี-เพาเวอร์ แก๊สโซฮอล์ 95"
+   },
+   "raw": {
+    "th": null,
+    "en": "Premium Gasohol 95"
+   },
+   "price": 51.84,
+   "prev": null
+  },
+  {
+   "id": "bangchak-hi-premium-diesel-plus",
+   "brand": "bangchak",
+   "fuel": "premium_diesel",
+   "group": "diesel",
+   "octane": null,
+   "octaneText": null,
+   "display": {
+    "en": "Hi Premium Diesel Plus",
+    "th": "ไฮ พรีเมียม ดีเซล พลัส"
+   },
+   "raw": {
+    "th": "ไฮ พรีเมียม ดีเซล พลัส",
+    "en": "Hi Premium Diesel Plus"
+   },
+   "price": 49.05,
+   "prev": 50.05
+  },
+  {
+   "id": "caltex-power-diesel-techron-d",
+   "brand": "caltex",
+   "fuel": "premium_diesel",
+   "group": "diesel",
+   "octane": null,
+   "octaneText": null,
+   "display": {
+    "en": "Power Diesel Techron D",
+    "th": "พาวเวอร์ ดีเซล เทครอน® ดี"
+   },
+   "raw": {
+    "th": "พาวเวอร์ ดีเซล เทครอน® ดี",
+    "en": null
+   },
+   "price": 49.05,
+   "prev": 50.05
+  },
+  {
+   "id": "ptt-super-power-diesel",
+   "brand": "ptt",
+   "fuel": "premium_diesel",
+   "group": "diesel",
+   "octane": null,
+   "octaneText": null,
+   "display": {
+    "en": "Super Power Diesel",
+    "th": "Super Power Diesel"
+   },
+   "raw": {
+    "th": "Super Power Diesel",
+    "en": "Premium Diesel"
+   },
+   "price": 49.05,
+   "prev": 50.05
+  },
+  {
+   "id": "shell-v-power-diesel",
+   "brand": "shell",
+   "fuel": "premium_diesel",
+   "group": "diesel",
+   "octane": null,
+   "octaneText": null,
+   "display": {
+    "en": "V-Power Diesel",
+    "th": "วี-เพาเวอร์ ดีเซล"
+   },
+   "raw": {
+    "th": null,
+    "en": "Premium Diesel"
+   },
+   "price": 51.84,
+   "prev": null
+  }
+ ]
+}
