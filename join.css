@@ -121,3 +121,14 @@ details > p { padding:0 14px 14px; color:var(--mut); font-size:15.5px; }
 
 /* first paint in a non-Thai language: hidden until the script has swapped the baked Thai text (fails open after 1.5 s) */
 html.pl body { opacity:0; animation:plshow .01s linear 1.5s forwards; } @keyframes plshow { to { opacity:1; } }
+
+/* in-app browser (Facebook/LINE) hint: shown by join.js only inside such a browser */
+.iab { display:flex; gap:10px; align-items:flex-start; margin-top:8px; padding:10px 12px; border-radius:16px; background:#fff8e1; border:2px solid #f2b705; }
+.iab[hidden] { display:none; }
+.iab > svg { flex:none; width:28px; height:28px; fill:#fff; stroke:#a67c00; stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round; }
+.iab div { min-width:0; }
+.iab b { display:block; font-size:17px; line-height:1.4; font-weight:700; color:#5c4300; }
+.iab span { display:block; font-size:14px; line-height:1.5; color:#4a3700; margin-top:2px; }
+.iabrow { display:flex; flex-wrap:wrap; gap:8px; margin-top:8px; }
+.iabrow .btn { min-height:44px; padding:8px 14px; font-size:15px; }
+.iab small { display:block; min-height:1em; margin-top:4px; font-size:13px; color:#4a3700; }

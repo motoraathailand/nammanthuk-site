@@ -32,6 +32,12 @@
     <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7.5l8 6 8-6"/></svg>
     <div><b data-t="gm">ใช้ Gmail เดียวกันทั้ง 3 ขั้นตอน</b><span data-t="gmD">ต้องเป็นบัญชี Google เดียวกับที่ใช้ใน Google Play บนมือถือของคุณ ถ้าใช้คนละบัญชี จะไม่ถูกนับเป็นผู้ทดสอบ</span></div>
   </div>
+  <div class="iab" id="iab" role="alert" hidden>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.01"/></svg>
+    <div><b data-t="iabT">เปิดหน้านี้ใน Chrome ก่อน</b><span data-t="iabD">ตอนนี้คุณเปิดอยู่ในเบราว์เซอร์ของแอป (Facebook/LINE) ซึ่งเข้าสู่ระบบ Google ได้ไม่ดี กดปุ่มด้านล่าง หรือกดจุดสามจุดมุมบนแล้วเลือก “เปิดใน Chrome”</span>
+      <div class="iabrow"><a class="btn" id="iabOpen" href="#" data-t="iabB">เปิดใน Chrome</a><button type="button" class="btn ghost" id="iabCopy" data-t="iabC">คัดลอกลิงก์</button></div>
+      <small id="iabNote" aria-live="polite"></small></div>
+  </div>
   <div class="prog"><div class="bar" aria-hidden="true"><i id="barFill"></i></div><p id="progTxt" aria-live="polite"></p></div>
 </div></section>
 

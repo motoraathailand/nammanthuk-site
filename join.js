@@ -56,6 +56,17 @@
     if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(function () { say('copied'); }, function () { say('copyFail'); });
     else say('copyFail');
   });
+  // Facebook / Instagram / LINE / Messenger in-app browser (or any Android WebView): Google sign-in often fails there, so ask to open the page in Chrome first (fbclid alone is not enough: it also stays in the URL after Chrome opens it).
+  var ua = navigator.userAgent || '', iab = $('#iab');
+  if (iab && /Android/i.test(ua) && /FBAN|FBAV|FB_IAB|Instagram|\bLine\/|MessengerLite|; wv\)/i.test(ua)) {
+    var pageUrl = location.href.split('#')[0];
+    iab.hidden = false;
+    $('#iabOpen').setAttribute('href', 'intent://' + pageUrl.replace(/^https?:\/\//, '') + '#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=' + encodeURIComponent(pageUrl) + ';end');
+    $('#iabCopy').addEventListener('click', function () {
+      var n = $('#iabNote'), ok = function () { n.textContent = t('iabOk'); }, bad = function () { n.textContent = t('copyFail'); };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(pageUrl).then(ok, bad); else bad();
+    });
+  }
   paintText();
   document.documentElement.classList.remove('pl');   // text is final: show the page (the CSS also un-hides it after 1.5 s if this script ever fails)
 })();
