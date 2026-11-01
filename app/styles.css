@@ -89,7 +89,7 @@ a { color: var(--brand); }
 .rowbtn, .bigopt, .opt, .rep-btn, .nt-item { border-radius: var(--radius-btn); }
 .row, .tile { border-radius: var(--radius); }
 /* press feedback: scale .97 + shallower shadow */
-.btn:active, .rowbtn:active, .bigopt:active, .opt:active, .tile:active, .row:active, .rep-btn:active, .navbtn:active, .seg button:active, .nt-item:active { transform: scale(.97); transition-duration: 120ms; }   /* quick down, spring back */
+.btn:active, .rowbtn:active, .bigopt:active, .opt:active, .tile:active, .row:active, .rep-btn:active, .navbtn:active, .seg button:active, .nt-item:active, .dr-update:active { transform: scale(.97); transition-duration: 120ms; }   /* quick down, spring back */
 .rowbtn:active, .bigopt:active, .tile:active, .row:active, .nt-item:active, .btn.outline:active { box-shadow: var(--shadow-press); }
 .btn.primary:active { box-shadow: 0 3px 8px -6px color-mix(in srgb, var(--brand) 80%, transparent); }
 .btn { border-radius: 999px; font-weight: 600; padding: .5rem 1.5rem; }
@@ -165,8 +165,9 @@ a { color: var(--brand); }
 .tut-dots i { width: .875rem; height: .875rem; border-radius: 50%; background: color-mix(in srgb, var(--brand) 25%, var(--line)); transition: background-color var(--m-fast) var(--m-ease); }
 .tut-dots i.on { background: var(--brand); box-shadow: 0 0 0 .1875rem var(--brand-soft); }
 .tut-bar { display: grid; gap: .75rem; }
-.tut-row { display: flex; gap: .75rem; }
-.tut-row .btn { flex: 1; min-height: 3.5rem; font-size: 1.25rem; justify-content: center; }
+.tut-row { display: flex; gap: .75rem; flex-wrap: wrap; }
+.tut-row .btn { flex: 1 1 7rem; min-width: 0; min-height: 3.5rem; font-size: 1.25rem; justify-content: center; }
+.tut-row .btn > span, #tut-next > span { min-width: 0; overflow-wrap: anywhere; }
 .tut-row .btn[hidden] { display: none; }
 #tut-next { gap: .5rem; justify-content: center; }
 
@@ -396,7 +397,7 @@ textarea:focus { border-color: color-mix(in srgb, var(--brand) 55%, var(--line))
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
-  .btn:active, .rowbtn:active, .bigopt:active, .opt:active, .tile:active, .row:active, .rep-btn:active, .navbtn:active, .seg button:active, .nt-item:active { transform: none !important; }
+  .btn:active, .rowbtn:active, .bigopt:active, .opt:active, .tile:active, .row:active, .rep-btn:active, .navbtn:active, .seg button:active, .nt-item:active, .dr-update:active { transform: none !important; }
 }
 
 /* ---------------- account, sign-in gate, fuel log, favourites & alerts (v1.1) ---------------- */
@@ -496,3 +497,50 @@ textarea:focus { border-color: color-mix(in srgb, var(--brand) 55%, var(--line))
 @keyframes nmt-pulse { 0% { opacity: .55; transform: scale(.7); } 100% { opacity: 0; transform: scale(2.4); } }
 #view-map:not([hidden]) { display: flex; flex-direction: column; height: 100vh; height: 100dvh; }
 #view-map #map { flex: 1 1 auto; height: auto; min-height: 15rem; }
+
+/* ---- v20: every button = icon + short text (line icons, rounded, from the sprite in index.html); option buttons show their own icon, the selected one also gets a check ---- */
+.opt > .ic, .bigopt > .ic:first-child, .seg button > .ic, .switchrow > .ic, .favgo > .ic, .nt-item time .ic { color: var(--brand); }
+.seg button > .ic { width: 1.375rem; height: 1.375rem; }
+.seg button.on > .ic { color: inherit; }
+.seg button.on .si { color: inherit; }
+.opt .opt-l { flex: 1 1 auto; min-width: 0; }
+.opt .si, .seg button .si { margin-left: auto; }
+.seg button { gap: .5rem; }
+.bigopt .lbl { flex: 1 1 auto; min-width: 0; }
+.bigopt > .ic:first-child { width: 1.625rem; height: 1.625rem; }
+.bigopt { gap: .75rem; }
+.switchrow > .ic { width: 1.5rem; height: 1.5rem; }
+.favgo { flex-direction: row; align-items: center; gap: .75rem; }
+.favgo .fg-t { display: flex; flex-direction: column; gap: .15rem; min-width: 0; flex: 1; }
+.nt-item time { display: flex; align-items: center; gap: .5rem; }
+.nt-item time .ic { width: 1.25rem; height: 1.25rem; }
+.btn > .ic, .textlink > .ic { flex: none; }
+.textlink { display: inline-flex; align-items: center; gap: .5rem; min-height: 3.5rem; }
+.textlink > .ic { width: 1.25rem; height: 1.25rem; }
+.btn.danger, .btn.dangerfill { gap: .5rem; }
+.dr-update { margin-top: .5rem; background: var(--brand-soft); border: 1px solid color-mix(in srgb, var(--brand) 30%, var(--line)); border-radius: var(--radius); color: var(--ink); font-weight: 700; }
+.dr-update:hover { background: var(--brand-soft); }
+.dr-update .dr-ic { color: var(--brand); }
+.dr-foot { text-align: center; justify-content: center; }
+
+/* ---- v20 popups: "new version" and "what's new". Sheet motion from the shared guide: scrim m-fade-in 320 ms, panel m-sheet-up 520 ms, exit 240 ms; transform + opacity only; the exit never takes a tap ---- */
+.popup { position: fixed; inset: 0; z-index: 95;   /* above the drawer and toast, below the language sheet (100): the language button is reachable from the popups */
+   display: flex; align-items: center; justify-content: center; padding: 1.25rem; }
+.pp-scrim { position: absolute; inset: 0; background: var(--scrim); animation: m-fade-in var(--m-base) var(--m-ease) backwards; }
+.pp-panel { position: relative; width: min(26rem, 100%); max-height: 90vh; max-height: 90dvh; overflow-y: auto; background: var(--surface); border-radius: var(--radius-lg); padding: 1.5rem 1.25rem calc(1.25rem + env(safe-area-inset-bottom)); display: flex; flex-direction: column; align-items: stretch; gap: .875rem; text-align: center; box-shadow: var(--shadow-lift); animation: m-sheet-up var(--m-sheet) var(--m-ease-out) backwards; }
+.pp-panel h2 { margin: 0; font-size: 1.625rem; line-height: 1.35; }
+.pp-panel .lead { margin: 0; }
+.pp-ic { align-self: center; display: grid; place-items: center; width: 4.5rem; height: 4.5rem; border-radius: 50%; background: var(--brand-grad); color: var(--on-brand); }
+.pp-ic .ic { width: 2.25rem; height: 2.25rem; }
+.pp-new, .pp-ver { justify-content: center; align-items: center; }
+.pp-new .ic, .pp-ver .ic { margin-top: 0; }
+.pp-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .75rem; text-align: left; }
+.pp-list li { display: flex; gap: .75rem; align-items: flex-start; font-size: 1.1875rem; line-height: 1.55; }
+.pp-list li .ic { color: var(--ok); margin-top: .2rem; width: 1.375rem; height: 1.375rem; }
+.popup.closing { pointer-events: none; }
+.popup.closing .pp-scrim { animation: m-fade-out var(--m-exit) var(--m-ease-in) forwards; }
+.popup.closing .pp-panel { animation: lsOut var(--m-exit) var(--m-ease-in) forwards; }
+@media (max-width: 30rem) { .popup { align-items: flex-end; padding: 0; } .pp-panel { width: 100%; border-radius: 22px 22px 0 0; } }
+@media (prefers-reduced-motion: reduce) { .pp-scrim, .pp-panel { animation: none !important; } }
+.pp-top { display: flex; justify-content: flex-end; margin: -.5rem -.25rem -.25rem; }
+.dr-item.dr-update:last-of-type { border-bottom-color: color-mix(in srgb, var(--brand) 30%, var(--line)); }

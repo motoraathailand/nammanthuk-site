@@ -5,6 +5,9 @@
     appName: 'น้ำมันถูก',
     appId: 'com.nammanthuk.app',
     appVersion: '1.0.0',           // versionName (versionCode lives in the Android wrapper's build.gradle)
+    appVersionCode: 20,             // versionCode. 0 here = unknown (plain web/dev): update popups stay off. The Android wrapper's prepare-www step writes the REAL number from android/app/build.gradle into the bundled copy (single source of truth); scripts/publish-app-preview.sh does the same for the web preview.
+    playPackage: 'com.nammanthuk.app',   // Play Store page: market://details?id=<playPackage>, fallback https://play.google.com/store/apps/details?id=<playPackage>
+    update: { snoozeHours: 24, recheckMinutes: 10 },   // "Later" hides the popup for that version for 24 h; resume re-checks at most every 10 min
     // Operator name/contact is the same for every app and changeable here in ONE place (protocol §4, §6).
     operatorName: 'Pornnarai Tananchai',
     contactEmail: 'motoraathailand@gmail.com',   // shared operator contact (all apps). Feedback opens the phone's mail app (mailto) to this address; shown in About.

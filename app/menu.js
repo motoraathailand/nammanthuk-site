@@ -38,14 +38,15 @@
       $('dr-close-l').textContent = t('common.close');
       $('dr-account-l').textContent = t('menu.account'); $('dr-fuellog-l').textContent = t('menu.fuellog'); $('dr-alerts-l').textContent = t('menu.alerts');
       $('dr-notices-l').textContent = t('menu.notices'); $('dr-updates-l').textContent = t('menu.updates'); $('dr-feedback-l').textContent = t('menu.feedback'); $('dr-howto-l').textContent = t('menu.howto'); $('dr-about-l').textContent = t('menu.about');
-      $('dr-foot').textContent = t('set.version', { v: cfg.appVersion });
+      $('dr-update-l').textContent = t('menu.update');
+      $('dr-foot').textContent = 'v' + cfg.appVersion + (cfg.appVersionCode ? ' (' + cfg.appVersionCode + ')' : '');   // "v1.0.0 (20)": versionCode is written into app-config.js at build time from build.gradle
       $('btn-menu').setAttribute('aria-label', t('menu.open'));
     }
     // ---- notices ----
     function renderNotices() {
       $('nt-title').textContent = t('notices.title'); $('nt-back').innerHTML = ico('back') + '<span>' + t('notices.back') + '</span>';
       var last = since.n === null ? seen(SEEN.n) : since.n;
-      $('nt-list').innerHTML = X.notices.map(function (n) { return '<li><button type="button" class="nt-item' + (key(n) > last ? ' new' : '') + '" data-id="' + esc(n.id) + '"><time>' + esc(n.date) + '</time><span class="nt-t">' + esc(pick(n.title)) + '</span>' + (key(n) > last ? '<span class="new-badge">' + esc(t('notices.new')) + '</span>' : '') + '</button></li>'; }).join('');
+      $('nt-list').innerHTML = X.notices.map(function (n) { return '<li><button type="button" class="nt-item' + (key(n) > last ? ' new' : '') + '" data-id="' + esc(n.id) + '"><time>' + ico('bell') + '<span>' + esc(n.date) + '</span></time><span class="nt-t">' + esc(pick(n.title)) + '</span>' + (key(n) > last ? '<span class="new-badge">' + esc(t('notices.new')) + '</span>' : '') + '</button></li>'; }).join('');
       $('nt-empty').textContent = t('notices.empty'); $('nt-empty').hidden = X.notices.length > 0;
       var open = !$('nt-detail').hidden && X.notices.filter(function (n) { return n.id === $('nt-detail').getAttribute('data-id'); })[0];
       if (open) fillNotice(open); else showNoticeList();
@@ -62,10 +63,10 @@
       $('up-empty').textContent = t('updates.empty'); $('up-empty').hidden = X.entries.length > 0;
     }
     // ---- feedback ----
-    var FB_TYPES = ['question', 'bug', 'idea', 'other'];
+    var FB_TYPES = ['question', 'bug', 'idea', 'other'], FB_ICON = { question: 'help', bug: 'bug', idea: 'bulb', other: 'chat' };
     function renderFeedback() {
-      $('fb-title').textContent = t('fb.title'); $('fb-done-close').textContent = t('common.close');
-      $('fb-types').innerHTML = FB_TYPES.map(function (k) { return '<button type="button" role="radio" aria-checked="' + (k === fbType) + '" class="opt' + (k === fbType ? ' on' : '') + '" data-t="' + k + '">' + (k === fbType ? sIco('ok') : '') + esc(t('fb.type.' + k)) + '</button>'; }).join('');
+      $('fb-title').textContent = t('fb.title'); $('fb-done-close').innerHTML = ico('check') + '<span>' + esc(t('common.close')) + '</span>';
+      $('fb-types').innerHTML = FB_TYPES.map(function (k) { return '<button type="button" role="radio" aria-checked="' + (k === fbType) + '" class="opt' + (k === fbType ? ' on' : '') + '" data-t="' + k + '">' + ico(FB_ICON[k]) + '<span class="opt-l">' + esc(t('fb.type.' + k)) + '</span>' + (k === fbType ? sIco('ok') : '') + '</button>'; }).join('');
       Array.prototype.forEach.call($('fb-types').querySelectorAll('[data-t]'), function (b) { b.onclick = function () { fbType = b.getAttribute('data-t'); renderFeedback(); }; });
       $('fb-label').textContent = t('fb.label'); $('fb-msg').placeholder = t('fb.ph'); $('fb-send').innerHTML = ico('mail') + '<span>' + t('fb.sendMail') + '</span>'; $('fb-hint').textContent = t('fb.mailHint'); $('fb-note').textContent = t('fb.noPersonal');
       $('fb-count').textContent = $('fb-msg').value.length + '/2000';
@@ -102,9 +103,9 @@
       $('ab-operator').textContent = t('set.operator', { name: cfg.operatorName });
       $('ab-contact').hidden = !cfg.contactEmail; if (cfg.contactEmail) $('ab-contact').textContent = t('about.contact', { email: cfg.contactEmail });
       $('ab-privacy-text').textContent = t('set.privacyText');
-      var pl = $('ab-privacy-link'); pl.hidden = !cfg.privacyUrl; if (cfg.privacyUrl) { pl.href = cfg.privacyUrl; pl.textContent = t('set.privacy'); }
+      var pl = $('ab-privacy-link'); pl.hidden = !cfg.privacyUrl; if (cfg.privacyUrl) { pl.href = cfg.privacyUrl; pl.innerHTML = ico('shield') + '<span>' + esc(t('set.privacy')) + '</span>'; }
       $('ab-src-h').textContent = t('set.sources'); $('ab-src').textContent = t('set.sourcesText'); $('ab-osm').textContent = t('about.osm');
-      $('ab-lic-h').textContent = t('about.licenses'); $('ab-lic-btn').textContent = t($('ab-lic-text').hidden ? 'about.licensesShow' : 'about.licensesHide');
+      $('ab-lic-h').textContent = t('about.licenses'); $('ab-lic-btn').innerHTML = ico('doc') + '<span>' + esc(t($('ab-lic-text').hidden ? 'about.licensesShow' : 'about.licensesHide')) + '</span>';
     }
     $('ab-lic-btn').addEventListener('click', function () {
       var pre = $('ab-lic-text');
@@ -152,6 +153,7 @@
     $('btn-menu').onclick = function () { app.go('#/menu'); };
     $('dr-howto').onclick = function () { app.replace('#/howto'); };   // the tutorial is a full screen (view-howto), not an overlay
     $('dr-close').onclick = app.back; $('dr-scrim').onclick = app.back;
+    $('dr-update').onclick = function () { if (app.openStore) app.openStore(); };   // Play Store page of this app (market:// -> https), see update.js
     ['account', 'fuellog', 'alerts', 'notices', 'updates', 'feedback', 'about'].forEach(function (k) { $('dr-' + k).onclick = function () { app.replace('#/' + k); }; });
     ['nt', 'up', 'fb', 'ab', 'ac', 'fl', 'al'].forEach(function (p) { $(p + '-close').onclick = app.back; });
     $('fb-done-close').onclick = app.back;

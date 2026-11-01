@@ -16,6 +16,7 @@
   function ico(n, cls) { return '<svg class="' + (cls || 'ic') + '" aria-hidden="true"><use href="#i-' + n + '"/></svg>'; }
   function sIco(st) { return '<i class="si" aria-hidden="true"><svg><use href="#s-' + st + '"/></svg></i>'; }
   function setHtml(id, h) { var e = $(id); if (e) e.innerHTML = h; }
+  var SORT_ICON = { near: 'pin', cheap: 'tag' };   // every option shows its own icon (v20); the selected one also gets the check mark
   var VIEWS = ['howto', 'gate', 'onboarding', 'home', 'map', 'board', 'premium', 'pick', 'settings'];
 
   var S = {
@@ -230,9 +231,9 @@
     $('tut-art').innerHTML = tutArt(i); $('tut-art').setAttribute('data-p', String(i + 1));
     var dots = ''; for (var k = 0; k < TUT_N; k++) dots += '<i' + (k === i ? ' class="on"' : '') + '></i>';
     $('tut-dots').innerHTML = dots; $('tut-dots').setAttribute('aria-label', t('tut.page', { n: i + 1, m: TUT_N })); $('tut-dots').setAttribute('data-i', String(i + 1));
-    $('tut-next').innerHTML = '<span>' + esc(t(last ? (first ? 'tut.start' : 'tut.done') : 'tut.next')) + '</span>' + (last ? '' : ico('chev'));
+    $('tut-next').innerHTML = '<span>' + esc(t(last ? (first ? 'tut.start' : 'tut.done') : 'tut.next')) + '</span>' + ico(last ? 'check' : 'chev');
     var bk = $('tut-back'); bk.hidden = i === 0; bk.innerHTML = ico('back') + '<span>' + esc(t('common.back')) + '</span>';
-    var sk = $('tut-skip'); sk.hidden = last; sk.textContent = t(first ? 'tut.skip' : 'common.close');
+    var sk = $('tut-skip'); sk.hidden = last; sk.innerHTML = ico(first ? 'skip' : 'close') + '<span>' + esc(t(first ? 'tut.skip' : 'common.close')) + '</span>';
     $('tut-page').setAttribute('data-p', String(i + 1)); $('tut-page').classList.remove('m-screen-fwd', 'm-screen-back');
     if (dir) play($('tut-page'), dir === 'back' ? 'm-screen-back' : 'm-screen-fwd', 520);
   }
@@ -257,17 +258,17 @@
   })();
 
   // ---------- onboarding: one tap on the fuel ----------
-  var menu = null;
+  var menu = null, upd = null;
   function fuelButton(f, cls, selected) {
     var hint = FUEL_HINT[f] ? '<small>' + esc(t(FUEL_HINT[f])) + '</small>' : '';
-    return '<button type="button" role="radio" aria-checked="' + (selected === f) + '" class="' + cls + (selected === f ? ' on' : '') + '" data-fuel="' + f + '"><span class="lbl">' + esc(fuelName(f)) + hint + '</span><svg class="ic rb-go" aria-hidden="true"><use href="#i-chev"/></svg></button>';
+    return '<button type="button" role="radio" aria-checked="' + (selected === f) + '" class="' + cls + (selected === f ? ' on' : '') + '" data-fuel="' + f + '">' + ico('fuel') + '<span class="lbl">' + esc(fuelName(f)) + hint + '</span><svg class="ic rb-go" aria-hidden="true"><use href="#i-chev"/></svg></button>';
   }
   function renderOnboarding() {
     setText('onb-title', t('onb.title')); setText('onb-sub', t('onb.sub')); setHtml('onb-loc', ico('pin') + '<span>' + esc(t('onb.loc')) + '</span>');
     var list = COMMON_FUELS.concat(S.onbMore ? OTHER_FUELS : []);
     $('onb-fuels').innerHTML = list.map(function (f) { return fuelButton(f, 'bigopt', null); }).join('');
     Array.prototype.forEach.call($('onb-fuels').querySelectorAll('[data-fuel]'), function (b) { b.onclick = function () { finishOnboarding(b.getAttribute('data-fuel')); }; });
-    var more = $('onb-more'); more.hidden = S.onbMore; more.innerHTML = esc(t('onb.more')) + ico('down');
+    var more = $('onb-more'); more.hidden = S.onbMore; more.innerHTML = ico('plus') + '<span>' + esc(t('onb.more')) + '</span>' + ico('down');
     document.documentElement.lang = I.lang();
   }
   function finishOnboarding(f) {
@@ -290,7 +291,7 @@
     setText('ls-title', t('lang.pick')); setText('ls-close-l', t('common.close'));
     $('ls-list').innerHTML = I.LANGS.map(function (l) {
       var on = l.id === I.lang();
-      return '<button type="button" role="radio" aria-checked="' + on + '" class="opt' + (on ? ' on' : '') + '" data-l="' + l.id + '" lang="' + l.id + '">' + (on ? sIco('ok') : '') + '<span>' + esc(l.label) + '</span></button>';
+      return '<button type="button" role="radio" aria-checked="' + on + '" class="opt' + (on ? ' on' : '') + '" data-l="' + l.id + '" lang="' + l.id + '">' + ico('globe') + '<span class="opt-l">' + esc(l.label) + '</span>' + (on ? sIco('ok') : '') + '</button>';
     }).join('');
     Array.prototype.forEach.call($('ls-list').querySelectorAll('[data-l]'), function (b) { b.onclick = function () { chooseLang(b.getAttribute('data-l')); }; });
   }
@@ -321,7 +322,7 @@
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && ls.open) { e.stopImmediatePropagation(); closeLang(); } }, true);
 
   function setLang(l) {
-    I.setLang(l); store.setItem(LS.lang, l); applyStaticText(); if (menu) menu.onLang(); route(); M.langFade(document.querySelector('.view:not([hidden])') || $('sheet'));
+    I.setLang(l); store.setItem(LS.lang, l); applyStaticText(); if (menu) menu.onLang(); if (upd) upd.onLang(); route(); M.langFade(document.querySelector('.view:not([hidden])') || $('sheet'));
   }
   function applyStaticText() {
     document.documentElement.lang = I.lang(); document.title = t('app.name');
@@ -375,7 +376,7 @@
     var key = { gps: 'loc.gps', wait: 'loc.wait' }[st] || ('loc.' + st);
     var e = $('loc-note'); e.textContent = t(key); e.setAttribute('data-state', st); e.hidden = !(failed || st === 'wait');
     var ask = $('loc-ask'); ask.hidden = st !== 'ask';
-    if (st === 'ask') { setText('loc-ask-t', t('loc.ask.title')); setText('loc-ask-p', t('loc.ask.text')); $('loc-ask-yes').innerHTML = ico('pin') + '<span>' + esc(t('loc.ask.allow')) + '</span>'; setText('loc-ask-no', t('loc.ask.later')); }
+    if (st === 'ask') { setText('loc-ask-t', t('loc.ask.title')); setText('loc-ask-p', t('loc.ask.text')); $('loc-ask-yes').innerHTML = ico('pin') + '<span>' + esc(t('loc.ask.allow')) + '</span>'; setHtml('loc-ask-no', ico('clock') + '<span>' + esc(t('loc.ask.later')) + '</span>'); }
     var b = $('btn-locate'); b.hidden = st === 'ask'; b.disabled = st === 'wait';
     b.innerHTML = ico('pin') + '<span>' + esc(t(st === 'wait' ? 'loc.finding' : failed ? 'loc.retry' : 'home.locate')) + '</span>';
   }
@@ -392,7 +393,7 @@
       S.data = d; refreshStock(); route(); acct.checkAlerts(); acct.scheduleSync(800); return D.flushReports(env).then(function () { if (S.route === 'settings') renderSettings(); });
     }).catch(function (e) {
       console.error('load failed', e);
-      $('home-skel').hidden = true; $('hero').hidden = false; $('hero').innerHTML = '<p class="lead">' + esc(t('err.load')) + '</p><button class="btn primary xl" id="btn-retry">' + esc(t('common.retry')) + '</button>';
+      $('home-skel').hidden = true; $('hero').hidden = false; $('hero').innerHTML = '<p class="lead">' + esc(t('err.load')) + '</p><button class="btn primary xl" id="btn-retry">' + ico('refresh') + '<span>' + esc(t('common.retry')) + '</span></button>';
       var b = $('btn-retry'); if (b) b.onclick = load;
     });
   }
@@ -425,7 +426,7 @@
     applyStaticText(); renderBanners(); renderLocNote();
     setText('fuel-row-l', t('home.myFuel')); setText('fuel-pill-name', fuelName(S.fuel)); setHtml('fuel-row-go', esc(t('home.change')) + ico('chev'));
     $('fuel-row').setAttribute('aria-label', t('home.myFuel') + ': ' + fuelName(S.fuel) + ' — ' + t('home.change'));
-    $('sort-seg').innerHTML = N.SORTS.map(function (s) { return '<button type="button" role="radio" data-sort="' + s + '" class="' + (S.sort === s ? 'on' : '') + '" aria-checked="' + (S.sort === s) + '">' + (S.sort === s ? sIco('ok') : '') + esc(t('home.sort.' + s)) + '</button>'; }).join('');
+    $('sort-seg').innerHTML = N.SORTS.map(function (s) { return '<button type="button" role="radio" data-sort="' + s + '" class="' + (S.sort === s ? 'on' : '') + '" aria-checked="' + (S.sort === s) + '">' + ico(SORT_ICON[s]) + '<span>' + esc(t('home.sort.' + s)) + '</span>' + (S.sort === s ? sIco('ok') : '') + '</button>'; }).join('');
     Array.prototype.forEach.call($('sort-seg').querySelectorAll('[data-sort]'), function (b) { b.onclick = function () { S.sort = b.getAttribute('data-sort'); S.showAll = false; S.popSort = true; store.setItem(LS.sort, S.sort); renderHome(); }; });
     var sortChanged = S.popSort;
     if (S.popSort) { S.popSort = false; var on = $('sort-seg').querySelector('button.on'); if (on) play(on, 'pop', 600); }
@@ -450,7 +451,7 @@
         '<div class="nums"><div class="num"><b class="big' + td + '" id="hero-dist" data-km="' + hero.km.toFixed(3) + '">' + esc(distNum(hero.km)) + '</b><span class="unit">' + esc(distUnit(hero.km)) + '</span></div>' + price + '</div>' +
         '<p class="stline">' + pillHtml(st.status, ' id="hero-status"') + '<span class="last">' + esc(lastText(st)) + '</span></p>' +
         '<a class="btn primary xl" id="hero-nav" href="' + esc(navHref(s)) + '">' + ico('nav') + '<span>' + esc(t('detail.navigate')) + '</span></a>' +
-        '<button type="button" class="btn outline wide" id="hero-detail">' + esc(t('home.details')) + '</button>';
+        '<button type="button" class="btn outline wide" id="hero-detail">' + ico('info') + '<span>' + esc(t('home.details')) + '</span></button>';
       $('hero-detail').onclick = function () { go('#/station/' + encodeURIComponent(s.id)); };
       if (hero.price) rollNum($('hero-price'), 'rp:' + s.id + ':' + S.fuel, hero.price.price, function (v) { return N.formatPrice(Math.round(v * 100) / 100); }, Math.round(hero.price.price * 93) / 100);
       rollDist($('hero-dist'), 'rd:' + s.id, hero.km);
@@ -472,7 +473,7 @@
         (S.showAll && (idx + 1) % every === 0 && idx < shown.length - 1 ? adHtml('native') : '');   // never right after the last row (the "show less" button follows)
     }).join('') : '';
     var sa = $('btn-showall'); sa.hidden = others.length <= 4;
-    sa.innerHTML = S.showAll ? esc(t('home.showLess')) + ico('up') : esc(t('home.showAll', { n: others.length })) + ico('down');
+    sa.innerHTML = S.showAll ? ico('up') + '<span>' + esc(t('home.showLess')) + '</span>' : ico('list') + '<span>' + esc(t('home.showAll', { n: others.length })) + '</span>' + ico('down');
     Array.prototype.forEach.call($('station-list').querySelectorAll('.row'), function (b) { b.onclick = function () { go('#/station/' + encodeURIComponent(b.getAttribute('data-id'))); }; });
     var holdSt = S.loc.state, holding = (holdSt === 'wait' && !S.waitExpired) || holdSt === 'ask';   // do not show Pattaya rows while we are still finding / asking
     ['hero', 'station-list', 'btn-showall', 'list-title', 'btn-brand'].forEach(function (id) { if (holding) $(id).hidden = true; else if (id !== 'hero' && id !== 'btn-showall') $(id).hidden = false; });
@@ -600,7 +601,7 @@
     }
     setText('pick-title', title);
     $('pick-list').innerHTML = opts.map(function (o) {
-      return '<button type="button" role="radio" aria-checked="' + (cur === o.v) + '" class="bigopt' + (cur === o.v ? ' on' : '') + '" ' + attr + '="' + esc(o.v) + '"' + (o.color ? ' style="--c:' + o.color + '"' : '') + '><span class="lbl">' + (cur === o.v ? '' + sIco('ok') + '' : '') + esc(o.label) + (o.hint ? '<small>' + esc(o.hint) + '</small>' : '') + '</span></button>';
+      return '<button type="button" role="radio" aria-checked="' + (cur === o.v) + '" class="bigopt' + (cur === o.v ? ' on' : '') + '" ' + attr + '="' + esc(o.v) + '"' + (o.color ? ' style="--c:' + o.color + '"' : '') + '>' + ico(kind === 'fuel' ? 'fuel' : kind === 'lang' ? 'globe' : o.v === 'all' ? 'list' : 'tag') + '<span class="lbl">' + esc(o.label) + (o.hint ? '<small>' + esc(o.hint) + '</small>' : '') + '</span>' + (cur === o.v ? sIco('ok') : '') + '</button>';
     }).join('');
     Array.prototype.forEach.call($('pick-list').querySelectorAll('[' + attr + ']'), function (b) {
       b.onclick = function () {
@@ -647,7 +648,7 @@
         '<b class="pv2">' + (pr ? N.formatPrice(pr.price) : '–') + '</b>' + pillHtml(si.status) + '</div>';
     }).join('');
     var other = fuels.filter(function (f) { return f !== S.reportFuel; });
-    var otherPick = S.otherReport ? '<div class="stack" id="report-fuels" role="radiogroup">' + fuels.map(function (f) { return '<button type="button" role="radio" aria-checked="' + (S.reportFuel === f) + '" class="opt' + (S.reportFuel === f ? ' on' : '') + '" data-rf="' + f + '">' + (S.reportFuel === f ? '' + sIco('ok') + '' : '') + esc(fuelName(f)) + '</button>'; }).join('') + '</div>' : '';
+    var otherPick = S.otherReport ? '<div class="stack" id="report-fuels" role="radiogroup">' + fuels.map(function (f) { return '<button type="button" role="radio" aria-checked="' + (S.reportFuel === f) + '" class="opt' + (S.reportFuel === f ? ' on' : '') + '" data-rf="' + f + '">' + ico('fuel') + '<span class="opt-l">' + esc(fuelName(f)) + '</span>' + (S.reportFuel === f ? sIco('ok') : '') + '</button>'; }).join('') + '</div>' : '';
     $('sheet-body').innerHTML =
       '<h1 id="detail-name" class="st-name">' + esc(s.name) + '</h1>' +
       '<p class="sub"><span class="bchip" style="background:' + b.color + ';color:' + (b.ink || '#fff') + '">' + esc(brandName(b)) + '</span> ' + esc(s.tambon) + '</p>' +
@@ -658,13 +659,13 @@
         (mine ? '<p class="note">' + esc(t('detail.price', { fuel: fuelName(S.fuel) }) + (mine.product ? ' · ' + mine.product : '')) + '</p><p class="stline">' + pillHtml(ms.status, ' id="detail-status"') + '<span class="last" id="detail-last">' + esc(lastText(ms)) + '</span></p>' : '') +
         '<a class="btn primary xl" id="nav-geo" href="' + esc(nav.geo) + '">' + ico('nav') + '<span>' + esc(t('detail.navigate')) + '</span></a>' +
         '<p class="note center">' + esc(t('detail.apps')) + '</p>' +
-        '<div class="grid2"><a class="btn outline" id="nav-google" href="' + esc(nav.google) + '">' + esc(t('detail.google')) + '</a><a class="btn outline" id="nav-waze" href="' + esc(nav.waze) + '">' + esc(t('detail.waze')) + '</a></div>' +
+        '<div class="grid2"><a class="btn outline" id="nav-google" href="' + esc(nav.google) + '">' + ico('map') + '<span>' + esc(t('detail.google')) + '</span></a><a class="btn outline" id="nav-waze" href="' + esc(nav.waze) + '">' + ico('route') + '<span>' + esc(t('detail.waze')) + '</span></a></div>' +
       '</section>' +
       '<section class="card"><h2>' + esc(t('detail.reportTitle')) + '</h2><p class="lead">' + esc(t('detail.reportNow', { fuel: fuelName(S.reportFuel) })) + '</p>' +
       '<div class="stack">' + ['ok', 'low', 'out'].map(function (k) { return '<button type="button" class="rep-btn st-' + k + '" data-status="' + k + '">' + sIco(k) + '<span>' + esc(t('status.' + k)) + '</span></button>'; }).join('') + '</div>' +
-      (fuels.length > 1 ? '<button type="button" class="btn outline wide" id="rf-toggle">' + esc(t('detail.otherFuel')) + (S.otherReport ? ico('up') : ico('down')) + '</button>' : '') + otherPick +
+      (fuels.length > 1 ? '<button type="button" class="btn outline wide" id="rf-toggle">' + ico('fuel') + '<span>' + esc(t('detail.otherFuel')) + '</span>' + (S.otherReport ? ico('up') : ico('down')) + '</button>' : '') + otherPick +
       '<p class="note">' + esc(t('detail.reportNote')) + '</p></section>' +
-      '<button type="button" class="btn outline wide" id="allfuels-toggle">' + esc(t('detail.allFuels')) + (S.allFuels ? ico('up') : ico('down')) + '</button>' +
+      '<button type="button" class="btn outline wide" id="allfuels-toggle">' + ico('list') + '<span>' + esc(t('detail.allFuels')) + '</span>' + (S.allFuels ? ico('up') : ico('down')) + '</button>' +
       '<div class="stock" id="stock-rows"' + (S.allFuels ? '' : ' hidden') + '>' + stockRows + '</div>';
     fuels.forEach(function (f) { pillPop($('sheet-body'), 'd:' + s.id + ':' + f, stockFn(s.id, f).status, '.srow[data-fuel="' + f + '"] .pill'); });
     pillPop($('sheet-body'), 'dm:' + s.id + ':' + S.fuel, ms.status, '#detail-status');
@@ -693,7 +694,7 @@
     if (auth.signedIn()) { if (store.getItem(LS.onboarded) === '1' && S.fuel) startLocation(); acct.checkAlerts(); acct.scheduleSync(3000); D.flushReports(env); }
   }
   function userLoc() { return { lat: S.loc.lat, lng: S.loc.lng }; }
-  menu = N.menuInit({ t: t, esc: esc, store: store, cfg: cfg, env: env, go: go, back: back, replace: replace, alertCount: function () { return acct ? acct.alertCount() : 0; } });
+  menu = N.menuInit({ t: t, esc: esc, store: store, cfg: cfg, env: env, go: go, back: back, replace: replace, openStore: function () { return upd ? upd.openStore() : undefined; }, alertCount: function () { return acct ? acct.alertCount() : 0; } });
   acct = N.acctInit({
     t: t, esc: esc, store: store, cfg: cfg, env: env, auth: auth, go: go, back: back, replace: replace, ico: ico, sIco: sIco, toast: toast, afterAuth: afterAuth,
     getData: function () { return S.data; }, getFuel: function () { return S.fuel; }, setFuel: setFuelFromAccount, stockFn: stockFn, menu: function () { return menu; }, userLoc: userLoc,
@@ -703,10 +704,11 @@
   menu.setExtra(acct.panels);
   applyStaticText();
   route();
+  upd = N.updateInit({ t: t, esc: esc, store: store, cfg: cfg, env: env, menuOpen: menuOpen, langOpen: function () { return ls.open; } });   // update notice + what's new (update.js); stays off while cfg.appVersionCode is 0
   adsBoot();
   auth.verify().then(function (ok) { if (!ok) afterAuth(); });
   window.addEventListener('online', function () { acct.scheduleSync(500); });
   document.addEventListener('visibilitychange', function () { if (!document.hidden) { acct.scheduleSync(800); acct.checkAlerts(); } });
   load().then(function () { if (store.getItem(LS.onboarded) === '1' && auth.signedIn()) startLocation(); });
-  window.__NMT = { state: S, reload: load };   // handy for tests and debugging only
+  window.__NMT = { state: S, reload: load, update: upd };   // handy for tests and debugging only
 })();

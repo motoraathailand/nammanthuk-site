@@ -39,6 +39,7 @@
       'menu.updates': "อัปเดต",
       'menu.feedback': "ส่งความคิดเห็น",
       'menu.about': "เกี่ยวกับแอป",
+      'menu.update': "อัปเดตเป็นเวอร์ชันล่าสุด", 'upd.title': "มีเวอร์ชันใหม่แล้ว", 'upd.body': "อัปเดตแอปเพื่อใช้ฟีเจอร์ใหม่และการแก้ไขล่าสุด", 'upd.force': "ต้องอัปเดตแอปเป็นเวอร์ชันล่าสุดก่อน จึงจะใช้งานต่อได้", 'upd.go': "อัปเดตตอนนี้", 'upd.later': "ไว้ทีหลัง", 'wn.title': "มีอะไรใหม่", 'wn.ok': "เข้าใจแล้ว", 'wn.version': "เวอร์ชัน {v}",
       // ---- first-run tutorial (v18) ----
       'menu.howto': "วิธีใช้", 'tut.next': "ถัดไป", 'tut.start': "เริ่มใช้งาน", 'tut.done': "เสร็จแล้ว", 'tut.skip': "ข้าม", 'tut.page': "หน้า {n} จาก {m}",
       'tut.1.t': "หาปั๊มใกล้คุณ", 'tut.1.p': "แตะ “ตำแหน่งฉัน” แอปจะหาปั๊มที่ใกล้ที่สุดให้ทันที",
@@ -300,6 +301,7 @@
       'menu.updates': "Updates",
       'menu.feedback': "Send feedback",
       'menu.about': "About the app",
+      'menu.update': "Update to the latest version", 'upd.title': "A new version is available", 'upd.body': "Update the app to get the newest features and fixes.", 'upd.force': "You need to update to the latest version to keep using the app.", 'upd.go': "Update now", 'upd.later': "Later", 'wn.title': "What's new", 'wn.ok': "Got it", 'wn.version': "Version {v}",
       // ---- first-run tutorial (v18) ----
       'menu.howto': "How to use", 'tut.next': "Next", 'tut.start': "Get started", 'tut.done': "Done", 'tut.skip': "Skip", 'tut.page': "Page {n} of {m}",
       'tut.1.t': "Find a station near you", 'tut.1.p': "Tap “My location” and the app finds the nearest station right away.",
@@ -527,6 +529,7 @@
       'menu.updates': "업데이트",
       'menu.feedback': "피드백 보내기",
       'menu.about': "앱 정보",
+      'menu.update': "최신 버전으로 업데이트", 'upd.title': "새 버전이 나왔어요", 'upd.body': "앱을 업데이트하면 새 기능과 개선 사항을 쓸 수 있어요.", 'upd.force': "계속 사용하려면 최신 버전으로 업데이트해야 해요.", 'upd.go': "지금 업데이트", 'upd.later': "나중에", 'wn.title': "새로 바뀐 점", 'wn.ok': "확인", 'wn.version': "버전 {v}",
       // ---- first-run tutorial (v18) ----
       'menu.howto': "사용 방법", 'tut.next': "다음", 'tut.start': "시작하기", 'tut.done': "완료", 'tut.skip': "건너뛰기", 'tut.page': "{m}쪽 중 {n}쪽",
       'tut.1.t': "가까운 주유소 찾기", 'tut.1.p': "“내 위치”를 누르면 가장 가까운 주유소를 바로 찾아 줘요.",
@@ -754,6 +757,7 @@
       'menu.updates': "更新",
       'menu.feedback': "发送反馈",
       'menu.about': "关于应用",
+      'menu.update': "更新到最新版本", 'upd.title': "有新版本了", 'upd.body': "更新应用即可使用最新功能和修复。", 'upd.force': "需要先更新到最新版本才能继续使用。", 'upd.go': "立即更新", 'upd.later': "稍后", 'wn.title': "新变化", 'wn.ok': "知道了", 'wn.version': "版本 {v}",
       // ---- first-run tutorial (v18) ----
       'menu.howto': "使用方法", 'tut.next': "下一步", 'tut.start': "开始使用", 'tut.done': "完成", 'tut.skip': "跳过", 'tut.page': "第 {n} 页，共 {m} 页",
       'tut.1.t': "找附近的加油站", 'tut.1.p': "点“我的位置”，应用马上找出最近的加油站。",
@@ -1042,6 +1046,7 @@
       'menu.updates': "अपडेट",
       'menu.feedback': "फ़ीडबैक भेजें",
       'menu.about': "ऐप के बारे में",
+      'menu.update': "नए वर्शन पर अपडेट करें", 'upd.title': "नया वर्शन आ गया है", 'upd.body': "नई सुविधाओं और सुधारों के लिए ऐप अपडेट करें।", 'upd.force': "ऐप चलाते रहने के लिए ताज़ा वर्शन पर अपडेट करना ज़रूरी है।", 'upd.go': "अभी अपडेट करें", 'upd.later': "बाद में", 'wn.title': "नया क्या है", 'wn.ok': "समझ गया", 'wn.version': "वर्शन {v}",
       // ---- first-run tutorial (v18) ----
       'menu.howto': "इस्तेमाल का तरीका", 'tut.next': "आगे", 'tut.start': "शुरू करें", 'tut.done': "हो गया", 'tut.skip': "छोड़ें", 'tut.page': "पृष्ठ {n} / {m}",
       'tut.1.t': "अपने पास का पंप खोजें", 'tut.1.p': "“मेरी लोकेशन” दबाएँ, ऐप सबसे पास का पंप तुरंत ढूँढ देगा।",

@@ -43,7 +43,7 @@
       $('gate-btn-t').textContent = t(gate.busy ? 'gate.busy' : 'gate.btn'); var b = $('gate-btn'); b.disabled = gate.busy; b.setAttribute('aria-busy', String(gate.busy)); b.classList.toggle('busy', gate.busy);
       var e = $('gate-err'); e.hidden = !gate.err; e.textContent = gate.err ? t(GATE_ERR[gate.err] || 'gate.err.failed') : ''; e.setAttribute('data-code', gate.err || '');
       var m = $('gate-msg'); m.hidden = !gate.msg || !!gate.err; m.textContent = gate.msg ? t(gate.msg) : '';
-      $('gate-note').textContent = t('gate.note'); var p = $('gate-privacy'); p.textContent = t('gate.privacy'); p.href = privacyHref();
+      $('gate-note').textContent = t('gate.note'); var p = $('gate-privacy'); p.innerHTML = ico('shield') + '<span>' + esc(t('gate.privacy')) + '</span>'; p.href = privacyHref();
       if (/^https?:/.test(privacyHref())) { p.target = '_blank'; p.rel = 'noopener'; } else { p.removeAttribute('target'); }
     }
     function pullAfterSignIn(user) {
@@ -77,20 +77,20 @@
           '<p id="ac-sync" class="note">' + esc(sy) + '</p>' +
           '<button type="button" id="ac-signout" class="btn outline wide">' + ico('logout') + '<span>' + esc(t('acct.signout')) + '</span></button>' +
           '<button type="button" id="ac-delete" class="btn danger wide">' + ico('trash') + '<span>' + esc(t('acct.delete')) + '</span></button>' +
-          '<a id="ac-privacy" class="btn outline wide" href="' + esc(privacyHref()) + '"' + extLink(privacyHref()) + '>' + esc(t('acct.privacy')) + '</a>' +
-          '<a id="ac-delweb" class="textlink" href="' + esc(deletionHref()) + '"' + extLink(deletionHref()) + '>' + esc(t('acct.deleteWeb')) + '</a>';
+          '<a id="ac-privacy" class="btn outline wide" href="' + esc(privacyHref()) + '"' + extLink(privacyHref()) + '>' + ico('shield') + '<span>' + esc(t('acct.privacy')) + '</span></a>' +
+          '<a id="ac-delweb" class="textlink" href="' + esc(deletionHref()) + '"' + extLink(deletionHref()) + '>' + ico('doc') + '<span>' + esc(t('acct.deleteWeb')) + '</span></a>';
       } else if (ac.step === 'out') {
         h = '<section class="card confirm" id="ac-out"><h2>' + esc(t('acct.signout.q')) + '</h2><p class="lead">' + esc(t('acct.signout.body')) + '</p>' + (unsyncedWarn() ? '<p class="err" id="ac-out-warn">' + esc(t('acct.signout.unsynced')) + '</p>' : '') +
           '<button type="button" id="ac-out-yes" class="btn primary xl">' + ico('logout') + '<span>' + esc(t('acct.signout.yes')) + '</span></button>' +
-          '<button type="button" id="ac-out-no" class="btn outline wide">' + esc(t('acct.keep')) + '</button></section>';
+          '<button type="button" id="ac-out-no" class="btn outline wide">' + ico('close') + '<span>' + esc(t('acct.keep')) + '</span></button></section>';
       } else if (ac.step === 'del1') {
         h = '<section class="card confirm" id="ac-del1"><h2>' + esc(t('acct.del1.title')) + '</h2><p class="lead">' + esc(t('acct.del1.body')) + '</p><ul class="del-list">' +
           [1, 2, 3, 4].map(function (n) { return '<li>' + esc(t('acct.del1.l' + n)) + '</li>'; }).join('') + '</ul>' +
-          '<button type="button" id="ac-del1-no" class="btn primary xl">' + esc(t('acct.keep')) + '</button>' +
-          '<button type="button" id="ac-del1-next" class="btn danger wide">' + esc(t('acct.del1.next')) + '</button></section>';
+          '<button type="button" id="ac-del1-no" class="btn primary xl">' + ico('user') + '<span>' + esc(t('acct.keep')) + '</span></button>' +
+          '<button type="button" id="ac-del1-next" class="btn danger wide">' + ico('warn') + '<span>' + esc(t('acct.del1.next')) + '</span></button></section>';
       } else if (ac.step === 'del2') {
         h = '<section class="card confirm danger-card" id="ac-del2"><h2>' + esc(t('acct.del2.title')) + '</h2><p class="lead">' + esc(t('acct.del2.body')) + '</p>' +
-          '<button type="button" id="ac-del2-no" class="btn primary xl">' + esc(t('acct.del2.no')) + '</button>' +
+          '<button type="button" id="ac-del2-no" class="btn primary xl">' + ico('user') + '<span>' + esc(t('acct.del2.no')) + '</span></button>' +
           '<button type="button" id="ac-del2-yes" class="btn dangerfill wide">' + ico('trash') + '<span>' + esc(t('acct.del2.yes')) + '</span></button></section>';
       } else if (ac.step === 'prog') {
         h = '<section class="card confirm" id="ac-prog" role="status" aria-live="polite"><h2>' + esc(t('acct.del.progress')) + '</h2><ol class="del-steps">' +
@@ -98,11 +98,11 @@
       } else if (ac.step === 'reauth') {
         h = '<section class="card confirm" id="ac-reauth"><h2>' + esc(t('acct.del.reauth.title')) + '</h2><p class="lead">' + esc(t('acct.del.reauth.body')) + '</p>' + (ac.reauthErr ? '<p class="err" role="alert">' + esc(t('gate.err.failed')) + '</p>' : '') +
           '<button type="button" id="ac-reauth-go" class="gbtn">' + GLOGO + '<span>' + esc(t('gate.btn')) + '</span></button>' +
-          '<button type="button" id="ac-del2-no" class="btn outline wide">' + esc(t('acct.del2.no')) + '</button></section>';
+          '<button type="button" id="ac-del2-no" class="btn outline wide">' + ico('close') + '<span>' + esc(t('acct.del2.no')) + '</span></button></section>';
       } else if (ac.step === 'fail') {
         h = '<section class="card confirm" id="ac-fail"><h2>' + esc(t('acct.del1.title')) + '</h2><p class="err" role="alert" id="ac-fail-msg">' + esc(t('acct.del.fail')) + '</p>' +
-          '<button type="button" id="ac-retry" class="btn danger wide">' + esc(t('acct.del.retry')) + '</button>' +
-          '<button type="button" id="ac-del2-no" class="btn primary xl">' + esc(t('acct.keep')) + '</button></section>';
+          '<button type="button" id="ac-retry" class="btn danger wide">' + ico('refresh') + '<span>' + esc(t('acct.del.retry')) + '</span></button>' +
+          '<button type="button" id="ac-del2-no" class="btn primary xl">' + ico('user') + '<span>' + esc(t('acct.keep')) + '</span></button></section>';
       }
       b.innerHTML = h;
       var img = b.querySelector('.avatar img'); if (img) { img.addEventListener('error', function () { img.remove(); }); img.addEventListener('load', function () { var bb = img.parentNode.querySelector('b'); if (bb) bb.hidden = true; }); }
@@ -157,18 +157,18 @@
       return n.type === 'price' ? t('al.note.price', { station: name, fuel: app.fuelName(n.fuel), from: N.formatPrice(n.from), to: N.formatPrice(n.to) }) : t('al.note.stock', { station: name, fuel: app.fuelName(n.fuel) });
     }
     function switchRow(k, label, on, disabled) {
-      return '<button type="button" role="switch" class="switchrow' + (on ? ' on' : '') + '" id="al-sw-' + k + '" data-k="' + k + '" aria-checked="' + on + '"' + (disabled ? ' aria-disabled="true"' : '') + '><span class="sw-l">' + esc(label) + '</span><span class="sw-s" aria-hidden="true"><i></i></span><b class="sw-v">' + esc(t(on ? 'al.state.on' : 'al.state.off')) + '</b></button>';
+      return '<button type="button" role="switch" class="switchrow' + (on ? ' on' : '') + '" id="al-sw-' + k + '" data-k="' + k + '" aria-checked="' + on + '"' + (disabled ? ' aria-disabled="true"' : '') + '>' + ico(k === 'price' ? 'tag' : k === 'stock' ? 'fuel' : 'bell') + '<span class="sw-l">' + esc(label) + '</span><span class="sw-s" aria-hidden="true"><i></i></span><b class="sw-v">' + esc(t(on ? 'al.state.on' : 'al.state.off')) + '</b></button>';
     }
     function renderAlerts() {
       $('al-title').textContent = t('al.title'); var a = U.getAlerts(store), favs = U.listFavs(store), notes = U.listNotes(store), d = app.getData();
       var seen = al.fresh;
       var h = '<section class="card" id="al-settings"><h2>' + esc(t('al.settings')) + '</h2>' + switchRow('on', t('al.on'), a.on, false) + switchRow('price', t('al.price'), a.price && a.on, !a.on) + switchRow('stock', t('al.stock'), a.stock && a.on, !a.on) + '<p class="note" id="al-push">' + esc(t('al.pushNote')) + '</p></section>';
       h += '<h2 class="sec-h">' + esc(t('al.notes')) + '</h2>';
-      h += notes.length ? '<ul class="al-notes" id="al-notes">' + notes.map(function (n) { var nw = seen[n.id]; return '<li><button type="button" class="note-item' + (nw ? ' new' : '') + '" data-id="' + esc(n.stationId) + '" data-type="' + n.type + '">' + ico(n.type === 'price' ? 'tag' : 'fuel') + '<span class="ni-t">' + esc(noteText(n)) + '<time>' + esc(app.fmtAgo(n.ts)) + '</time></span>' + (nw ? '<span class="new-badge">' + esc(t('al.new')) + '</span>' : '') + '</button></li>'; }).join('') + '</ul><button type="button" id="al-clear" class="btn outline wide">' + esc(t('al.clear')) + '</button>'
+      h += notes.length ? '<ul class="al-notes" id="al-notes">' + notes.map(function (n) { var nw = seen[n.id]; return '<li><button type="button" class="note-item' + (nw ? ' new' : '') + '" data-id="' + esc(n.stationId) + '" data-type="' + n.type + '">' + ico(n.type === 'price' ? 'tag' : 'fuel') + '<span class="ni-t">' + esc(noteText(n)) + '<time>' + esc(app.fmtAgo(n.ts)) + '</time></span>' + (nw ? '<span class="new-badge">' + esc(t('al.new')) + '</span>' : '') + '</button></li>'; }).join('') + '</ul><button type="button" id="al-clear" class="btn outline wide">' + ico('trash') + '<span>' + esc(t('al.clear')) + '</span></button>'
         : '<p class="lead" id="al-notes-empty">' + esc(t('al.notes.empty')) + '</p>';
       h += '<h2 class="sec-h">' + esc(t('al.favs')) + '</h2>';
       var fs = favs.map(stationById).filter(Boolean);
-      h += fs.length ? '<div class="stack" id="al-favs">' + fs.map(function (s) { var b = app.brandById(s.brand); return '<div class="favrow" style="--c:' + b.color + '"><button type="button" class="favgo" data-id="' + esc(s.id) + '"><b>' + esc(s.name) + '</b><span class="sub">' + esc(app.brandName(b)) + ' · ' + esc(s.tambon) + '</span></button><button type="button" class="favrm" data-id="' + esc(s.id) + '" aria-label="' + esc(t('al.remove') + ': ' + s.name) + '">' + ico('star-on') + '<span>' + esc(t('al.remove')) + '</span></button></div>'; }).join('') + '</div>'
+      h += fs.length ? '<div class="stack" id="al-favs">' + fs.map(function (s) { var b = app.brandById(s.brand); return '<div class="favrow" style="--c:' + b.color + '"><button type="button" class="favgo" data-id="' + esc(s.id) + '">' + ico('pin') + '<span class="fg-t"><b>' + esc(s.name) + '</b><span class="sub">' + esc(app.brandName(b)) + ' · ' + esc(s.tambon) + '</span></span></button><button type="button" class="favrm" data-id="' + esc(s.id) + '" aria-label="' + esc(t('al.remove') + ': ' + s.name) + '">' + ico('star-on') + '<span>' + esc(t('al.remove')) + '</span></button></div>'; }).join('') + '</div>'
         : '<p class="lead" id="al-favs-empty">' + esc(t('al.favs.empty')) + '</p>';
       $('al-body').innerHTML = h;
       Array.prototype.forEach.call($('al-body').querySelectorAll('.switchrow'), function (b) {
@@ -210,7 +210,7 @@
         var confirm = fl.delId === e.id;
         return '<li class="fl-item" data-id="' + esc(e.id) + '"><div class="fl-main"><b class="fl-date">' + esc(app.fmtDate(e.date)) + '</b><span class="fl-st">' + esc(e.stationName || t('log.noStation')) + (e.fuel ? ' · ' + esc(app.fuelName(e.fuel)) : '') + '</span>' +
           '<span class="fl-nums"><b>' + esc(fmtNum(e.amount)) + '</b> ' + esc(t('log.baht')) + ' · ' + esc(fmtNum(e.liters)) + ' ' + esc(t('log.liters')) + ' · ' + esc(t('log.perLiter', { p: fmtNum(e.amount / e.liters) })) + '</span></div>' +
-          (confirm ? '<div class="fl-confirm" role="group" aria-label="' + esc(t('log.delete.q')) + '"><p class="lead">' + esc(t('log.delete.q')) + '</p><button type="button" class="btn dangerfill wide fl-del-yes" data-id="' + esc(e.id) + '">' + esc(t('log.delete.yes')) + '</button><button type="button" class="btn outline wide fl-del-no">' + esc(t('acct.keep')) + '</button></div>'
+          (confirm ? '<div class="fl-confirm" role="group" aria-label="' + esc(t('log.delete.q')) + '"><p class="lead">' + esc(t('log.delete.q')) + '</p><button type="button" class="btn dangerfill wide fl-del-yes" data-id="' + esc(e.id) + '">' + ico('trash') + '<span>' + esc(t('log.delete.yes')) + '</span></button><button type="button" class="btn outline wide fl-del-no">' + ico('close') + '<span>' + esc(t('acct.keep')) + '</span></button></div>'
             : '<button type="button" class="btn outline fl-del" data-id="' + esc(e.id) + '" aria-label="' + esc(t('log.delete') + ' ' + app.fmtDate(e.date)) + '">' + ico('trash') + '<span>' + esc(t('log.delete')) + '</span></button>') + '</li>'; }).join('') + '</ul>'
         : '<p class="lead" id="fl-empty">' + esc(t('log.empty')) + '</p>';
       $('fl-body').innerHTML = h;
