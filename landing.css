@@ -16,6 +16,7 @@ html { scroll-behavior:smooth; scroll-padding-top:calc(var(--hd) + 12px); -webki
 body { margin:0; background:#fff; color:var(--ink); font-family:"IBM Plex Sans","IBM Plex Sans Thai","Noto Sans KR","Noto Sans SC","Noto Sans Devanagari",system-ui,-apple-system,"Segoe UI",sans-serif; font-size:18px; line-height:1.7; overflow-x:hidden; -webkit-tap-highlight-color:transparent; }
 html[lang=th] body { font-family:"IBM Plex Sans Thai","IBM Plex Sans",system-ui,sans-serif; line-height:1.75; }
 html[lang=ko] body { font-family:"IBM Plex Sans","Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",system-ui,sans-serif; letter-spacing:-.01em; }
+html[lang=ko] body { word-break:keep-all; overflow-wrap:break-word; }   /* Korean: wrap only at spaces, never inside a word */
 html[lang=zh] body { font-family:"IBM Plex Sans","Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif; }
 html[lang=hi] body { font-family:"IBM Plex Sans","Noto Sans Devanagari","Nirmala UI",system-ui,sans-serif; line-height:1.8; }
 img { max-width:100%; height:auto; display:block; }
@@ -253,13 +254,47 @@ html[lang=th] h2 { line-height:1.45; } html[lang=hi] h2 { line-height:1.5; } htm
 @media (max-width:359px) { .btn.lg, .hero .gp { width:100%; justify-content:center; } }
 
 /* reduced motion: nothing moves, nothing is hidden; the marquee can be swiped by hand; the screenshots/gauge stay on a fixed state */
+/* v22: "100% free" strip + Android Auto section (same tokens as the rest; transform/opacity motion only) */
+.tags { display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+.tagpill.free { background:var(--acc); color:#fff; border-color:var(--acc); font-size:18px; font-weight:700; padding:9px 20px; box-shadow:0 12px 24px -12px rgba(12,99,92,.9); }
+.tagpill.free i { background:#ffe14d; box-shadow:0 0 0 0 rgba(255,225,77,.7); }
+.tagpill.new { text-decoration:none; padding:6px 16px 6px 8px; gap:8px; transition:transform .22s var(--spring), background-color .25s; } .tagpill.new:hover { background:var(--tint); } .tagpill.new:active { transform:scale(.97); }
+.tagpill.new b { background:var(--acc3); color:#fff; border-radius:999px; padding:0 10px; font-size:14px; line-height:1.7; }
+.free { padding:56px 0; background:linear-gradient(135deg,#0a5651 0%,#0c635c 45%,#13a394 100%); color:#fff; position:relative; overflow:hidden; }
+.free::before { content:""; position:absolute; right:-120px; top:-140px; width:420px; height:420px; border-radius:50%; background:radial-gradient(circle at 35% 35%,rgba(255,255,255,.18),rgba(255,255,255,0) 70%); }
+.free-in { position:relative; display:grid; gap:28px; }
+.free-badge { display:inline-flex; align-items:center; gap:10px; margin:0 0 14px; padding:8px 20px; border-radius:999px; background:#ffe14d; color:#0b4f46; font-weight:700; font-size:clamp(22px,6vw,28px); line-height:1.4; box-shadow:0 14px 26px -14px rgba(0,40,35,.7); }
+.fb-dot { width:12px; height:12px; border-radius:50%; background:#0c635c; flex:none; }
+.free h2, .feat.auto h2 { text-wrap:balance; }
+.free h2 { margin:0; font-size:clamp(28px,7.6vw,40px); line-height:1.3; letter-spacing:-.01em; color:#fff; }
+.free-p { margin:12px 0 0; font-size:clamp(18px,4.6vw,21px); font-weight:500; color:rgba(255,255,255,.92); }
+.free-tiles { display:grid; gap:12px; grid-template-columns:1fr; }
+.ftile { display:flex; align-items:center; gap:16px; background:rgba(255,255,255,.13); border:1px solid rgba(255,255,255,.28); border-radius:22px; padding:14px 20px; -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px); }
+.ftile b { font-size:clamp(40px,11vw,52px); line-height:1.1; font-variant-numeric:tabular-nums; color:#ffe14d; min-width:2.2ch; }
+.ftile > span { font-size:clamp(18px,4.6vw,20px); font-weight:600; line-height:1.4; }
+.free-note { margin:0; font-size:16px; line-height:1.7; color:rgba(255,255,255,.88); }
+.sec-l em.new { font-style:normal; background:var(--acc3); color:#fff; border-radius:999px; padding:0 12px; font-size:14px; line-height:1.7; animation:badge 2.8s var(--ease) infinite; }
+.auto-free { display:flex; align-items:center; gap:14px; margin:26px 0 0; padding:12px 16px; border-radius:18px; background:var(--tint); border:1px solid color-mix(in srgb, var(--acc) 22%, var(--line)); font-weight:600; font-size:clamp(17px,4.4vw,18px); line-height:1.5; }
+.auto-free b { flex:none; font-size:28px; color:var(--acc); line-height:1; }
+.car { margin:0; width:100%; }
+.car-frame { border-radius:26px; padding:10px; background:linear-gradient(145deg,#2a2a31,#0d0d10); box-shadow:var(--sh-f), 0 40px 80px -30px rgba(12,99,92,.5); }
+.car-screen { position:relative; overflow:hidden; border-radius:18px; background:#1b2029; aspect-ratio:1024/550; }
+.car-screen > img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transform:scale(1.03); transition:opacity .6s var(--std), transform .8s var(--ease); } .car-screen > img.on { opacity:1; transform:none; }
+.car-chips { margin-top:18px; }
+@media (max-width:599px) { .car-screen { aspect-ratio:5/4; } .car-screen > img { object-position:0 50%; } }   /* phones: show the station list larger (the map side is cropped) */
+.car-chips .gc { --c:#2fa86a; min-width:44px; } .car-chips .gc:not(.on) i { background:#c9d9d6; }
+.car-cap { margin:14px auto 0; max-width:520px; text-align:center; color:var(--mut); font-size:16px; line-height:1.65; }
+.auto-note { margin-top:34px; margin-bottom:0; text-align:center; color:var(--mut); font-size:15px; line-height:1.7; max-width:760px; }
+@media (min-width:860px) { .free { padding:72px 0; } .free-in { grid-template-columns:1.1fr 1fr; gap:48px; align-items:center; } .free-note { grid-column:1 / -1; } .free-tiles { grid-template-columns:1fr; } .feat.auto .feat-in { align-items:center; } }
+@media (min-width:600px) and (max-width:859px) { .free-tiles { grid-template-columns:repeat(3,1fr); } .ftile { flex-direction:column; align-items:flex-start; gap:4px; } }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior:auto; }
   *, *::before, *::after { animation:none !important; transition:none !important; }
   .js .rv, .js .in-h { opacity:1; transform:none; } .js .check li, .js .check li::before { opacity:1; transform:none; } .js .gauge .arc { stroke-dashoffset:0; } .js .sec-l:not(.in) i { transform:none; }
   .mq-row { overflow-x:auto; -webkit-mask-image:none; mask-image:none; scrollbar-width:none; } .mq-row::-webkit-scrollbar { display:none; }
   .tab .bar b { transform:scaleX(0); } .tab.on .bar b, .tab.done .bar b { transform:scaleX(1); }
-  .drops { display:none; } .tilt { transform:none !important; } .stick { transform:none; }
+  .car-screen > img { transform:none; } .drops { display:none; } .tilt { transform:none !important; } .stick { transform:none; }
 }
 
 /* first paint in a non-Thai language: hidden until the script has swapped the baked Thai text (fails open after 1.5 s) */

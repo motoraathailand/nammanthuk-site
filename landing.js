@@ -28,13 +28,14 @@
 
   /* ---- language (crossfade) ---- */
   function setShots(l) { $$('[data-shot]').forEach(function (img) { var src = 'img/' + shotLang(l) + '-' + img.getAttribute('data-shot') + '.webp'; if (img.getAttribute('src') !== src) img.src = src; }); }
+  function setAuto(l) { $$('[data-auto]').forEach(function (img) { var src = 'img/auto-' + l + '-' + img.getAttribute('data-auto') + '.webp'; if (img.getAttribute('src') !== src) img.src = src; }); }   // car-screen illustrations exist in all 5 languages
   function paintLang(l) {
     var D = LS[l] || LS.th; if (!D) return; lang = l; root.lang = l;
     $$('[data-t]').forEach(function (el) { var k = el.getAttribute('data-t'); if (k in D) el.textContent = D[k]; });
     $$('[data-alt]').forEach(function (el) { var k = el.getAttribute('data-alt'); if (k in D) el.alt = D[k]; });
     $$('[data-alt-label]').forEach(function (el) { var k = el.getAttribute('data-alt-label'); if (k in D) el.setAttribute('aria-label', D[k]); });
     $$('[data-gp]').forEach(function (el) { el.setAttribute('aria-label', D.gpSmall + ' Google Play'); });
-    setShots(l); doc.title = D.title; var m = $('meta[name=description]'); if (m) m.setAttribute('content', D.desc);
+    setShots(l); setAuto(l); doc.title = D.title; var m = $('meta[name=description]'); if (m) m.setAttribute('content', D.desc);
     var chip = function (q) { return '<span class="mq-chip">' + esc(q) + '</span>'; }, a = D.mq.slice(0, Math.ceil(D.mq.length / 2)), b = D.mq.slice(Math.ceil(D.mq.length / 2));
     $('#mq1').innerHTML = a.concat(a).map(chip).join(''); $('#mq2').innerHTML = b.concat(b).map(chip).join('');
     $('#mqList').innerHTML = D.mq.map(function (q) { return '<li>' + esc(q) + '</li>'; }).join('');
@@ -86,6 +87,14 @@
   if (!reduce) setInterval(function () { if (!reduce && gvis && !gtouched && !doc.hidden) setGauge((gcur + 1) % 3); }, 2400);
   setGauge(0);
 
+  /* ---- Android Auto car screen: Nearest / Cheapest crossfade, auto-switches while visible, tap = manual ---- */
+  var cimgs = $$('#carStack > img'), cchips = $$('#carChips .gc'), ccur = 0, ctouched = false, cvis = false;
+  function setCar(i) { ccur = i; cimgs.forEach(function (im, k) { if (k === i && im.loading === 'lazy') im.loading = 'eager'; im.classList.toggle('on', k === i); }); cchips.forEach(function (c, k) { c.classList.toggle('on', k === i); c.setAttribute('aria-pressed', k === i ? 'true' : 'false'); }); }
+  cchips.forEach(function (c) { c.addEventListener('click', function () { ctouched = true; setCar(+c.getAttribute('data-i')); }); });
+  if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { cvis = es[0].isIntersecting; if (cvis) cimgs.forEach(function (im) { im.loading = 'eager'; }); }, { threshold: 0.4 }).observe($('.car'));
+  if (!reduce) setInterval(function () { if (!reduce && cvis && !ctouched && !doc.hidden) setCar((ccur + 1) % 2); }, 3400);
+  setCar(0);
+
   /* ---- 3 steps: icon tiles + progress bars, auto-advance while visible, tap = manual ---- */
   var tabs = $$('.tab'), tabsBox = $('#tabs'), panelText = $('.panel-text'), simgs = $$('#stepStack > img'), step = 0, manual = reduce, stepsVisible = false;
   function setStep(i, quiet) {
@@ -108,7 +117,7 @@
     if (getComputedStyle(b).position === 'static') b.style.position = 'relative'; b.style.overflow = 'hidden'; b.appendChild(s); s.addEventListener('animationend', function () { s.remove(); }); setTimeout(function () { s.remove(); }, 900);
   }, { passive: true });
 
-  if (lang !== 'th') paintLang(lang); else { $('#lang').value = 'th'; setShots('th'); }
+  if (lang !== 'th') paintLang(lang); else { $('#lang').value = 'th'; setShots('th'); setAuto('th'); }
   root.classList.remove('pl');   // text is final: show the page (the CSS also un-hides it after 1.5 s if this script ever fails)
   setStep(0, true);
   window.__landing = { setLang: function (l) { applyLang(l, true); }, reduce: function () { return reduce; } };
