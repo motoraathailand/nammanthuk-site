@@ -132,3 +132,12 @@ html.pl body { opacity:0; animation:plshow .01s linear 1.5s forwards; } @keyfram
 .iabrow { display:flex; flex-wrap:wrap; gap:8px; margin-top:8px; }
 .iabrow .btn { min-height:44px; padding:8px 14px; font-size:15px; }
 .iab small { display:block; min-height:1em; margin-top:4px; font-size:13px; color:#4a3700; }
+
+/* "See all apps" -> the owner's app collection page (AA common rule 2026-11-02). Ghost pill, line icon (same stroke style as the other icons), whole words only; grows taller instead of overflowing at 200% text. */
+.btn.apps { width:100%; margin-top:12px; max-width:100%; height:auto; min-height:48px; white-space:normal; text-align:center; line-height:1.3; }
+.btn.apps span { word-break:keep-all; overflow-wrap:normal; hyphens:none; text-wrap:balance; }
+html[lang=th] .btn.apps span, html[lang=hi] .btn.apps span { white-space:nowrap; }
+.btn.apps svg.ai { width:22px; height:22px; transition:transform var(--m-base) var(--m-ease-out); }
+.btn.ghost.apps { box-shadow:inset 0 0 0 2px var(--acc); }
+.btn.apps:hover svg.ai { transform:translateX(3px); }
+@media (prefers-reduced-motion:reduce) { .btn.apps svg.ai { transition:none; } .btn.apps:hover svg.ai { transform:none; } }
