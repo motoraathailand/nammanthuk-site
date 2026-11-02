@@ -141,3 +141,13 @@ html[lang=th] .btn.apps span, html[lang=hi] .btn.apps span { white-space:nowrap;
 .btn.ghost.apps { box-shadow:inset 0 0 0 2px var(--acc); }
 .btn.apps:hover svg.ai { transform:translateX(3px); }
 @media (prefers-reduced-motion:reduce) { .btn.apps svg.ai { transition:none; } .btn.apps:hover svg.ai { transform:none; } }
+
+/* owner rule 2026-11-02 15:02: info cards (retry note, "invite others", "open on device" QR, the all-done banner) are centred: title, text, buttons, QR, icon. The 3 step cards keep their phone-left layout. */
+.ncard, .panel, .all { text-align:center; }
+.ncard { flex-direction:column; align-items:center; gap:8px; }
+.ncard > svg { margin-top:0; }
+.ncard > div { width:100%; }
+.panel .row { display:flex; justify-content:center; }
+.panel .note { text-align:center; }
+.qr img { margin:10px auto 2px; }
+.all { flex-direction:column; justify-content:center; gap:6px; }
