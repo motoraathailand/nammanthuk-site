@@ -19,12 +19,24 @@
 (function () {
   var L = ["th","en","ko","zh","hi"], BACK = {"th":"กลับไปที่แอป","en":"Back to the app","ko":"앱으로 돌아가기","zh":"返回应用","hi":"ऐप पर वापस जाएँ"};
   document.documentElement.setAttribute('data-js', '');
-  function show(l) { if (L.indexOf(l) < 0) l = 'th'; document.documentElement.lang = l;
+  function show(l) { if (L.indexOf(l) < 0) l = 'en'; document.documentElement.lang = l;
     L.forEach(function (x) { document.getElementById('s-' + x).classList.toggle('on', x === l); });
     [].forEach.call(document.querySelectorAll('#langs button'), function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-l') === l)); });
     document.querySelector('#back span').textContent = BACK[l]; try { localStorage.setItem('nmt.site.lang', l); } catch (e) {} }
-  var q = /[?&]lang=(\w+)/.exec(location.search), saved = null; try { saved = localStorage.getItem('nmt.site.lang') || localStorage.getItem('nmt.lang'); } catch (e) {}
-  show(q ? q[1] : saved || 'th');
+  var q = /[?&]lang=(\w+)/.exec(location.search), saved = null, nav = null;
+  try { saved = localStorage.getItem('nmt.site.lang') || localStorage.getItem('nmt.lang'); } catch (e) {}
+  if (q && L.indexOf(q[1]) > -1) show(q[1]);
+  else if (saved && L.indexOf(saved) > -1) show(saved);
+  else {
+    try {
+      var a = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language];
+      for (var i = 0; i < a.length; i++) {
+        var p = String(a[i] || '').toLowerCase().split(/[-_]/)[0];
+        if (L.indexOf(p) > -1) { nav = p; break; }
+      }
+    } catch (e) {}
+    show(nav || 'en');
+  }
   document.getElementById('langs').addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) show(b.getAttribute('data-l')); });
 })();
 </script>
