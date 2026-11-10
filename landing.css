@@ -311,3 +311,66 @@ html[lang=th] .btn.apps span, html[lang=hi] .btn.apps span { white-space:nowrap;
 .final .btn.apps { margin-top:2px; }
 @media (max-width:359px) { .cta .btn.apps { width:100%; } }
 @media (prefers-reduced-motion:reduce) { .btn.apps .ai { transition:none; } .btn.apps:hover .ai, .btn.apps:active .ai { transform:none; } }
+
+/* 2026-11-10 (owner pt146u): official store badges side by side, car-screen cards (Android Auto + CarPlay preview), layout polish.
+   Repeated tiles share one layout; every row of tiles has equal heights; labels wrap only between words (Thai/Hindi kept whole, Korean keep-all). */
+h2, h3, .cc-name, .store-cap, .cc-st { text-wrap:balance; }
+.desc, .lead, .free-p, .car-cap, .auto-note, .qa details p, .mcard p, .tcard p { text-wrap:pretty; }
+/* store badges: two equal columns, each badge drawn inside the same box (the Google Play badge's 3.36:1), so both have exactly the same height */
+.cta { flex-direction:column; align-items:flex-start; gap:16px; }
+.stores { display:grid; grid-template-columns:repeat(2, minmax(0, 210px)); gap:12px 14px; align-items:start; width:100%; max-width:434px; }
+.stores.center { justify-content:center; margin:0 auto; }
+.store { display:flex; flex-direction:column; align-items:center; gap:10px; min-width:0; }
+.badge { display:block; width:100%; aspect-ratio:3.36; border-radius:12px; transition:transform .2s var(--ease), box-shadow .2s; }
+.badge img { width:100%; height:100%; object-fit:contain; }
+a.badge:hover { transform:translateY(-2px); box-shadow:0 12px 22px -14px rgba(17,17,17,.8); } a.badge:active { transform:scale(.97); }
+.badge.off { cursor:default; }
+.store-cap { display:inline-flex; align-items:center; justify-content:center; min-height:32px; padding:2px 14px; border-radius:999px; font-size:15px; font-weight:700; line-height:1.35; text-align:center; word-break:keep-all; overflow-wrap:normal; max-width:100%; }
+html[lang=th] .store-cap, html[lang=th] .cc-st { white-space:nowrap; }
+.store-cap.go { background:var(--tint); color:var(--acc-d); } .store-cap.soon { background:#fff3d6; color:#7a5200; }
+.cta2 { display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:12px 14px; width:100%; max-width:434px; }
+.cta2 .btn { width:100%; min-width:0; height:auto; min-height:60px; padding:8px 14px; white-space:normal; text-align:center; line-height:1.3; }
+.cta2 .btn span { word-break:keep-all; overflow-wrap:normal; }
+html[lang=th] .cta2 .btn span, html[lang=hi] .cta2 .btn span { white-space:nowrap; }
+.cta2.center { margin:22px auto 0; }
+.final .dl { display:block; margin:0; }
+@media (max-width:479px) { .cta2 { grid-template-columns:1fr; } }
+/* car screens: one card layout for Android Auto and CarPlay (header, screen, control row, caption) */
+.feat.auto { background:linear-gradient(180deg,#fff,#f4fbf9 40%,#fff); }
+.auto-head { text-align:center; max-width:780px; margin:0 auto 34px; } .auto-head .sec-l { justify-content:center; }
+.cars { display:grid; grid-template-columns:1fr; gap:20px; }
+.carcard { display:flex; flex-direction:column; min-width:0; background:#fff; border-radius:24px; padding:16px 16px 18px; box-shadow:var(--sh), 0 0 0 1px var(--line); }
+.carcard .car { display:flex; flex-direction:column; flex:1; }
+.cc-h { display:flex; align-items:center; justify-content:space-between; gap:12px; min-height:40px; margin:0 4px 14px; }
+.cc-name { font-weight:700; font-size:21px; line-height:1.3; white-space:nowrap; }
+.cc-st { display:inline-flex; align-items:center; min-height:32px; padding:2px 14px; border-radius:999px; font-weight:700; font-size:15px; line-height:1.35; text-align:center; word-break:keep-all; }
+.cc-st.ok { background:#e3f6ea; color:#0a5a2a; } .cc-st.soon { background:#fff3d6; color:#7a5200; }
+.carcard .car-frame { padding:8px; border-radius:20px; } .carcard .car-screen { border-radius:14px; }
+.cc-ctl { display:flex; align-items:center; justify-content:center; min-height:56px; margin-top:14px; }
+.cc-ctl .car-chips { margin-top:0; }
+.cc-dev { display:inline-flex; align-items:center; gap:8px; min-height:44px; padding:0 18px; border-radius:999px; border:1.5px dashed #d9b85c; color:#7a5200; background:#fffaf0; font-weight:600; font-size:16px; }
+.cc-dev i { width:10px; height:10px; border-radius:50%; background:var(--amber); flex:none; }
+.carcard .car-cap { margin:10px auto 0; max-width:none; font-size:16px; }
+.cp-ribbon { position:absolute; z-index:2; top:10px; right:10px; padding:3px 14px; border-radius:999px; background:var(--acc3); color:#fff; font-weight:700; font-size:15px; line-height:1.5; box-shadow:0 6px 14px -6px rgba(0,0,0,.5); white-space:nowrap; }
+.auto-list { margin:30px auto 0; grid-template-columns:1fr; gap:12px; }
+.auto-list li { min-height:68px; padding:12px 16px 12px 62px; background:#fff; border-radius:18px; box-shadow:0 0 0 1px var(--line); line-height:1.5; }
+.auto-list li::before { left:14px; } .auto-list li::after { left:26px; }
+.feat.auto .auto-free { justify-content:center; max-width:780px; margin:18px auto 0; text-align:left; }
+.feat.auto .auto-note { margin:18px auto 0; }
+@media (min-width:860px) { .cars { grid-template-columns:1fr 1fr; gap:24px; } .auto-list { grid-template-columns:repeat(3, 1fr); } .feat.auto { padding:96px 0; } }
+/* "everything in one app" + trust cards: same tile layout, equal heights per row; trust cards icon-left in a 2 x 2 grid (titles no longer squeezed) */
+.mgrid, .cards { align-items:stretch; }
+.mcard, .tcard { display:flex; flex-direction:column; }
+@media (min-width:860px) {
+  .cards { grid-template-columns:repeat(2, 1fr); gap:16px; }
+  .tcard { display:grid; grid-template-columns:52px 1fr; grid-template-rows:auto 1fr; column-gap:18px; align-items:start; }
+  .tcard .ti { grid-row:1 / span 2; } .tcard h3 { margin:6px 0 6px; }
+  .hero .cta { max-width:434px; }
+}
+.ft-tm { font-size:14px !important; max-width:640px; }
+@media (prefers-reduced-motion:reduce) { a.badge:hover, a.badge:active { transform:none; } }
+/* the brand name น้ำมันถูก appears inside every language: always draw Thai letters with the Thai face (unicode-range keeps it to Thai only) */
+html[lang=en] body, html[lang=ko] body, html[lang=zh] body, html[lang=hi] body { font-family:"IBM Plex Sans","IBM Plex Sans Thai","Noto Sans KR","Noto Sans SC","Noto Sans Devanagari","Malgun Gothic","Apple SD Gothic Neo","PingFang SC","Microsoft YaHei","Nirmala UI",system-ui,sans-serif; }
+.badge { position:relative; } .badge img { position:absolute; inset:0; }   /* the box alone sets the size: both badges exactly the same height */
+/* Chinese: headings and short labels break only at punctuation/spaces (whole words kept); running text keeps normal Chinese line breaking */
+html[lang=zh] h1, html[lang=zh] h2, html[lang=zh] h3, html[lang=zh] .store-cap, html[lang=zh] .cc-st, html[lang=zh] .btn span, html[lang=zh] .gc span, html[lang=zh] .tagpill span, html[lang=zh] .tab, html[lang=zh] summary { word-break:keep-all; }

@@ -28,6 +28,7 @@
 
   /* ---- language (crossfade) ---- */
   function setShots(l) { $$('[data-shot]').forEach(function (img) { var src = 'img/' + shotLang(l) + '-' + img.getAttribute('data-shot') + '.webp'; if (img.getAttribute('src') !== src) img.src = src; }); }
+  function setBadges(l) { $$('[data-badge]').forEach(function (img) { var k = img.getAttribute('data-badge'), src = k === 'gp' ? 'img/badges/gp-' + l + '.png' : 'img/badges/as-' + (l === 'hi' ? 'en' : l) + '.svg'; if (img.getAttribute('src') !== src) img.src = src; }); $$('[data-cp]').forEach(function (img) { var src = 'img/carplay-' + l + '.webp'; if (img.getAttribute('src') !== src) img.src = src; }); }   // official store badges per language (Apple has no Hindi badge: English); CarPlay design preview in all 5 languages
   function setAuto(l) { $$('[data-auto]').forEach(function (img) { var src = 'img/auto-' + l + '-' + img.getAttribute('data-auto') + '.webp'; if (img.getAttribute('src') !== src) img.src = src; }); }   // car-screen illustrations exist in all 5 languages
   function paintLang(l) {
     var D = LS[l] || LS.th; if (!D) return; lang = l; root.lang = l;
@@ -35,7 +36,7 @@
     $$('[data-alt]').forEach(function (el) { var k = el.getAttribute('data-alt'); if (k in D) el.alt = D[k]; });
     $$('[data-alt-label]').forEach(function (el) { var k = el.getAttribute('data-alt-label'); if (k in D) el.setAttribute('aria-label', D[k]); });
     $$('[data-gp]').forEach(function (el) { el.setAttribute('aria-label', D.gpSmall + ' Google Play'); });
-    setShots(l); setAuto(l); doc.title = D.title; var m = $('meta[name=description]'); if (m) m.setAttribute('content', D.desc);
+    setShots(l); setAuto(l); setBadges(l); doc.title = D.title; var m = $('meta[name=description]'); if (m) m.setAttribute('content', D.desc);
     var chip = function (q) { return '<span class="mq-chip">' + esc(q) + '</span>'; }, a = D.mq.slice(0, Math.ceil(D.mq.length / 2)), b = D.mq.slice(Math.ceil(D.mq.length / 2));
     $('#mq1').innerHTML = a.concat(a).map(chip).join(''); $('#mq2').innerHTML = b.concat(b).map(chip).join('');
     $('#mqList').innerHTML = D.mq.map(function (q) { return '<li>' + esc(q) + '</li>'; }).join('');
@@ -117,7 +118,7 @@
     if (getComputedStyle(b).position === 'static') b.style.position = 'relative'; b.style.overflow = 'hidden'; b.appendChild(s); s.addEventListener('animationend', function () { s.remove(); }); setTimeout(function () { s.remove(); }, 900);
   }, { passive: true });
 
-  if (lang !== 'th') paintLang(lang); else { $('#lang').value = 'th'; setShots('th'); setAuto('th'); }
+  if (lang !== 'th') paintLang(lang); else { $('#lang').value = 'th'; setShots('th'); setAuto('th'); setBadges('th'); }
   root.classList.remove('pl');   // text is final: show the page (the CSS also un-hides it after 1.5 s if this script ever fails)
   setStep(0, true);
   window.__landing = { setLang: function (l) { applyLang(l, true); }, reduce: function () { return reduce; } };
