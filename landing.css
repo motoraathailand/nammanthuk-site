@@ -74,15 +74,12 @@ button { font:inherit; }
 .drops i { position:absolute; left:var(--x); bottom:-40px; width:22px; height:22px; border-radius:50% 0 50% 50%; background:linear-gradient(135deg,rgba(20,184,166,.5),rgba(12,99,92,.28)); transform:rotate(-45deg) scale(var(--s)); opacity:0; animation:rise var(--t) linear var(--dl) infinite; }
 @keyframes rise { 0% { opacity:0; transform:translateY(0) rotate(-45deg) scale(var(--s)); } 12% { opacity:.65; } 85% { opacity:.35; } 100% { opacity:0; transform:translateY(-760px) rotate(-45deg) scale(var(--s)); } }
 .hero-in { position:relative; display:grid; gap:34px; }
-.tagpill { display:inline-flex; align-items:center; gap:10px; padding:8px 18px; border-radius:999px; background:#fff; border:1px solid color-mix(in srgb, var(--acc) 22%, var(--line)); color:var(--acc); font-weight:600; font-size:16px; box-shadow:0 6px 16px -10px rgba(12,99,92,.5); }
-.tagpill i { width:10px; height:10px; border-radius:50%; background:var(--acc2); box-shadow:0 0 0 0 rgba(20,184,166,.55); animation:ping 2s ease-out infinite; }
 @keyframes ping { 0% { box-shadow:0 0 0 0 rgba(20,184,166,.55); } 80%,100% { box-shadow:0 0 0 10px rgba(20,184,166,0); } }
-h1 { margin:16px 0 0; font-size:clamp(46px, 14vw, 84px); line-height:1.12; font-weight:700; letter-spacing:-.02em; display:flex; flex-direction:column; align-items:flex-start; }
+h1 { margin:0; font-size:clamp(46px, 14vw, 84px); line-height:1.12; font-weight:700; letter-spacing:-.02em; display:flex; flex-direction:column; align-items:flex-start; }
 html[lang=th] h1 { line-height:1.3; }
 .grad { white-space:nowrap; background:linear-gradient(95deg,#0c635c 0%,#14b8a6 50%,#0c635c 100%) 0 0 / 220% 100%; -webkit-background-clip:text; background-clip:text; color:transparent; -webkit-text-fill-color:transparent; padding-bottom:.06em; animation:sheen 7s ease-in-out infinite alternate; }
 @keyframes sheen { to { background-position:100% 0; } }
 .sub { margin:18px 0 0; font-size:clamp(21px,5.4vw,26px); font-weight:600; line-height:1.7; }
-.hl { display:inline-block; background:#fff; color:var(--acc); border:1px solid color-mix(in srgb, var(--acc) 22%, var(--line)); border-radius:12px; padding:0 12px; margin-right:10px; box-shadow:0 8px 18px -12px rgba(12,99,92,.55); font-weight:700; }
 .lead { margin:14px 0 0; color:var(--mut); font-size:clamp(18px,4.4vw,20px); max-width:600px; text-wrap:pretty; }
 .cta { display:flex; flex-wrap:wrap; gap:18px 14px; margin-top:26px; align-items:center; }
 .note { margin:16px 0 0; color:var(--mut); font-size:16px; }
@@ -238,11 +235,6 @@ html[lang=th] h2 { line-height:1.45; } html[lang=hi] h2 { line-height:1.5; } htm
 
 /* reduced motion: nothing moves, nothing is hidden; the marquee can be swiped by hand; the screenshots/gauge stay on a fixed state */
 /* v22: "100% free" strip + Android Auto section (same tokens as the rest; transform/opacity motion only) */
-.tags { display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
-.tagpill.free { background:var(--acc); color:#fff; border-color:var(--acc); font-size:18px; font-weight:700; padding:9px 20px; box-shadow:0 12px 24px -12px rgba(12,99,92,.9); }
-.tagpill.free i { background:#ffe14d; box-shadow:0 0 0 0 rgba(255,225,77,.7); }
-.tagpill.new { text-decoration:none; padding:6px 16px 6px 8px; gap:8px; transition:transform .22s var(--spring), background-color .25s; } .tagpill.new:hover { background:var(--tint); } .tagpill.new:active { transform:scale(.97); }
-.tagpill.new b { background:var(--acc3); color:#fff; border-radius:999px; padding:0 10px; font-size:14px; line-height:1.7; }
 .free { padding:56px 0; background:linear-gradient(135deg,#0a5651 0%,#0c635c 45%,#13a394 100%); color:#fff; position:relative; overflow:hidden; }
 .free::before { content:""; position:absolute; right:-120px; top:-140px; width:420px; height:420px; border-radius:50%; background:radial-gradient(circle at 35% 35%,rgba(255,255,255,.18),rgba(255,255,255,0) 70%); }
 .free-in { position:relative; display:grid; gap:28px; }
@@ -357,7 +349,7 @@ html[lang=th] .cta2 .btn span, html[lang=hi] .cta2 .btn span { white-space:nowra
 html[lang=en] body, html[lang=ko] body, html[lang=zh] body, html[lang=hi] body { font-family:"IBM Plex Sans","IBM Plex Sans Thai","Noto Sans KR","Noto Sans SC","Noto Sans Devanagari","Malgun Gothic","Apple SD Gothic Neo","PingFang SC","Microsoft YaHei","Nirmala UI",system-ui,sans-serif; }
 .badge { position:relative; } .badge img { position:absolute; inset:0; }   /* the box alone sets the size: both badges exactly the same height */
 /* Chinese: headings and short labels break only at punctuation/spaces (whole words kept); running text keeps normal Chinese line breaking */
-html[lang=zh] h1, html[lang=zh] h2, html[lang=zh] h3, html[lang=zh] .store-cap, html[lang=zh] .cc-st, html[lang=zh] .btn span, html[lang=zh] .gc span, html[lang=zh] .tagpill span, html[lang=zh] .tab, html[lang=zh] summary { word-break:keep-all; }
+html[lang=zh] h1, html[lang=zh] h2, html[lang=zh] h3, html[lang=zh] .store-cap, html[lang=zh] .cc-st, html[lang=zh] .btn span, html[lang=zh] .gc span, html[lang=zh] .tab, html[lang=zh] summary { word-break:keep-all; }
 
 
 /* Bottom bar (2026-11-10, design A): Google Play badge (-> join.html) + App Store badge (not linked, small "coming soon" corner tag).
