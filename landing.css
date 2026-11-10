@@ -148,7 +148,7 @@ html[lang=th] h2 { line-height:1.45; } html[lang=hi] h2 { line-height:1.5; } htm
 .js .check.in li { opacity:1; transform:none; } .js .check.in li::before { transform:none; }
 .check li:nth-child(1) { --i:0; } .check li:nth-child(2) { --i:1; } .check li:nth-child(3) { --i:2; } .check li:nth-child(4) { --i:3; }
 .feat-vis { padding:24px 0; position:relative; }
-.gauge-card { position:relative; z-index:2; width:min(100%, 330px); margin:0 auto -22px; background:#fff; border-radius:26px; padding:18px 18px 16px; box-shadow:var(--sh-f); text-align:center; }
+.gauge-card { position:relative; z-index:2; width:min(100%, 330px); margin:0 auto 28px; background:#fff; border-radius:26px; padding:18px 18px 16px; box-shadow:var(--sh-f); text-align:center; }
 .g-t { margin:0 0 4px; font-weight:600; color:var(--mut); font-size:16px; }
 .gauge { width:100%; max-width:260px; height:auto; overflow:visible; }
 .gauge .arc { fill:none; stroke-width:16; stroke-linecap:round; stroke-dasharray:1; } .gauge .a1 { stroke:#2fa86a; } .gauge .a2 { stroke:#e0a100; } .gauge .a3 { stroke:#d4483a; }
@@ -389,3 +389,17 @@ body { padding-bottom:calc(84px + env(safe-area-inset-bottom)); }
 .stick { display:none !important; }
 /* final section: a single "all apps" button (feedback button removed 2026-11-10, owner pt151u): one centred column, same width as one store badge pair */
 .cta2.one { grid-template-columns:minmax(0,1fr); max-width:300px; }
+
+/* 2026-11-10 (owner pt155u, overlap bug): nothing may sit on top of a phone screenshot.
+   - stock section: the gauge card used a negative bottom margin (-22px) to tuck over the phone; it now keeps a 28px gap (phone bob is 12px).
+   - hero: the three info callouts (.fl) were absolutely positioned over the phone frame; they are now a normal list: under the phone and its dots
+     (phones/tablets), or a column beside the phone on wide screens. Same card style, no floating. */
+.fls { display:grid; grid-template-columns:minmax(0,1fr); gap:10px; width:min(100%, 340px); margin:22px auto 0; }
+.fls .fl { position:static; animation:none; min-width:0; }
+.fls .fl > div { min-width:0; }
+@media (min-width:1100px) {
+  .hero-vis { display:grid; grid-template-columns:auto minmax(0, 250px); grid-template-rows:auto auto; column-gap:24px; align-items:center; }
+  .hero-vis > .phone-wrap { grid-column:1; grid-row:1; } .hero-vis > .dots { grid-column:1; grid-row:2; } .hero-vis > .fls { grid-column:2; grid-row:1 / span 2; width:100%; margin:0; }
+  .hero-vis .phone-wrap { width:250px; }
+  .hero-in { grid-template-columns:1fr 1fr; gap:48px; }   /* give the phone + callout column enough room */
+}
