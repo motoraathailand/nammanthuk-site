@@ -384,7 +384,7 @@ body { padding-bottom:calc(84px + env(safe-area-inset-bottom)); }
 .ft-contact { display:flex; flex-direction:column; align-items:center; gap:12px; width:100%; }
 .ft-mail { min-width:min(100%, 260px); gap:10px; } .ft-mail .mi { width:24px; height:24px; flex:none; }
 .ft-links { display:grid; grid-template-columns:minmax(0,1fr); gap:10px; width:100%; max-width:460px; }
-@media (min-width:760px) { .ft-links { grid-template-columns:repeat(3, minmax(0,1fr)); max-width:920px; gap:14px; } }
+@media (min-width:760px) { .ft-links { grid-template-columns:repeat(2, minmax(0,1fr)); max-width:640px; gap:14px; } }   /* 2 cards (privacy, delete account): one balanced, centred row */
 .ftl { display:flex; align-items:center; gap:12px; min-height:64px; padding:10px 14px; border-radius:18px; background:#fff; border:1px solid var(--line); box-shadow:0 6px 16px -12px rgba(17,17,17,.35); color:var(--ink); text-decoration:none; font-weight:700; font-size:17px; line-height:1.35; text-align:left; transition:border-color .2s, box-shadow .2s, transform .18s var(--ease); }
 .ftl:hover { border-color:color-mix(in srgb, var(--acc) 40%, var(--line)); box-shadow:0 10px 22px -12px rgba(12,99,92,.45); }
 .ftl:active { transform:scale(.98); }
