@@ -395,3 +395,5 @@ body { padding-bottom:calc(84px + env(safe-area-inset-bottom)); }
 .ftl-go { flex:none; width:20px; height:20px; color:var(--mut); }
 .ft-fine { display:flex; flex-direction:column; align-items:center; gap:6px; max-width:640px; padding-top:20px; border-top:1px solid var(--line); width:100%; }
 .ft .ft-fine p { font-size:14px; line-height:1.6; }
+/* legacy guard: an index.html cached before 2026-11-10 (old ".stick" bar markup) never shows a half-styled bar with this stylesheet */
+.stick { display:none !important; }
