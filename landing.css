@@ -59,20 +59,7 @@ button { font:inherit; }
 .dl .gp:hover, .hero .gp:hover { animation:wobble .6s var(--ease); }
 @keyframes wobble { 30% { transform:rotate(-1.5deg) scale(1.02); } 60% { transform:rotate(1deg) scale(1.02); } }
 
-/* sticky download bar (phones only) */
-.stick { display:none; }
-@media (max-width:859px) {
-  .gp.sm { display:none; }
-  .stick { position:fixed; left:0; right:0; bottom:0; z-index:45; display:flex; align-items:center; gap:12px; padding:10px max(16px, env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left)); background:rgba(255,255,255,.95); -webkit-backdrop-filter:saturate(1.6) blur(14px); backdrop-filter:saturate(1.6) blur(14px); border-top:1px solid var(--line); box-shadow:0 -10px 28px -16px rgba(17,17,17,.35); transform:translateY(110%); transition:transform .4s var(--ease); }
-  .stick.show { transform:none; }
-  .stick .logo-drop { width:38px; height:38px; }
-  .st-t { display:flex; flex-direction:column; min-width:0; flex:1; line-height:1.3; } .st-t b { font-size:17px; } .st-t small { color:var(--mut); font-size:15px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  .stick .btn { flex:none; height:44px; padding:0 16px; font-size:16px; gap:6px; } .stick .btn svg { width:20px; height:20px; flex:none; }
-  .stick .btn.off { background:var(--tint); color:var(--acc); box-shadow:none; cursor:default; }
-  body { padding-bottom:calc(72px + env(safe-area-inset-bottom)); }
-  .totop { bottom:calc(84px + env(safe-area-inset-bottom)) !important; }
-}
-.stick .btn svg { width:20px; height:20px; }
+@media (max-width:859px) { .gp.sm { display:none; } }
 
 /* hero: mint gradient + dot grid + drifting blobs + rising droplets */
 .hero { position:relative; overflow:hidden; padding:34px 0 52px; background:linear-gradient(180deg,#eef9f7 0%,#fff 100%); isolation:isolate; }
@@ -226,9 +213,6 @@ html[lang=th] h2 { line-height:1.45; } html[lang=hi] h2 { line-height:1.5; } htm
 .final { position:relative; overflow:hidden; padding:72px 0; text-align:center; background:radial-gradient(700px 360px at 50% 100%, #cfeee9 0%, rgba(207,238,233,0) 70%), linear-gradient(180deg,#fff,#eef9f7); }
 .final p { margin:14px 0 26px; color:var(--mut); font-size:clamp(18px,4.4vw,20px); }
 .final-drop { display:inline-block; margin-bottom:6px; } .final-drop svg { width:72px; height:72px; animation:dropFill 3.4s var(--ease) infinite; } @keyframes dropFill { 0%,100% { transform:translateY(0) scale(1); } 45% { transform:translateY(-10px) scale(1.06,.96); } 60% { transform:translateY(0) scale(.96,1.05); } }
-.ft { padding:36px 0 44px; border-top:1px solid var(--line); background:#fff; }
-.ft-in { display:flex; flex-direction:column; align-items:center; gap:12px; text-align:center; } .ft p { margin:0; color:var(--mut); font-size:16px; }
-.ft nav { display:flex; flex-wrap:wrap; justify-content:center; gap:4px 24px; } .ft nav a { color:var(--ink); text-decoration:none; font-weight:600; font-size:17px; padding:12px 2px; min-height:48px; background:linear-gradient(var(--acc),var(--acc)) 0 100% / 0 2px no-repeat; transition:background-size .3s var(--ease), color .2s; } .ft nav a:hover { color:var(--acc); background-size:100% 2px; }
 
 .totop { position:fixed; right:max(16px, env(safe-area-inset-right)); bottom:max(18px, env(safe-area-inset-bottom)); z-index:40; width:52px; height:52px; border-radius:50%; border:0; background:#fff; color:var(--ink); display:grid; place-items:center; box-shadow:0 10px 24px -8px rgba(17,17,17,.3), 0 0 0 1px var(--line); cursor:pointer; opacity:0; transform:translateY(12px) scale(.9); pointer-events:none; transition:opacity .25s, transform .3s var(--spring); }
 .totop.show { opacity:1; transform:none; pointer-events:auto; } .totop svg { width:26px; height:26px; } .totop:active { transform:scale(.92); } .totop[hidden] { display:none; }
@@ -238,7 +222,7 @@ html[lang=th] h2 { line-height:1.45; } html[lang=hi] h2 { line-height:1.5; } htm
 .js .rv.in { will-change:auto; }
 .js .rv.z { transform:translateY(28px) scale(.94); }
 .js .rv.in { opacity:1; transform:none; }
-.js main, .js footer { transition:opacity .22s var(--std); } .js.lsw main, .js.lsw footer, .js.lsw .stick { opacity:0; }
+.js main, .js footer { transition:opacity .22s var(--std); } .js.lsw main, .js.lsw footer, .js.lsw #stick { opacity:0; }
 
 @media (min-width:600px) { .stats-in { grid-template-columns:repeat(4,1fr); } .mgrid { grid-template-columns:repeat(2,1fr); } .cards { grid-template-columns:repeat(2,1fr); } }
 @media (min-width:860px) {
@@ -293,7 +277,7 @@ html[lang=th] h2 { line-height:1.45; } html[lang=hi] h2 { line-height:1.5; } htm
   .js .rv, .js .in-h { opacity:1; transform:none; } .js .check li, .js .check li::before { opacity:1; transform:none; } .js .gauge .arc { stroke-dashoffset:0; } .js .sec-l:not(.in) i { transform:none; }
   .mq-row { overflow-x:auto; -webkit-mask-image:none; mask-image:none; scrollbar-width:none; } .mq-row::-webkit-scrollbar { display:none; }
   .tab .bar b { transform:scaleX(0); } .tab.on .bar b, .tab.done .bar b { transform:scaleX(1); }
-  .car-screen > img { transform:none; } .drops { display:none; } .tilt { transform:none !important; } .stick { transform:none; }
+  .car-screen > img { transform:none; } .drops { display:none; } .tilt { transform:none !important; } .dlbar { transform:none; }
 }
 
 /* first paint in a non-Thai language: hidden until the script has swapped the baked Thai text (fails open after 1.5 s) */
@@ -375,17 +359,39 @@ html[lang=en] body, html[lang=ko] body, html[lang=zh] body, html[lang=hi] body {
 /* Chinese: headings and short labels break only at punctuation/spaces (whole words kept); running text keeps normal Chinese line breaking */
 html[lang=zh] h1, html[lang=zh] h2, html[lang=zh] h3, html[lang=zh] .store-cap, html[lang=zh] .cc-st, html[lang=zh] .btn span, html[lang=zh] .gc span, html[lang=zh] .tagpill span, html[lang=zh] .tab, html[lang=zh] summary { word-break:keep-all; }
 
-/* Bottom bar with the two store badges (replaces logo + "join the test" button). Variant A (.sb-a): badges only, a small "coming soon" tag on the App Store badge.
-   Variant B (.sb-b): badges with the same caption pills as the hero. Both badges share one box (same size), centred; body gets bottom padding so nothing is covered. */
-.stick.sb { display:block; position:fixed; left:0; right:0; bottom:0; z-index:45; padding:10px max(12px, env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left)); background:rgba(255,255,255,.96); -webkit-backdrop-filter:saturate(1.6) blur(14px); backdrop-filter:saturate(1.6) blur(14px); border-top:1px solid var(--line); box-shadow:0 -10px 28px -16px rgba(17,17,17,.35); transform:translateY(110%); transition:transform .4s var(--ease); }
-.stick.sb.show { transform:none; }
-.sb-in { display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:10px; max-width:440px; margin:0 auto; }
-.sb .store { gap:6px; } .sb .badge { aspect-ratio:3.36; }
-.sb .store-cap { min-height:26px; padding:1px 12px; font-size:14px; }
-.sb-tag { position:absolute; z-index:1; top:-9px; right:-4px; font-style:normal; font-size:12.5px; font-weight:700; line-height:1.5; padding:1px 9px; border-radius:999px; background:var(--acc3); color:#fff; white-space:nowrap; box-shadow:0 4px 10px -4px rgba(240,112,95,.8); }
-.sb-a .store-cap { display:none; } .sb-b .sb-tag { display:none; }
-body:has(.stick.sb-a) { padding-bottom:calc(76px + env(safe-area-inset-bottom)); }
-body:has(.stick.sb-b) { padding-bottom:calc(108px + env(safe-area-inset-bottom)); }
-@media (max-width:859px) { .stick.sb ~ .totop, body:has(.stick.sb-b) .totop { bottom:calc(120px + env(safe-area-inset-bottom)) !important; } body:has(.stick.sb-a) .totop { bottom:calc(88px + env(safe-area-inset-bottom)) !important; } }
-@media (min-width:860px) { .sb-in { max-width:460px; } body:has(.stick.sb) .totop { bottom:calc(120px + env(safe-area-inset-bottom)); } }
-@media (prefers-reduced-motion:reduce) { .stick.sb { transform:none; } }
+
+/* Bottom bar (2026-11-10, design A): Google Play badge (-> join.html) + App Store badge (not linked, small "coming soon" corner tag).
+   Self-contained class names (nothing shared with the hero .store/.badge/.store-cap rules) and one nowrap flex row; the badge box size comes from a
+   padding ratio (works on every WebKit, no aspect-ratio needed), so both badges are always exactly the same size. */
+.dlbar { position:fixed; left:0; right:0; bottom:0; z-index:45; padding:10px max(12px, env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left)); background:rgba(255,255,255,.96); -webkit-backdrop-filter:saturate(1.6) blur(14px); backdrop-filter:saturate(1.6) blur(14px); border-top:1px solid var(--line); box-shadow:0 -10px 28px -16px rgba(17,17,17,.35); -webkit-transform:translateY(110%); transform:translateY(110%); transition:transform .4s var(--ease); }
+.dlbar.show { -webkit-transform:none; transform:none; }
+.dlbar-in { display:flex; flex-direction:row; flex-wrap:nowrap; align-items:center; gap:10px; max-width:440px; margin:0 auto; }
+.dlb { position:relative; display:block; flex:1 1 0; width:0; min-width:0; margin:0; padding:0; border-radius:10px; text-decoration:none; -webkit-tap-highlight-color:transparent; }
+.dlb::before { content:""; display:block; padding-top:29.762%; }   /* 1 / 3.36 */
+.dlb img { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:contain; display:block; }
+.dlb-off { cursor:default; }
+.dlb-tag { position:absolute; z-index:1; top:-9px; right:-4px; display:block; margin:0; font-style:normal; font-size:12.5px; font-weight:700; line-height:1.5; padding:1px 9px; border-radius:999px; background:var(--acc3); color:#fff; white-space:nowrap; box-shadow:0 4px 10px -4px rgba(240,112,95,.8); pointer-events:none; }
+a.dlb:active { transform:scale(.97); }
+body { padding-bottom:calc(84px + env(safe-area-inset-bottom)); }
+.totop { bottom:calc(88px + env(safe-area-inset-bottom)) !important; }
+@media (min-width:860px) { .dlbar-in { max-width:460px; } body { padding-bottom:calc(100px + env(safe-area-inset-bottom)); } .totop { bottom:calc(104px + env(safe-area-inset-bottom)) !important; } }
+@media (prefers-reduced-motion:reduce) { .dlbar { transition:none; } }
+
+/* Footer (2026-11-10, owner pt148u): contact heading + a real e-mail button, three equal link cards with icons, then small muted fine print. */
+.ft { padding:44px 0 36px; border-top:1px solid var(--line); background:linear-gradient(180deg,#f6fbfa,#fff); }
+.ft-in { display:flex; flex-direction:column; align-items:center; gap:28px; text-align:center; }
+.ft p { margin:0; color:var(--mut); font-size:16px; }
+.ft-contact { display:flex; flex-direction:column; align-items:center; gap:12px; width:100%; }
+.ft .ft-h { color:var(--ink); font-size:21px; font-weight:800; }
+.ft-mail { min-width:min(100%, 260px); gap:10px; } .ft-mail .mi { width:24px; height:24px; flex:none; }
+.ft .ft-addr { font-size:16px; color:var(--mut); -webkit-user-select:all; user-select:all; }
+.ft-links { display:grid; grid-template-columns:minmax(0,1fr); gap:10px; width:100%; max-width:460px; }
+@media (min-width:760px) { .ft-links { grid-template-columns:repeat(3, minmax(0,1fr)); max-width:920px; gap:14px; } }
+.ftl { display:flex; align-items:center; gap:12px; min-height:64px; padding:10px 14px; border-radius:18px; background:#fff; border:1px solid var(--line); box-shadow:0 6px 16px -12px rgba(17,17,17,.35); color:var(--ink); text-decoration:none; font-weight:700; font-size:17px; line-height:1.35; text-align:left; transition:border-color .2s, box-shadow .2s, transform .18s var(--ease); }
+.ftl:hover { border-color:color-mix(in srgb, var(--acc) 40%, var(--line)); box-shadow:0 10px 22px -12px rgba(12,99,92,.45); }
+.ftl:active { transform:scale(.98); }
+.ftl-ic { flex:none; width:42px; height:42px; border-radius:13px; background:var(--tint); color:var(--acc); display:grid; place-items:center; } .ftl-ic svg { width:23px; height:23px; }
+.ftl-t { flex:1; min-width:0; word-break:keep-all; overflow-wrap:break-word; }
+.ftl-go { flex:none; width:20px; height:20px; color:var(--mut); }
+.ft-fine { display:flex; flex-direction:column; align-items:center; gap:6px; max-width:640px; padding-top:20px; border-top:1px solid var(--line); width:100%; }
+.ft .ft-fine p { font-size:14px; line-height:1.6; }
