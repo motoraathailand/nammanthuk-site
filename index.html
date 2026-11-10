@@ -16,7 +16,7 @@
 <script>/* decide the language first (no flash): ?lang= > saved choice > phone language (th/en/ko/zh/hi by primary subtag) > English (owner rule 2026-10-30). The Thai text baked into this file is only the no-JS fallback; a non-Thai result keeps the page hidden (html.pl) until landing.js has swapped the text. */
 (function(){var L=['th','en','ko','zh','hi'],l='en';try{var m=/[?&]lang=(\w\w)/.exec(location.search),s=localStorage.getItem('nmt.site.lang'),a=navigator.languages&&navigator.languages.length?navigator.languages:[navigator.language],p='';if(m&&L.indexOf(m[1])>-1)l=m[1];else if(L.indexOf(s)>-1)l=s;else for(var i=0;i<a.length;i++){p=String(a[i]||'').toLowerCase().split(/[-_]/)[0];if(L.indexOf(p)>-1){l=p;break}}}catch(e){}window.__L=l;document.documentElement.lang=l;document.documentElement.className='js'+(l==='th'?'':' pl')})();</script>
 <link rel="preload" href="fonts/ibm-plex-sans-thai-thai-700-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="landing.css?v=1279300a1c">
+<link rel="stylesheet" href="landing.css?v=ec03612eb8">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"น้ำมันถูก","applicationCategory":"UtilitiesApplication","operatingSystem":"Android","inLanguage":["th","en","ko","zh","hi"],"offers":{"@type":"Offer","price":"0","priceCurrency":"THB"},"author":{"@type":"Person","name":"Pornnarai Tananchai"}}</script>
 </head>
 <body>
@@ -260,7 +260,7 @@
           <div class="store"><a class="badge" href="join.html" aria-label="Google Play — ทดสอบก่อน⁠ใคร" data-gp><img src="img/badges/gp-th.png" data-badge="gp" alt="" width="565" height="168" decoding="async"></a><span class="store-cap go" data-t="gpCap">ร่วม⁠ทดสอบก่อน⁠ใคร</span></div>
           <div class="store"><span class="badge off" role="img" aria-label="App Store — เร็ว ๆ นี้ (ยังไม่เปิด)" data-alt-label="asAria"><img src="img/badges/as-th.svg" data-badge="as" alt="" width="130" height="40" decoding="async"></span><span class="store-cap soon" data-t="asCap">เร็ว ๆ นี้</span></div>
         </div></div>
-    <div class="cta2 center rv" style="--d:.15s"><a class="btn lg" href="mailto:motoraathailand@gmail.com"><span data-t="mailBtn">ส่งความ⁠คิด⁠เห็น</span></a><a class="btn ghost lg apps" href="https://motoraathailand.github.io/" data-apps><svg class="ai" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6.5" height="6.5" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="2" fill="none" stroke="currentColor" stroke-width="2"/></svg><span data-t="apps">ดูแอปทั้งหมด</span></a></div>
+    <div class="cta2 one center rv" style="--d:.15s"><a class="btn ghost lg apps" href="https://motoraathailand.github.io/" data-apps><svg class="ai" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6.5" height="6.5" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="2" fill="none" stroke="currentColor" stroke-width="2"/></svg><span data-t="apps">ดูแอปทั้งหมด</span></a></div>
   </div>
 </section>
 </main>
@@ -268,7 +268,6 @@
 <footer class="ft">
   <div class="wrap ft-in">
     <div class="ft-contact">
-      <p class="ft-h" data-t="ftContact">ติด⁠ต่อเรา</p>
       <a class="btn lg ft-mail" href="mailto:motoraathailand@gmail.com?subject=%E0%B8%99%E0%B9%89%E0%B8%B3%E0%B8%A1%E0%B8%B1%E0%B8%99%E0%B8%96%E0%B8%B9%E0%B8%81"><svg class="mi" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M4 7l8 6 8-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-t="ftEmail">ส่งอีเมล</span></a>
     </div>
     <nav class="ft-links">
@@ -289,7 +288,7 @@
   <span class="dlb dlb-off" role="img" aria-label="App Store — เร็ว ๆ นี้ (ยังไม่เปิด)" data-alt-label="asAria"><img src="img/badges/as-th.svg" data-badge="as" alt="" width="130" height="40" decoding="async"><em class="dlb-tag" data-t="asCap">เร็ว ๆ นี้</em></span>
 </div></div>
 <button type="button" class="totop" id="totop" hidden aria-label="กลับไปด้านบน" data-alt-label="totop"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 14l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2.400" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-<script src="strings.js?v=85d69a3086"></script>
+<script src="strings.js?v=b818d08ae6"></script>
 <script src="landing.js?v=af29730ba4"></script>
 </body>
 </html>

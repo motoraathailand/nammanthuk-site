@@ -382,7 +382,6 @@ body { padding-bottom:calc(84px + env(safe-area-inset-bottom)); }
 .ft-in { display:flex; flex-direction:column; align-items:center; gap:28px; text-align:center; }
 .ft p { margin:0; color:var(--mut); font-size:16px; }
 .ft-contact { display:flex; flex-direction:column; align-items:center; gap:12px; width:100%; }
-.ft .ft-h { color:var(--ink); font-size:21px; font-weight:800; }
 .ft-mail { min-width:min(100%, 260px); gap:10px; } .ft-mail .mi { width:24px; height:24px; flex:none; }
 .ft-links { display:grid; grid-template-columns:minmax(0,1fr); gap:10px; width:100%; max-width:460px; }
 @media (min-width:760px) { .ft-links { grid-template-columns:repeat(3, minmax(0,1fr)); max-width:920px; gap:14px; } }
@@ -396,3 +395,5 @@ body { padding-bottom:calc(84px + env(safe-area-inset-bottom)); }
 .ft .ft-fine p { font-size:14px; line-height:1.6; }
 /* legacy guard: an index.html cached before 2026-11-10 (old ".stick" bar markup) never shows a half-styled bar with this stylesheet */
 .stick { display:none !important; }
+/* final section: a single "all apps" button (feedback button removed 2026-11-10, owner pt151u): one centred column, same width as one store badge pair */
+.cta2.one { grid-template-columns:minmax(0,1fr); max-width:300px; }
