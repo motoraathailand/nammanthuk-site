@@ -151,3 +151,6 @@ html[lang=th] .btn.apps span, html[lang=hi] .btn.apps span { white-space:nowrap;
 .panel .note { text-align:center; }
 .qr img { margin:10px auto 2px; }
 .all { flex-direction:column; justify-content:center; gap:6px; }
+
+/* Korean: wrap only at spaces, never inside a word (owner rule; 2026-11-10) */
+:lang(ko) { word-break:keep-all; overflow-wrap:break-word; }
