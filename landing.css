@@ -353,7 +353,7 @@ html[lang=en] body, html[lang=ko] body, html[lang=zh] body, html[lang=hi] body {
 html[lang=zh] h1, html[lang=zh] h2, html[lang=zh] h3, html[lang=zh] .store-cap, html[lang=zh] .cc-st, html[lang=zh] .btn span, html[lang=zh] .gc span, html[lang=zh] .tab, html[lang=zh] summary { word-break:keep-all; }
 
 
-/* Bottom bar (2026-11-10, design A): Google Play badge (-> join.html) + App Store badge (not linked, small "coming soon" corner tag).
+/* Bottom bar (2026-11-10, design A; App Store live 2026-11-12): Google Play badge (-> join.html) + App Store badge (-> Thailand App Store).
    Self-contained class names (nothing shared with the hero .store/.badge/.store-cap rules) and one nowrap flex row; the badge box size comes from a
    padding ratio (works on every WebKit, no aspect-ratio needed), so both badges are always exactly the same size. */
 .dlbar { position:fixed; left:0; right:0; bottom:0; z-index:45; padding:10px max(12px, env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left)); background:rgba(255,255,255,.96); -webkit-backdrop-filter:saturate(1.6) blur(14px); backdrop-filter:saturate(1.6) blur(14px); border-top:1px solid var(--line); box-shadow:0 -10px 28px -16px rgba(17,17,17,.35); -webkit-transform:translateY(110%); transform:translateY(110%); transition:transform .4s var(--ease); }
