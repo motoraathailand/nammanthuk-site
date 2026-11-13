@@ -28,8 +28,6 @@ h1, h2, p { margin:0; }
 .hd-in { height:var(--hd); max-width:680px; margin:0 auto; padding:0 16px; display:flex; align-items:center; justify-content:space-between; }
 .logo { display:flex; align-items:center; gap:8px; color:var(--ink); text-decoration:none; font-weight:700; font-size:19px; min-height:44px; }
 .logo svg { width:22px; height:30px; }
-.lang { display:flex; align-items:center; gap:4px; height:40px; padding:0 8px 0 10px; border-radius:999px; background:var(--soft); color:var(--ink); }
-.lang select { appearance:none; -webkit-appearance:none; border:0; background:transparent; color:inherit; font:inherit; font-size:16px; font-weight:600; padding:6px 4px; max-width:112px; cursor:pointer; }
 
 .hero { position:relative; margin-top:calc(var(--hd) * -1); padding:calc(var(--hd) + 2px) 0 8px; background:radial-gradient(520px 300px at 92% -10%, var(--mint) 0%, rgba(211,239,234,0) 62%), radial-gradient(420px 260px at -10% 40%, #e8f6f1 0%, rgba(232,246,241,0) 60%); }
 .hero::before { content:""; position:absolute; inset:0; background-image:radial-gradient(rgba(12,99,92,.2) 1.2px, transparent 1.4px); background-size:22px 22px; -webkit-mask-image:linear-gradient(180deg,#000 0%,transparent 85%); mask-image:linear-gradient(180deg,#000 0%,transparent 85%); pointer-events:none; }
@@ -119,8 +117,6 @@ details > p { padding:0 14px 14px; color:var(--mut); font-size:15.5px; }
 @media (min-width:680px) { h1 { font-size:34px; } .two { grid-template-columns:1fr 1fr; } }
 @media (prefers-reduced-motion:reduce) { .tap .ring { animation:none; opacity:.6; } .pend.nudge, .all:not([hidden]), details[open] > p { animation:none; } .bar i, .num svg, summary::after { transition:none; } }
 
-/* first paint in a non-Thai language: hidden until the script has swapped the baked Thai text (fails open after 1.5 s) */
-html.pl body { opacity:0; animation:plshow .01s linear 1.5s forwards; } @keyframes plshow { to { opacity:1; } }
 
 /* in-app browser (Facebook/LINE) hint: shown by join.js only inside such a browser */
 .iab { display:flex; gap:10px; align-items:flex-start; margin-top:8px; padding:10px 12px; border-radius:16px; background:#fff8e1; border:2px solid #f2b705; }

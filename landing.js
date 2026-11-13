@@ -1,14 +1,12 @@
-/* น้ำมันถูก intro page script (vanilla, no dependencies): language switch with crossfade, staggered hero entrance, scroll reveal (IntersectionObserver),
-   animated counters, floating/tilting phone, screenshot carousel, fuel gauge, 3-step tabs, ripple, scroll progress. prefers-reduced-motion: no animation, no autoplay, final numbers at once. */
+/* น้ำมันถูก intro page script (vanilla, no dependencies): staggered hero entrance, scroll reveal (IntersectionObserver),
+   animated counters, floating/tilting phone, screenshot carousel, fuel gauge, 3-step tabs, ripple, scroll progress. prefers-reduced-motion: no animation, no autoplay, final numbers at once. Page is Thai only. */
 (function () {
   'use strict';
   var LS = window.LS || {}, doc = document, root = doc.documentElement;
   var rmq = window.matchMedia ? matchMedia('(prefers-reduced-motion: reduce)') : { matches: false }, reduce = rmq.matches;
   if (rmq.addEventListener) rmq.addEventListener('change', function (e) { reduce = e.matches; });
   var $ = function (s, r) { return (r || doc).querySelector(s); }, $$ = function (s, r) { return Array.prototype.slice.call((r || doc).querySelectorAll(s)); };
-  var lang = window.__L || 'en', ready = false;
-  var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
-  var shotLang = function (l) { return l === 'th' ? 'th' : 'en'; };   // Thai screenshots for Thai, English screenshots for the others
+  var ready = false;
   function start() { root.classList.add('ready'); ready = true; $$('.hero .cnt').forEach(function (c) { runCount(c, 300); }); }
   if (doc.readyState === 'complete') requestAnimationFrame(start); else addEventListener('load', function () { requestAnimationFrame(start); });
   setTimeout(function () { if (!ready) start(); }, 2500);   // never leave the hero hidden if "load" is slow
@@ -25,29 +23,6 @@
     requestAnimationFrame(step);
   }
   $$('.cnt').forEach(function (c) { if (!c.closest('.hero')) c.textContent = fmt(c, c.hasAttribute('data-from') ? +c.getAttribute('data-from') : 0); });   // start from the "before" value; the real number is already in the HTML if JS is off
-
-  /* ---- language (crossfade) ---- */
-  function setShots(l) { $$('[data-shot]').forEach(function (img) { var src = 'img/' + shotLang(l) + '-' + img.getAttribute('data-shot') + '.webp'; if (img.getAttribute('src') !== src) img.src = src; }); }
-  function setBadges(l) { $$('[data-badge]').forEach(function (img) { var k = img.getAttribute('data-badge'), src = k === 'gp' ? 'img/badges/gp-' + l + '.png' : 'img/badges/as-' + (l === 'hi' ? 'en' : l) + '.svg'; if (img.getAttribute('src') !== src) img.src = src; }); $$('[data-cp]').forEach(function (img) { var src = 'img/carplay-' + l + '.webp'; if (img.getAttribute('src') !== src) img.src = src; }); }   // official store badges per language (Apple has no Hindi badge: English); CarPlay design preview in all 5 languages
-  function setAuto(l) { $$('[data-auto]').forEach(function (img) { var src = 'img/auto-' + l + '-' + img.getAttribute('data-auto') + '.webp'; if (img.getAttribute('src') !== src) img.src = src; }); }   // car-screen illustrations exist in all 5 languages
-  function paintLang(l) {
-    var D = LS[l] || LS.th; if (!D) return; lang = l; root.lang = l;
-    $$('[data-t]').forEach(function (el) { var k = el.getAttribute('data-t'); if (k in D) el.textContent = D[k]; });
-    $$('[data-alt]').forEach(function (el) { var k = el.getAttribute('data-alt'); if (k in D) el.alt = D[k]; });
-    $$('[data-alt-label]').forEach(function (el) { var k = el.getAttribute('data-alt-label'); if (k in D) el.setAttribute('aria-label', D[k]); });
-    $$('[data-gp]').forEach(function (el) { el.setAttribute('aria-label', D.gpSmall + ' Google Play'); });
-    setShots(l); setAuto(l); setBadges(l); doc.title = D.title; var m = $('meta[name=description]'); if (m) m.setAttribute('content', D.desc);
-    var chip = function (q) { return '<span class="mq-chip">' + esc(q) + '</span>'; }, a = D.mq.slice(0, Math.ceil(D.mq.length / 2)), b = D.mq.slice(Math.ceil(D.mq.length / 2));
-    $('#mq1').innerHTML = a.concat(a).map(chip).join(''); $('#mq2').innerHTML = b.concat(b).map(chip).join('');
-    $('#mqList').innerHTML = D.mq.map(function (q) { return '<li>' + esc(q) + '</li>'; }).join('');
-    $('#lang').value = l; setStep(step, true);
-  }
-  function applyLang(l, quick) {
-    try { localStorage.setItem('nmt.site.lang', l); } catch (e) {}
-    if (reduce || quick) return paintLang(l);
-    root.classList.add('lsw'); setTimeout(function () { paintLang(l); requestAnimationFrame(function () { root.classList.remove('lsw'); }); }, 230);   // fade out, swap text, fade in (~450 ms in total)
-  }
-  $('#lang').addEventListener('change', function () { applyLang(this.value); });
 
   /* ---- scroll reveal ---- */
   $$('.stg').forEach(function (g) { $$(':scope > .rv', g).forEach(function (el, i) { el.style.setProperty('--d', (Math.min(i, 9) * 0.045).toFixed(3) + 's'); }); });
@@ -99,7 +74,7 @@
   /* ---- 3 steps: icon tiles + progress bars, auto-advance while visible, tap = manual ---- */
   var tabs = $$('.tab'), tabsBox = $('#tabs'), panelText = $('.panel-text'), simgs = $$('#stepStack > img'), step = 0, manual = reduce, stepsVisible = false;
   function setStep(i, quiet) {
-    step = i; var D = LS[lang] || LS.th, n = i + 1;
+    step = i; var D = LS.th || {}, n = i + 1;
     tabs.forEach(function (t, k) { t.classList.toggle('on', k === i); t.classList.toggle('done', k < i); t.setAttribute('aria-selected', k === i ? 'true' : 'false'); });
     simgs.forEach(function (im, k) { if (k === i && im.loading === 'lazy') im.loading = 'eager'; im.classList.toggle('on', k === i); });
     $('#stepNo').textContent = n; var h = $('#stepH'), p = $('#stepP'); h.setAttribute('data-t', 'st' + n + 'h'); p.setAttribute('data-t', 'st' + n + 'p'); h.textContent = D['st' + n + 'h']; p.textContent = D['st' + n + 'p'];
@@ -113,13 +88,11 @@
 
   /* ---- press ripple on buttons (skipped in reduced motion) ---- */
   doc.addEventListener('pointerdown', function (e) {
-    if (reduce) return; var b = e.target.closest && e.target.closest('.btn:not(.off), .gc, .lang, .tab .tile, .totop'); if (!b) return;
+    if (reduce) return; var b = e.target.closest && e.target.closest('.btn:not(.off), .gc, .tab .tile, .totop'); if (!b) return;
     var r = b.getBoundingClientRect(), s = doc.createElement('span'); s.className = 'rip'; s.style.left = (e.clientX - r.left) + 'px'; s.style.top = (e.clientY - r.top) + 'px';
     if (getComputedStyle(b).position === 'static') b.style.position = 'relative'; b.style.overflow = 'hidden'; b.appendChild(s); s.addEventListener('animationend', function () { s.remove(); }); setTimeout(function () { s.remove(); }, 900);
   }, { passive: true });
 
-  if (lang !== 'th') paintLang(lang); else { $('#lang').value = 'th'; setShots('th'); setAuto('th'); setBadges('th'); }
-  root.classList.remove('pl');   // text is final: show the page (the CSS also un-hides it after 1.5 s if this script ever fails)
   setStep(0, true);
-  window.__landing = { setLang: function (l) { applyLang(l, true); }, reduce: function () { return reduce; } };
+  window.__landing = { reduce: function () { return reduce; } };
 })();

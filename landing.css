@@ -34,10 +34,6 @@ button { font:inherit; }
 .logo { display:flex; align-items:center; gap:8px; color:var(--ink); text-decoration:none; font-weight:700; font-size:21px; letter-spacing:-.01em; }
 .logo-drop { width:30px; height:30px; flex:none; transition:transform .5s var(--spring); } .logo:hover .logo-drop { transform:rotate(-12deg) scale(1.12); }
 .hd-r { display:flex; align-items:center; gap:10px; }
-.lang { display:flex; align-items:center; gap:4px; height:44px; padding:0 8px 0 12px; border-radius:999px; background:var(--soft); color:var(--ink); transition:background-color .2s, transform .15s var(--ease); }
-.lang:hover { background:var(--tint); } .lang:active { transform:scale(.97); }
-.lang svg { width:20px; height:20px; flex:none; }
-.lang select { appearance:none; -webkit-appearance:none; border:0; background:transparent; color:inherit; font:inherit; font-size:16px; font-weight:600; padding:8px 6px; max-width:120px; cursor:pointer; }
 .progress { position:absolute; left:0; right:0; bottom:-1px; height:4px; transform-origin:0 50%; transform:scaleX(0); background:linear-gradient(90deg,var(--acc),var(--acc2) 70%,#5eead4); border-radius:0 4px 4px 0; will-change:transform; }
 
 /* buttons (soft, pill, press + ripple) */
@@ -219,7 +215,7 @@ html[lang=th] h2 { line-height:1.45; } html[lang=hi] h2 { line-height:1.5; } htm
 .js .rv.in { will-change:auto; }
 .js .rv.z { transform:translateY(28px) scale(.94); }
 .js .rv.in { opacity:1; transform:none; }
-.js main, .js footer { transition:opacity .22s var(--std); } .js.lsw main, .js.lsw footer, .js.lsw #stick { opacity:0; }
+.js main, .js footer { transition:opacity .22s var(--std); }
 
 @media (min-width:600px) { .stats-in { grid-template-columns:repeat(4,1fr); } .mgrid { grid-template-columns:repeat(2,1fr); } .cards { grid-template-columns:repeat(2,1fr); } }
 @media (min-width:860px) {
@@ -273,7 +269,6 @@ html[lang=th] h2 { line-height:1.45; } html[lang=hi] h2 { line-height:1.5; } htm
 }
 
 /* first paint in a non-Thai language: hidden until the script has swapped the baked Thai text (fails open after 1.5 s) */
-html.pl body { opacity:0; animation:plshow .01s linear 1.5s forwards; } @keyframes plshow { to { opacity:1; } }
 
 /* "See all apps" -> the owner's app collection page (AA common rule 2026-11-02). Ghost pill like the other secondary buttons, line icon, always visible (hero + final section).
    Label keeps whole words (nowrap for Thai, which has no spaces; other languages may wrap only at spaces); the button grows taller instead of overflowing at 200% text. */
