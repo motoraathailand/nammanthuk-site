@@ -71,6 +71,14 @@
   if (!reduce) setInterval(function () { if (!reduce && cvis && !ctouched && !doc.hidden) setCar((ccur + 1) % 2); }, 3400);
   setCar(0);
 
+  /* ---- Apple CarPlay screen: same Nearest / Cheapest crossfade as Android Auto ---- */
+  var pimgs = $$('#cpStack > img'), pchips = $$('#cpChips .gc'), pcur = 0, ptouched = false, pvis = false;
+  function setCp(i) { pcur = i; pimgs.forEach(function (im, k) { if (k === i && im.loading === 'lazy') im.loading = 'eager'; im.classList.toggle('on', k === i); }); pchips.forEach(function (c, k) { c.classList.toggle('on', k === i); c.setAttribute('aria-pressed', k === i ? 'true' : 'false'); }); }
+  pchips.forEach(function (c) { c.addEventListener('click', function () { ptouched = true; setCp(+c.getAttribute('data-i')); }); });
+  if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { pvis = es[0].isIntersecting; if (pvis) pimgs.forEach(function (im) { im.loading = 'eager'; }); }, { threshold: 0.4 }).observe($('#cpStack'));
+  if (!reduce) setInterval(function () { if (!reduce && pvis && !ptouched && !doc.hidden) setCp((pcur + 1) % 2); }, 3400);
+  setCp(0);
+
   /* ---- 3 steps: icon tiles + progress bars, auto-advance while visible, tap = manual ---- */
   var tabs = $$('.tab'), tabsBox = $('#tabs'), panelText = $('.panel-text'), simgs = $$('#stepStack > img'), step = 0, manual = reduce, stepsVisible = false;
   function setStep(i, quiet) {

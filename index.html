@@ -168,8 +168,12 @@
       <article class="carcard rv">
         <header class="cc-h"><span class="cc-name">Apple CarPlay</span><span class="cc-st ok" data-t="ccOk">ใช้ได้แล้ว</span></header>
         <figure class="car">
-          <div class="car-frame"><div class="car-screen cp"><img data-cp src="img/carplay-th.webp" data-alt="altCarPlay" alt="หน้า⁠จอ CarPlay: รายการปั๊มใกล้คุณพร้อมแผนที่" width="1024" height="550" loading="lazy" decoding="async" class="on"></div></div>
-          <figcaption class="car-cap" data-t="cpCap">หน้า⁠จอ CarPlay แสดงปั๊มใกล้คุณพร้อมแผนที่</figcaption>
+          <div class="car-frame"><div class="car-screen cp" id="cpStack">
+            <img data-cp="near" src="img/carplay-th-near.webp" data-alt="altCpNear" alt="หน้า⁠จอ CarPlay: รายการปั๊มใกล้คุณเรียงตามใกล้⁠สุด พร้อมแผนที่" width="1024" height="550" loading="lazy" decoding="async" class="on">
+            <img data-cp="cheap" src="img/carplay-th-cheap.webp" data-alt="altCpCheap" alt="หน้า⁠จอ CarPlay: รายการปั๊มเรียงตามราคาถูก⁠สุด พร้อมแผนที่" width="1024" height="550" loading="lazy" decoding="async">
+          </div></div>
+          <div class="cc-ctl"><div class="g-chips car-chips" id="cpChips" role="group" aria-label="สลับมุมมองหน้า⁠จอรถ" data-alt-label="autoSw"><button type="button" class="gc on" data-i="0" aria-pressed="true"><i></i><span data-t="autoNear">ใกล้⁠สุด</span></button><button type="button" class="gc" data-i="1" aria-pressed="false"><i></i><span data-t="autoCheap">ถูก⁠สุด</span></button></div></div>
+          <figcaption class="car-cap" data-t="cpCap">ภาพจำลองหน้า⁠จอรถจากเนื้อหาจริงของแอป ชื่อปั๊มและราคาเป็นตัว⁠อย่าง ไม่ใช่ภาพจริงจาก Apple CarPlay</figcaption>
         </figure>
       </article>
     </div>
@@ -274,7 +278,7 @@
   <a class="dlb" href="https://apps.apple.com/th/app/id6832604587" data-as aria-label="App Store — ดาวน์โหลดได้แล้ว" data-alt-label="asAria"><img src="img/badges/as-th.svg" data-badge="as" alt="" width="565" height="168" decoding="async"></a>
 </div></div>
 <button type="button" class="totop" id="totop" hidden aria-label="กลับไปด้านบน" data-alt-label="totop"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 14l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2.400" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-<script src="strings.js?v=2a04afb27d"></script>
-<script src="landing.js?v=d67c6e5f63"></script>
+<script src="strings.js?v=c4ea24ab04"></script>
+<script src="landing.js?v=af25e3cc5d"></script>
 </body>
 </html>
