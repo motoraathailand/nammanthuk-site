@@ -13,7 +13,7 @@
 <meta name="twitter:card" content="summary"><meta name="twitter:title" content="ร่วมทดสอบ น้ำมันถูก บน Android ได้เองใน 3 ขั้นตอน"><meta name="twitter:description" content="น้ำมันถูก แอปหาปั๊มราคาถูกใกล้คุณและเช็กว่ามีน้ำมันไหม เปิดให้ลองใช้ก่อนบน Android ทำตาม 3 ขั้นตอนง่าย ๆ แล้วติดตั้งจาก Google Play ได้เลย ไม่ต้องส่งอีเมลให้ใคร">
 <link rel="icon" href="img/icon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="motion.css?v=dde97f3d7f">
-<link rel="stylesheet" href="join.css?v=cf2bcb7dbf">
+<link rel="stylesheet" href="join.css?v=51db528823">
 </head>
 <body>
 <a class="skip" href="#steps" data-t="s1t">เข้ากลุ่ม</a>
@@ -23,16 +23,19 @@
 
 <main>
 <section class="hero"><div class="wrap">
+  <div class="iab" id="iab" role="alert" hidden>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.01"/></svg>
+    <div><b data-t="iabT">เปิดหน้านี้ใน Chrome ก่อน</b><span data-t="iabD">ตอนนี้เปิดอยู่ในเบราว์เซอร์ของแอป ซึ่งเข้าสู่ระบบ Google ได้ไม่ดี กดปุ่มด้านล่างเพื่อเปิดด้วย Chrome แล้วดำเนินการต่อ หรือคัดลอกลิงก์ไปวางใน Chrome</span>
+      <div class="iabrow">
+        <a class="btn" id="iabOpen" href="#" data-press data-ripple><span data-t="iabB">เปิดด้วย Chrome เพื่อดำเนินการต่อ</span></a>
+        <button type="button" class="btn ghost" id="iabCopy" data-press data-ripple data-t="iabC">คัดลอกลิงก์</button>
+      </div>
+      <small id="iabNote" aria-live="polite"></small></div>
+  </div>
   <h1 data-t="h1">ร่วมทดสอบ น้ำมันถูก</h1>
   <div class="gmail" role="note">
     <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7.5l8 6 8-6"/></svg>
     <div><b data-t="gm">ใช้ Gmail เดียวกันทั้ง 3 ขั้นตอน</b><span data-t="gmD">ต้องเป็นบัญชี Google เดียวกับที่ใช้ใน Google Play บนมือถือของคุณ ถ้าใช้คนละบัญชี จะไม่ถูกนับเป็นผู้ทดสอบ</span></div>
-  </div>
-  <div class="iab" id="iab" role="alert" hidden>
-    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.01"/></svg>
-    <div><b data-t="iabT">เปิดหน้านี้ใน Chrome ก่อน</b><span data-t="iabD">ตอนนี้คุณเปิดอยู่ในเบราว์เซอร์ของแอป (Facebook/LINE) ซึ่งเข้าสู่ระบบ Google ได้ไม่ดี กดปุ่มด้านล่าง หรือกดจุดสามจุดมุมบนแล้วเลือก “เปิดใน Chrome”</span>
-      <div class="iabrow"><a class="btn" id="iabOpen" href="#" data-t="iabB">เปิดใน Chrome</a><button type="button" class="btn ghost" id="iabCopy" data-t="iabC">คัดลอกลิงก์</button></div>
-      <small id="iabNote" aria-live="polite"></small></div>
   </div>
   <div class="prog"><div class="bar" aria-hidden="true"><i id="barFill"></i></div><p id="progTxt" aria-live="polite"></p></div>
 </div></section>
@@ -122,7 +125,7 @@
 <footer class="ft"><div class="wrap"><a href="./" data-t="back">หน้าแรก</a><span aria-hidden="true">·</span><a href="privacy.html" data-t="privacy">นโยบายความเป็นส่วนตัว</a></div></footer>
 
 <script src="motion.js?v=bb445964ea"></script>
-<script src="join-strings.js?v=6d55ce6675"></script>
-<script src="join.js?v=13929755c4"></script>
+<script src="join-strings.js?v=dd7b5c5b3c"></script>
+<script src="join.js?v=0a4729cd36"></script>
 </body>
 </html>

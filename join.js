@@ -49,15 +49,36 @@
     if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(function () { say('copied'); }, function () { say('copyFail'); });
     else say('copyFail');
   });
-  // Facebook / Instagram / LINE / Messenger in-app browser (or any Android WebView): Google sign-in often fails there, so ask to open the page in Chrome first (fbclid alone is not enough: it also stays in the URL after Chrome opens it).
-  var ua = navigator.userAgent || '', iab = $('#iab');
-  if (iab && /Android/i.test(ua) && /FBAN|FBAV|FB_IAB|Instagram|\bLine\/|MessengerLite|; wv\)/i.test(ua)) {
-    var pageUrl = location.href.split('#')[0];
-    iab.hidden = false;
-    $('#iabOpen').setAttribute('href', 'intent://' + pageUrl.replace(/^https?:\/\//, '') + '#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=' + encodeURIComponent(pageUrl) + ';end');
+  // In-app browsers (LINE, Facebook, Instagram, TikTok, Android WebView): Google sign-in and Play opt-in often fail there, so offer to open this page in Chrome. Hidden in normal Chrome. (fbclid alone is not enough: it also stays in the URL after Chrome opens it.)
+  var ua = navigator.userAgent || '', iabBox = $('#iab');
+  var isIAB = /FBAN|FBAV|FB_IAB|Instagram|\bLine\/|MessengerLite|TikTok|musical_ly|BytedanceWebview|; wv\)/i.test(ua);
+  var isAndroid = /Android/i.test(ua);
+  var isIOS = /iPhone|iPad|iPod/i.test(ua);
+  function pageUrl() { return location.href.split('#')[0]; }
+  function chromeHref() {
+    var u = pageUrl(), hostPath = u.replace(/^https?:\/\//, '');
+    if (isAndroid) return 'intent://' + hostPath + '#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=' + encodeURIComponent(u) + ';end';
+    if (isIOS) return 'googlechromes://' + hostPath;
+    return u;
+  }
+  if (iabBox && isIAB && (isAndroid || isIOS)) {
+    iabBox.hidden = false;
+    var open = $('#iabOpen');
+    open.setAttribute('href', chromeHref());
+    if (isIOS) {
+      open.addEventListener('click', function () {
+        var start = Date.now();
+        setTimeout(function () {
+          if (!document.hidden && Date.now() - start < 2500) {
+            var n = $('#iabNote'); if (n) n.textContent = t('iabHint');
+          }
+        }, 1500);
+      });
+    }
     $('#iabCopy').addEventListener('click', function () {
-      var n = $('#iabNote'), ok = function () { n.textContent = t('iabOk'); }, bad = function () { n.textContent = t('copyFail'); };
-      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(pageUrl).then(ok, bad); else bad();
+      var n = $('#iabNote'), u = pageUrl();
+      var ok = function () { n.textContent = t('iabOk'); }, bad = function () { n.textContent = t('copyFail'); };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(u).then(ok, bad); else bad();
     });
   }
   paintText();
